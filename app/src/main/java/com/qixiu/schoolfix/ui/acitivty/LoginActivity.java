@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.gson.Gson;
 import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
 import com.qixiu.qixiu.utils.Preference;
@@ -90,7 +91,10 @@ public class LoginActivity extends RequstActivity {
     public void onSuccess(BaseBean data) {
         if (data instanceof LoginBean) {
             LoginBean bean = (LoginBean) data;
-            LoginStatus.setLoginBean(bean);
+            Gson gson=new Gson();
+            String loginStr = gson.toJson(bean);
+            Preference.put(ConstantString.USERBEAN,loginStr);
+            LoginStatus.setLoginBean();
             Preference.put(ConstantString.USERID, bean.getO().getId());
             Preference.put(ConstantString.USERNAME, bean.getO().getUserName());
             Preference.put(ConstantString.CODE, bean.getO().getUserName());

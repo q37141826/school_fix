@@ -118,6 +118,7 @@ public class HardWorkDetailsActivity extends RequstActivity {
                     workDetailsBean.getO().getWorkOrderTypeStr().equals(ORDER_DELETE)) {
                 lineearLayoutSignOrFinish.setVisibility(View.GONE);
                 lineGotoReport.setEnabled(false);
+                mTitleView.setRightTextVisible(View.GONE);
             }
             Glide.with(getContext()).load(workDetailsBean.getO().getProductImgUrl()).into(iamgeViewProduct);
             textViewProductName.setText(workDetailsBean.getO().getProductName());
@@ -130,11 +131,18 @@ public class HardWorkDetailsActivity extends RequstActivity {
             textViewContactPhone.setSecondaryText(workDetailsBean.getO().getWorkOrderSubmitTel());
             textViewAddress.setSecondaryText(workDetailsBean.getO().getSchoolUnitAddress());
             textViewCity.setSecondaryText(workDetailsBean.getO().getSchoolUnitArea());
-            textViewExpectTime.setSecondaryText(workDetailsBean.getO().getWorkOrderExpectTime().substring(0, 10)
-                    + "至" + workDetailsBean.getO().getWorkOrderExpectEndTime().substring(0, 10));
+            try {
+                textViewExpectTime.setSecondaryText(workDetailsBean.getO().getWorkOrderExpectTime().substring(0, 10)
+                        + "至" + workDetailsBean.getO().getWorkOrderExpectEndTime().substring(0, 10));
+            }catch (Exception e){
+
+            }
             textViewHandelPerson.setSecondaryText(workDetailsBean.getO().getRepairUserName());
             textViewTicketNumber.setSecondaryText(workDetailsBean.getO().getWorkOrderServiceNo());
             textViewCommitTime.setSecondaryText(workDetailsBean.getO().getWorkOrderCreatime());
+
+
+
         }
 
         if (data instanceof RepairPersonBean) {

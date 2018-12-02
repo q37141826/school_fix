@@ -4,6 +4,7 @@ import com.qixiu.qixiu.request.OKHttpRequestModel;
 import com.qixiu.qixiu.request.OKHttpUIUpdataListener;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
 import com.qixiu.qixiu.utils.ToastUtil;
+import com.qixiu.schoolfix.BuildConfig;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.model.IdIntef;
@@ -29,6 +30,12 @@ public class UploadFileRequest {
     }
 
     public static void uploadFile(String path,UploadFileCallBack callBack) {
+        if(path.startsWith(BuildConfig.BASE_URL)){
+            UploadFileBean uploadFileBean=new UploadFileBean();
+            uploadFileBean.setO(path.replace(BuildConfig.BASE_URL,""));
+            callBack.call(uploadFileBean);
+            return;
+        }
         OKHttpRequestModel okHttpRequestModel = new OKHttpRequestModel(new OKHttpUIUpdataListener() {
             @Override
             public void onSuccess(Object data, int i) {
@@ -80,6 +87,9 @@ public class UploadFileRequest {
         return stringBuffer.toString();
     }
 
-
+    public static String[]  splitStrs(String str,String symbol){
+        String[] split = str.split(symbol);
+        return split;
+    }
 
 }

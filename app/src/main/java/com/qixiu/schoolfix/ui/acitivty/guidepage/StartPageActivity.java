@@ -10,7 +10,9 @@ import com.qixiu.qixiu.application.BaseApplication;
 import com.qixiu.qixiu.utils.Preference;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantString;
+import com.qixiu.schoolfix.ui.acitivty.LoginActivity;
 import com.qixiu.schoolfix.ui.acitivty.MainActivity;
+import com.qixiu.schoolfix.utils.LoginStatus;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 
@@ -54,11 +56,11 @@ public class StartPageActivity extends AppCompatActivity {
         } catch (Exception e) {
         }
         try {
-//            if (TextUtils.isEmpty(Preference.get(ConstantString.USERID, ""))) {
-//                handeler.postDelayed(new MyRunnable(1), 1000);
-//            } else {
-//                handeler.postDelayed(new MyRunnable(2), 1000);
-//            }
+            if (TextUtils.isEmpty(Preference.get(ConstantString.USERID, ""))) {
+                handeler.postDelayed(new MyRunnable(1), 10);
+            } else {
+                handeler.postDelayed(new MyRunnable(2), 10);
+            }
         } catch (Exception e) {
         }
     }
@@ -77,9 +79,10 @@ public class StartPageActivity extends AppCompatActivity {
         @Override
         public void run() {
             if (type == 1) {
-//                LoginActivity.start(StartPageActivity.this);
+                LoginActivity.start(StartPageActivity.this);
             } else {
-//                MainActivity.start(StartPageActivity.this);
+                LoginStatus.setLoginBean();
+                MainActivity.start(StartPageActivity.this);
             }
             StartPageActivity.this.finish();
         }

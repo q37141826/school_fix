@@ -90,6 +90,7 @@ public abstract class UploadPictureActivityNew extends RequstActivity implements
         mRcAdapter = new UpLoadPictureAdapter();
         mRcAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mRcAdapter);
+        onInitViewNew();
     }
 
 

@@ -68,6 +68,10 @@ public class ServiceProgressActivity extends RequstActivity {
         adapter.setClickListenner(new RecyclerBaseAdapter.ClickListenner() {
             @Override
             public void click(View view, Object o) {
+                if(TextUtils.isEmpty(resultBean.getWorkOrderRepairSolutionRemark())){
+                    ToastUtil.toast("请提交设施报告");
+                    return;
+                }
                 Map<String, String> map = new HashMap<>();
                 map.put("id", resultBean.getId());
                 map.put("workOrderRepairIsConfirmFinish", "1");

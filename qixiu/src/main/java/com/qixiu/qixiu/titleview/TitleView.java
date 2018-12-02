@@ -107,4 +107,11 @@ public class TitleView extends BaseView {
     public void setTitle_textColor(int color) {
         title_text.setTextColor(color);
     }
+
+    public CharSequence getTitle(){
+        return title_text.getText();
+    }
+    public TextView getTitleView(){
+        return title_text;
+    }
 }

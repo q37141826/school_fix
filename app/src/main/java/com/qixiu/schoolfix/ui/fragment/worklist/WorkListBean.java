@@ -41,11 +41,27 @@ public class WorkListBean extends BaseBean<WorkListBean.ResultBean>{
         }
 
         public static class MyWorkOdersBean {
+
+            /**
+             * productName : 雷蛇TAIPAN3500
+             * productImgUrl : /upload/shproduct/2018120135883_004164653.jpg
+             * workOrderTypeStr : 待接单
+             * workOrderCreatime : 2018-11-30 10:01:28
+             * workOrderCstProblemRemark :
+             * deviceTypeStr : 硬件
+             * schoolUnitName : 上海市青浦区金泽幼儿园
+             * schoolUnitArea : 中国上海上海市青浦区
+             * id : dac12fda-13be-41d1-e73a-08d65667be08
+             */
+
             private String productName;
             private String productImgUrl;
             private String workOrderTypeStr;
             private String workOrderCreatime;
             private String workOrderCstProblemRemark;
+            private String deviceTypeStr;
+            private String schoolUnitName;
+            private String schoolUnitArea;
             private String id;
 
             public String getProductName() {
@@ -86,6 +102,30 @@ public class WorkListBean extends BaseBean<WorkListBean.ResultBean>{
 
             public void setWorkOrderCstProblemRemark(String workOrderCstProblemRemark) {
                 this.workOrderCstProblemRemark = workOrderCstProblemRemark;
+            }
+
+            public String getDeviceTypeStr() {
+                return deviceTypeStr;
+            }
+
+            public void setDeviceTypeStr(String deviceTypeStr) {
+                this.deviceTypeStr = deviceTypeStr;
+            }
+
+            public String getSchoolUnitName() {
+                return schoolUnitName;
+            }
+
+            public void setSchoolUnitName(String schoolUnitName) {
+                this.schoolUnitName = schoolUnitName;
+            }
+
+            public String getSchoolUnitArea() {
+                return schoolUnitArea;
+            }
+
+            public void setSchoolUnitArea(String schoolUnitArea) {
+                this.schoolUnitArea = schoolUnitArea;
             }
 
             public String getId() {

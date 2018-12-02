@@ -105,8 +105,8 @@ public class HardWorkReceiveActivity extends RequstActivity {
             textViewContactPhone.setSecondaryText(workDetailsBean.getO().getWorkOrderSubmitTel());
             textViewAddress.setSecondaryText(workDetailsBean.getO().getSchoolUnitAddress());
             textViewCity.setSecondaryText(workDetailsBean.getO().getSchoolUnitArea());
-            textViewExpectTime.setSecondaryText(workDetailsBean.getO().getWorkOrderExpectTime() + "至" +
-                    workDetailsBean.getO().getWorkOrderExpectEndTime());
+            textViewExpectTime.setSecondaryText(workDetailsBean.getO().getWorkOrderExpectTime() .substring(0,10)+ "至" +
+                    workDetailsBean.getO().getWorkOrderExpectEndTime().substring(0,10));
 
             textViewHandelPerson.setSecondaryText(LoginStatus.getLoginBean().getO().getRepairBusinessName());
             textViewTicketNumber.setSecondaryText(workDetailsBean.getO().getWorkOrderServiceNo());
@@ -118,7 +118,7 @@ public class HardWorkReceiveActivity extends RequstActivity {
 
         }
         if (data.getUrl().equals(ConstantUrl.receiveUrl)) {
-            ToastUtil.toast("接单成功");
+            ToastUtil.toast(mTitleView.getTitle()+"成功");
             finish();
         }
         if (data instanceof RepairPersonBean) {
@@ -144,9 +144,9 @@ public class HardWorkReceiveActivity extends RequstActivity {
             picker.setTitle("选择指派人");
             picker.show();
         }
-        if(giveOrderUrl.equals(data.getUrl())){
-            ToastUtil.toast("指派成功");
-        }
+//        if(giveOrderUrl.equals(data.getUrl())){
+//            ToastUtil.toast("指派成功");
+//        }
 
     }
 

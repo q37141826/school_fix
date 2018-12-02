@@ -3,6 +3,7 @@ package com.qixiu.schoolfix.utils;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.qixiu.qixiu.utils.Preference;
 import com.qixiu.schoolfix.constant.ConstantString;
 import com.qixiu.schoolfix.ui.acitivty.LoginActivity;
@@ -14,26 +15,31 @@ import com.qixiu.schoolfix.ui.acitivty.LoginActivity;
 public final class LoginStatus {
 
     private static LoginStatus instance = new LoginStatus();
-    private static LoginActivity.LoginBean  loginBean;
+    private static LoginActivity.LoginBean loginBean;
     /*是否已登录*/
     private volatile boolean logged;
-    private          String  token;
+    private String token;
 
     public static LoginActivity.LoginBean getLoginBean() {
+        String loginStr = Preference.get(ConstantString.USERBEAN, "");
+        Gson gson = new Gson();
+        LoginStatus.loginBean = gson.fromJson(loginStr, LoginActivity.LoginBean.class);
         return loginBean;
     }
 
-    public static void setLoginBean(LoginActivity.LoginBean loginBean) {
-        LoginStatus.loginBean = loginBean;
+    public static void setLoginBean() {
+        String loginStr = Preference.get(ConstantString.USERBEAN, "");
+        Gson gson = new Gson();
+        LoginStatus.loginBean = gson.fromJson(loginStr, LoginActivity.LoginBean.class);
     }
 
     public static boolean isLogged() {
-        return !TextUtils.isEmpty(Preference.get(ConstantString.USERID,""));
+        return !TextUtils.isEmpty(Preference.get(ConstantString.USERID, ""));
     }
 
     @Nullable
     public static String getToken() {
-        return  Preference.get(ConstantString.USERID,"");//测试的时候改变一下这个地方
+        return Preference.get(ConstantString.USERID, "");//测试的时候改变一下这个地方
     }
 
 //    /*登录成功*/
@@ -51,10 +57,8 @@ public final class LoginStatus {
         instance.logged = false;
         instance.token = null;
         Preference.clearAllFlag();
-        Preference.putBoolean(ConstantString.IS_FIRST_LOGIN,true);
+        Preference.putBoolean(ConstantString.IS_FIRST_LOGIN, true);
     }
-
-
 
 
 }

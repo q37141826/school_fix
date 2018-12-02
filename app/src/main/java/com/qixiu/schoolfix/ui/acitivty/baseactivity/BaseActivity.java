@@ -73,7 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     //启动方法
-    public static void start(Context context, Class activity, ArrayList< Parcelable> datas){
+    public static void start(Context context, Class activity, ArrayList<? extends Parcelable> datas){
         Intent intent =new Intent(context,activity);
         intent.putParcelableArrayListExtra(IntentDataKeyConstant.DATA,datas);
         context.startActivity(intent);

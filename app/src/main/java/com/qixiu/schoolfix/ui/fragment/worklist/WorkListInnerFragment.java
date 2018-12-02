@@ -1,6 +1,7 @@
 package com.qixiu.schoolfix.ui.fragment.worklist;
 
 import android.content.Context;
+import android.os.Debug;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
 import com.qixiu.qixiu.utils.Preference;
 import com.qixiu.qixiu.utils.XrecyclerViewUtil;
+import com.qixiu.schoolfix.BuildConfig;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantString;
 import com.qixiu.schoolfix.constant.ConstantUrl;
@@ -29,6 +31,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 
+import static com.qixiu.schoolfix.ui.acitivty.work_flow.details.HardWorkDetailsActivity.ORDER_COMPLETE;
 import static com.qixiu.schoolfix.ui.acitivty.work_flow.details.HardWorkDetailsActivity.ORDER_WATING;
 
 /**
@@ -85,13 +88,14 @@ public class WorkListInnerFragment extends RequstFragment implements XRecyclerVi
             if (workDetailsBean.getO().getDeviceType() == 2) {
                 if (type.equals(types[0])) {
                     HardWorkReceiveActivity.start(getContext(), HardWorkReceiveActivity.class, selectedId);
-                }
-                if (type.equals(types[1])) {
-                    if(workDetailsBean.getO().getWorkOrderTypeStr().equals(ORDER_WATING)){
+                } else if (type.equals(types[1])) {
+                    if (workDetailsBean.getO().getWorkOrderTypeStr().equals(ORDER_WATING) || workDetailsBean.getO().getWorkOrderTypeStr().equals(ORDER_COMPLETE)) {
                         HardWorkReceiveActivity.start(getContext(), HardWorkReceiveActivity.class, selectedId);
-                    }else {
+                    } else {
                         HardWorkDetailsActivity.start(getContext(), HardWorkDetailsActivity.class, selectedId);
                     }
+                }else {
+                    HardWorkDetailsActivity.start(getContext(), HardWorkDetailsActivity.class, selectedId);
                 }
             } else {
                 SoftWorkDetailsActivity.start(getContext(), SoftWorkDetailsActivity.class, selectedId);
@@ -163,11 +167,14 @@ public class WorkListInnerFragment extends RequstFragment implements XRecyclerVi
             public void bindHolder(int position) {
                 if (mData instanceof WorkListBean.ResultBean.MyWorkOdersBean) {
                     WorkListBean.ResultBean.MyWorkOdersBean bean = (WorkListBean.ResultBean.MyWorkOdersBean) mData;
-                    Glide.with(mContext).load(bean.getProductImgUrl()).error(R.mipmap.shizi).into(imageViewWorkListItem);
+                    Glide.with(mContext).load(BuildConfig.BASE_URL + bean.getProductImgUrl()).error(R.mipmap.shizi).into(imageViewWorkListItem);
                     textViewObjectName.setText(bean.getProductName());
                     textViewTime.setText(bean.getWorkOrderCreatime());
                     textViewProblem.setText(bean.getWorkOrderCstProblemRemark());
                     textViewState.setText(bean.getWorkOrderTypeStr());
+                    textViewCity.setText(bean.getSchoolUnitArea());
+                    textViewAddress.setText(bean.getSchoolUnitName());
+                    textViewType.setText(bean.getDeviceTypeStr());
                 }
 
             }

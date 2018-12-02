@@ -127,7 +127,7 @@ public class ProblemSelectActivity extends RequstActivity implements OnRecyclerI
     public void onSuccess(BaseBean data) {
         if (data instanceof ProblemDataBean) {
             ProblemDataBean bean = (ProblemDataBean) data;
-            List dataList = bean.getO().getDataList();
+            List<ProblemDataBean.ResultBean.DataListBean> dataList = bean.getO().getDataList();
             adapter.refreshData(dataList);
 
         }

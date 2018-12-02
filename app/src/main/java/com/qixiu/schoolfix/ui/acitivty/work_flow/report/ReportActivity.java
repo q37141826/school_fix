@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Config;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,13 +14,16 @@ import com.bumptech.glide.Glide;
 import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
 import com.qixiu.qixiu.utils.ToastUtil;
+import com.qixiu.schoolfix.BuildConfig;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
 import com.qixiu.schoolfix.model.UploadFileBean;
 import com.qixiu.schoolfix.ui.acitivty.baseactivity.upload.UploadPictureActivityNew;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.details.WorkDetailsBean;
+import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.ProblemDataBean;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.ProblemSelectActivity;
+import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.ResoveListBean;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.SelectedProblemResoveListBeans;
 import com.qixiu.schoolfix.utils.reuestutil.UploadFileRequest;
 
@@ -51,10 +55,13 @@ public class ReportActivity extends UploadPictureActivityNew {
     SelectedProblemResoveListBeans selectedProblemResoveListBeans;
     String signPath;
     private String signUrl;
+    private String repairProductProblemGUIDs;
+    private String productProblemSolutionGUID;
+    private String urlsStringSpell;
 
     @Override
     protected void onInitViewNew() {
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
         mTitleView.setTitle("实施报告");
         recyclerPic.setLayoutManager(new GridLayoutManager(getContext(), 3));
         resultBean = getIntent().getParcelableExtra(IntentDataKeyConstant.DATA);
@@ -66,6 +73,42 @@ public class ReportActivity extends UploadPictureActivityNew {
                 startUpload();
             }
         });
+        setMaxPictureCount(3);
+    }
+
+
+
+
+    private void resolveData() {
+        if (!TextUtils.isEmpty(resultBean.getWorkOrderRepairSolutionRemark())) {
+            textViewProblems.setText(resultBean.getWorkOrderRepairProblemRemark());
+            textViewSolutions.setText(resultBean.getWorkOrderRepairSolutionRemark());
+            String[] problemsIds = resultBean.getRepairProductProblemGUIDs().split(";");
+            String[] solutionsIds = resultBean.getProductProblemSolutionGUID().split(";");
+            selectedProblemResoveListBeans = new SelectedProblemResoveListBeans();
+            List<ProblemDataBean.ResultBean.DataListBean> problems = new ArrayList<>();
+            for (int i = 0; i < problemsIds.length; i++) {
+                ProblemDataBean.ResultBean.DataListBean dataListBean = new ProblemDataBean.ResultBean.DataListBean();
+                dataListBean.setId(problemsIds[i]);
+                problems.add(dataListBean);
+            }
+            selectedProblemResoveListBeans.setProblemBeans(problems);
+            List<ResoveListBean.ResultBean.GetProductProblemSolutionDtosBean> solutions = new ArrayList<>();
+            for (int i = 0; i < solutionsIds.length; i++) {
+                ResoveListBean.ResultBean.GetProductProblemSolutionDtosBean dataListBean = new ResoveListBean.ResultBean.GetProductProblemSolutionDtosBean();
+                dataListBean.setId(solutionsIds[i]);
+                solutions.add(dataListBean);
+            }
+            selectedProblemResoveListBeans.setResoveBeans(solutions);
+            urlsStringSpell = resultBean.getWorkOrderErrorImgUrls();
+            String[] images = urlsStringSpell.split(";");
+            for (int i = 0; i < images.length; i++) {
+                selectPhotos.add( BuildConfig.BASE_URL +images[i]);
+            }
+            mRcAdapter.refreshData(selectPhotos);
+            signUrl = resultBean.getWorkOrderUserSignImgUrl();
+            Glide.with(getContext()).load(BuildConfig.BASE_URL +signUrl).into(imageViewGotoSign);
+        }
     }
 
     private void startUpload() {
@@ -78,11 +121,13 @@ public class ReportActivity extends UploadPictureActivityNew {
             ToastUtil.toast("请选择现场照片");
             return;
         }
+        if(!TextUtils.isEmpty(signUrl)){
+            signPath=BuildConfig.BASE_URL+signUrl;
+        }
         if (TextUtils.isEmpty(signPath)) {
             ToastUtil.toast("请填写签名");
             return;
         }
-
         List<String> imagesUrls = new ArrayList<>();
         for (int i = 0; i < selectPhotos.size(); i++) {
             UploadFileRequest.uploadFile(selectPhotos.get(i), new UploadFileRequest.UploadFileCallBack<UploadFileBean>() {
@@ -124,21 +169,24 @@ public class ReportActivity extends UploadPictureActivityNew {
     }
 
     private void checkAndSave(List<String> imagesUrls) {
-        if (selectPhotos.size() == imagesUrls.size() &&! TextUtils.isEmpty(signUrl)) {
-            String urlsStringSpell = UploadFileRequest.getUrlsStringSpell(imagesUrls, ";");
-            String repairProductProblemGUIDs = UploadFileRequest.getIdsStringSpell(selectedProblemResoveListBeans.getProblemBeans(), ";");
-            String productProblemSolutionGUID = UploadFileRequest.getIdsStringSpell(selectedProblemResoveListBeans.getResoveBeans(), ";");
-
-            Map<String, String> map = new HashMap();
-            map.put("id",resultBean.getId());
-            map.put("workOrderErrorImgUrls", urlsStringSpell);
-            map.put("workOrderUserSignImgUrl", signUrl);
-            map.put("repairProductProblemGUIDs", repairProductProblemGUIDs);
-            map.put("workOrderRepairProblemRemark", textViewProblems.getText().toString());
-            map.put("productProblemSolutionGUID", productProblemSolutionGUID);
-            map.put("workOrderRepairSolutionRemark", textViewSolutions.getText().toString());
-            post(ConstantUrl.saveReportUrl, map, new BaseBean());
+        if (selectPhotos.size() == imagesUrls.size() && !TextUtils.isEmpty(signUrl)) {
+            urlsStringSpell = UploadFileRequest.getUrlsStringSpell(imagesUrls, ";");
+            repairProductProblemGUIDs = UploadFileRequest.getIdsStringSpell(selectedProblemResoveListBeans.getProblemBeans(), ";");
+            productProblemSolutionGUID = UploadFileRequest.getIdsStringSpell(selectedProblemResoveListBeans.getResoveBeans(), ";");
+            requestUpload();
         }
+    }
+
+    private void requestUpload() {
+        Map<String, String> map = new HashMap();
+        map.put("id", resultBean.getId());
+        map.put("workOrderErrorImgUrls", urlsStringSpell);
+        map.put("workOrderUserSignImgUrl", signUrl);
+        map.put("repairProductProblemGUIDs", repairProductProblemGUIDs);
+        map.put("workOrderRepairProblemRemark", textViewProblems.getText().toString());
+        map.put("productProblemSolutionGUID", productProblemSolutionGUID);
+        map.put("workOrderRepairSolutionRemark", textViewSolutions.getText().toString());
+        post(ConstantUrl.saveReportUrl, map, new BaseBean());
     }
 
     @Override
@@ -166,7 +214,8 @@ public class ReportActivity extends UploadPictureActivityNew {
 
     @Override
     public void onError(Exception e) {
-        mZProgressHUD.dismiss();;
+        mZProgressHUD.dismiss();
+        ;
     }
 
     @Override
@@ -182,7 +231,8 @@ public class ReportActivity extends UploadPictureActivityNew {
 
     @Override
     protected void onInitData() {
-
+        //如果已经有数据了  先加载，再选择数据
+        resolveData();
     }
 
     @Override
@@ -228,7 +278,7 @@ public class ReportActivity extends UploadPictureActivityNew {
 
     @Subscribe
     public void getSignEvent(String path) {
-        signPath=path;
+        signPath = path;
         Glide.with(getContext()).load(path).into(imageViewGotoSign);
     }
 
@@ -236,5 +286,10 @@ public class ReportActivity extends UploadPictureActivityNew {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onItemClick(View v, RecyclerView.Adapter adapter, Object data) {
+        super.onItemClick(v, adapter, data);
     }
 }
