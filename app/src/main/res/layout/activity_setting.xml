@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.qixiu.schoolfix.ui.acitivty.mine.SettingActivity">
+
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin0.5dp"
+        android:background="@color/lineColor"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/back_grey"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <com.qixiu.widget.LineControllerView
+                app:showRightArrow="true"
+                android:id="@+id/lineAbout"
+                style="@style/line_controller_style"
+                app:textPrimary="关于"></com.qixiu.widget.LineControllerView>
+            <View
+                android:layout_marginLeft="@dimen/margin18dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin0.5dp"
+                android:background="@color/lineColor"></View>
+            <com.qixiu.widget.LineControllerView
+                android:onClick="gotoChangePsw"
+                app:showRightArrow="true"
+                android:id="@+id/lineChangePsw"
+                style="@style/line_controller_style"
+                app:textPrimary="修改密码"></com.qixiu.widget.LineControllerView>
+                        
+        </LinearLayout>
+        <Button
+            android:onClick="outLogin"
+            android:id="@+id/btnOutLog"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:text="退出登录"
+            android:layout_marginTop="@dimen/margin58dp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin51dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

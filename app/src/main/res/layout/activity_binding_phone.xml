@@ -1,0 +1,184 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back_grey"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.qixiu.schoolfix.ui.acitivty.home.binding.BindingPhoneActivity">
+
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/mine_text_grey"
+                android:text="单位信息" />
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineCompanyName"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="单位名称"
+                app:textSecondary="第三高中"></com.qixiu.widget.LineControllerView>
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineServiceName"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="服务对象"
+                app:textSecondary="第三高中"></com.qixiu.widget.LineControllerView>
+
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/linePhone"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="电话"
+                app:textSecondary="第三高中"></com.qixiu.widget.LineControllerView>
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineAddress"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="详细地址"
+                app:textSecondary="第三高中"></com.qixiu.widget.LineControllerView>
+
+
+            <TextView
+                style="@style/mine_text_grey"
+                android:text="产品信息" />
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineProductName"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="产品名称"
+                app:textSecondary="打印机"></com.qixiu.widget.LineControllerView>
+
+            <TextView
+                style="@style/mine_text_grey"
+                android:text="设备信息" />
+
+            <com.qixiu.widget.LineControllerView
+                android:onClick="selectCode"
+                app:showRightArrow="true"
+                android:id="@+id/lineMechineCode"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="机器码"
+                app:textSecondary="请选择机器码"></com.qixiu.widget.LineControllerView>
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineMechineAddress"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="设备地址"
+                app:textSecondary="--"></com.qixiu.widget.LineControllerView>
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineBuyDate"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="采购日期"
+                app:textSecondary="--"></com.qixiu.widget.LineControllerView>
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineLimitYear"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="报废年限"
+                app:textSecondary="--"></com.qixiu.widget.LineControllerView>
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineRepairPeriod"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="维护期间"
+                app:textSecondary="--"></com.qixiu.widget.LineControllerView>
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineNetIP"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="网络IP地址"
+                app:textSecondary="--"></com.qixiu.widget.LineControllerView>
+
+            <TextView
+                style="@style/mine_text_grey"
+                android:text="维护商信息" />
+
+            <com.qixiu.widget.LineControllerView
+                android:onClick="selectRepairCompany"
+                android:id="@+id/lineMaintenance"
+                app:showRightArrow="true"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="维护商名称"
+                app:textSecondary="--"></com.qixiu.widget.LineControllerView>
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineMaintainPhone"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="联系电话"
+                app:textSecondary="---"></com.qixiu.widget.LineControllerView>
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineMaintainAddress"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:textPrimary="详细地址"
+                app:textSecondary="----"></com.qixiu.widget.LineControllerView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin34dp"
+                android:background="@color/back_grey"></View>
+
+            <Button
+                android:id="@+id/btnBinding"
+                android:onClick="binding"
+                android:textSize="18sp"
+                android:background="@color/white"
+                android:text="绑定"
+                android:textColor="#FFC9A26C"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin48dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin7dp"
+                android:background="@color/back_grey"></View>
+
+            <Button
+                android:onClick="cancle"
+                android:textSize="18sp"
+                android:text="取消"
+                android:textColor="#FF4EBDEE"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin48dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin28dp"
+                android:background="@color/back_grey"></View>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

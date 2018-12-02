@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.qixiu.schoolfix.ui.acitivty.MainActivity">
+    <FrameLayout
+        android:id="@+id/fragmen_for_fragment"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/margin60dp"
+        android:layout_height="match_parent"></FrameLayout>
+    <View
+        android:layout_marginBottom="@dimen/margin60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lineColor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin0.5dp"></View>
+    <RadioGroup
+        android:id="@+id/group"
+        android:paddingTop="@dimen/margin5dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin60dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/radio_home"
+                android:drawableTop="@drawable/selector_home"
+                android:text="首页"
+                android:textColor="@color/color_selector_home_key"
+                android:button="@null"
+                style="@style/text_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+
+            <RadioButton
+                android:id="@+id/radio_work_list"
+                android:layout_marginRight="@dimen/margin80dp"
+                android:layout_marginLeft="@dimen/margin80dp"
+                android:drawableTop="@drawable/selector_work_list"
+                android:textColor="@color/color_selector_home_key"
+                android:text="工单"
+                android:button="@null"
+                style="@style/text_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <RadioButton
+                android:id="@+id/radio_work_mine"
+                android:drawableTop="@drawable/selector_mine"
+                android:text="我的"
+                android:textColor="@color/color_selector_home_key"
+                android:button="@null"
+                style="@style/text_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+
+    </RadioGroup>
+
+</RelativeLayout>

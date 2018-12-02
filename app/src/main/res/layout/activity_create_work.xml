@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.qixiu.schoolfix.ui.acitivty.work_flow.CreateHardWorkActivity">
+
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/part_creatwork_message01"></include>
+            <TextView
+                style="@style/mine_text_grey"
+                android:text="产品信息" />
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineProductType"
+                android:background="@drawable/under_line"
+                style="@style/line_work"
+                app:showRightArrow="true"
+                app:textPrimary="类型"
+                app:textSecondary="硬件设备"></com.qixiu.widget.LineControllerView>
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineProductName"
+                android:background="@drawable/under_line"
+                style="@style/line_work"
+                app:showRightArrow="true"
+                app:textPrimary="名称"
+                app:textSecondary="监控设备"></com.qixiu.widget.LineControllerView>
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineProductModel"
+                android:background="@drawable/under_line"
+                style="@style/line_work"
+                app:textPrimary="型号"
+                app:textSecondary="ZXT1500"></com.qixiu.widget.LineControllerView>
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineProductBrand"
+                android:background="@drawable/under_line"
+                style="@style/line_work"
+                app:textPrimary="品牌"
+                app:textSecondary="水滴"></com.qixiu.widget.LineControllerView>
+            <TextView
+                style="@style/mine_text_grey"
+                android:text="设备信息" />
+            <com.qixiu.widget.LineControllerView
+                android:onClick="gotoSelectMechineCode"
+                android:id="@+id/lineMechineCode"
+                android:background="@drawable/under_line"
+                style="@style/line_work"
+                app:showRightArrow="true"
+                app:textPrimary="机器码"
+                app:textSecondary="水滴"></com.qixiu.widget.LineControllerView>
+            <com.qixiu.widget.LineControllerView
+                android:background="@drawable/under_line"
+                android:id="@+id/lineDeviceCode"
+                style="@style/line_work"
+                app:textPrimary="设备码"
+                app:textSecondary="水滴"></com.qixiu.widget.LineControllerView>
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineMechinAddress"
+                android:background="@drawable/under_line"
+                style="@style/line_work"
+                app:showRightArrow="true"
+                app:textPrimary="详细地址"
+                app:textSecondary="水滴"></com.qixiu.widget.LineControllerView>
+
+            <include layout="@layout/part_work_problem_describe"></include>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

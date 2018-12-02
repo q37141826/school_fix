@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="mine_text_grey">
+        <item name="android:background">@color/back_grey</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/margin50dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/margin18dp</item>
+        <item name="android:textColor">@color/balck_half</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="line_controller_style">
+        <item name="android:paddingLeft">@dimen/margin4dp</item>
+        <item name="android:paddingRight">@dimen/margin4dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/margin52dp</item>
+        <item name="android:background">@color/white</item>
+        <item name="textPrimaryColor">@color/black</item>
+        <item name="textSecondaryColor">@color/balck_half</item>
+        <item name="textPrimarySize">18sp</item>
+        <item name="textSecondarySize">18sp</item>
+        <item name="rightArrowIcon">@drawable/smbd_butn_xiala</item>
+
+    </style>
+
+    <style name="line_work" parent="line_controller_style">
+        <item name="textSecondaryColor">@color/alpha_black_80per</item>
+
+    </style>
+    <style name="line_under" parent="line_controller_style">
+        <item name="background">@drawable/under_line</item>
+
+    </style>
+
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.qixiu.schoolfix.ui.acitivty.work_flow.CreateSoftWorkActivity">
+
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <include layout="@layout/part_creatwork_message01"></include>
+            <TextView
+                android:text="产品信息"
+                style="@style/mine_text_grey"
+                ></TextView>
+            <com.qixiu.widget.LineControllerView
+                app:textPrimary="类型"
+                app:textSecondary="软件项目"
+                style="@style/line_work"></com.qixiu.widget.LineControllerView>
+            <com.qixiu.widget.LineControllerView
+                app:textPrimary="名称"
+                app:textSecondary="运维系统"
+                style="@style/line_work"></com.qixiu.widget.LineControllerView>
+            <com.qixiu.widget.LineControllerView
+                app:textPrimary="架构"
+                app:textSecondary="运维系统"
+                style="@style/line_work"></com.qixiu.widget.LineControllerView>
+            <com.qixiu.widget.LineControllerView
+                app:textPrimary="品牌"
+                app:textSecondary="运维系统"
+                style="@style/line_work"></com.qixiu.widget.LineControllerView>
+            <include layout="@layout/part_work_problem_describe"></include>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

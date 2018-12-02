@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white_text">#F5F5F5</color>
+    <color name="login_bg_color">#FF146968</color>
+    <color name="login_btn_unable">#aaaaaaaa</color>
+    <color name="black_text">#FF000000</color>
+    <color name="red_bg">#FFFF0000</color>
+    <color name="mine_bg">#FFF0F0F2</color>
+
+    <!--50%半透明黑色-->
+    <color name="balck_half">#88000000</color>
+    <!--60%半透明黑色-->
+    <color name="balck_60per">#99000000</color>
+
+</resources>

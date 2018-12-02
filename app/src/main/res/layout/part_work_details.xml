@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/mine_text_grey"
+        android:text="联系人及地址" />
+
+    <com.qixiu.widget.LineControllerView
+        android:id="@+id/textViewServiceObject"
+        android:background="@drawable/under_line"
+        style="@style/line_under"
+        app:textPrimary="服务对象"
+        app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+    <com.qixiu.widget.LineControllerView
+        android:background="@drawable/under_line"
+        android:id="@+id/textViewDepartName"
+        style="@style/line_under"
+        app:textPrimary="单位名称"
+        app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+    <com.qixiu.widget.LineControllerView
+        android:background="@drawable/under_line"
+        android:id="@+id/textViewCity"
+        style="@style/line_under"
+        app:textPrimary="地区"
+        app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+    <com.qixiu.widget.LineControllerView
+        android:background="@drawable/under_line"
+        android:id="@+id/textViewAddress"
+        style="@style/line_under"
+        app:showRightArrow="true"
+        app:textPrimary="地址"
+        app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+    <com.qixiu.widget.LineControllerView
+        android:background="@drawable/under_line"
+        android:id="@+id/textViewContactPerson"
+        style="@style/line_under"
+        app:textPrimary="联系人"
+        app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+    <com.qixiu.widget.LineControllerView
+        android:background="@drawable/under_line"
+        android:id="@+id/textViewContactPhone"
+        style="@style/line_controller_style"
+        app:showRightArrow="true"
+        app:textPrimary="电话"
+        app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+    <TextView
+        style="@style/mine_text_grey"
+        android:text="服务信息" />
+
+    <com.qixiu.widget.LineControllerView
+        android:background="@drawable/under_line"
+        android:id="@+id/textViewExpectTime"
+        style="@style/line_under"
+        app:textPrimary="期望上门时间"
+        app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+    <com.qixiu.widget.LineControllerView
+        style="@style/line_under"
+        app:textPrimary="负责人"
+        android:id="@+id/textViewHandelPerson"
+        app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+    <TextView
+        style="@style/mine_text_grey"
+        android:text="单据信息" />
+
+    <com.qixiu.widget.LineControllerView
+        android:background="@drawable/under_line"
+        android:id="@+id/textViewTicketNumber"
+        style="@style/line_under"
+        app:textPrimary="单据号"
+        app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+    <com.qixiu.widget.LineControllerView
+        android:id="@+id/textViewCommitTime"
+        style="@style/line_controller_style"
+        app:textPrimary="提交时间"
+        app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+    <LinearLayout
+        android:id="@+id/lineearLayoutSignOrFinish"
+        android:paddingRight="@dimen/margin7dp"
+        android:paddingLeft="@dimen/margin7dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin66dp"
+        android:layout_marginTop="@dimen/margin17dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/margin4dp">
+
+        <TextView
+            android:onClick="completeWork"
+            style="@style/mine_text_grey"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:background="@color/theme_color"
+            android:drawableLeft="@drawable/qkxx_icon_fwwc"
+            android:gravity="center"
+            android:text="服务完成"
+            android:drawablePadding="@dimen/margin4dp"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/textViewGotoSign"
+            android:drawablePadding="@dimen/margin4dp"
+            android:onClick="signWork"
+            style="@style/mine_text_grey"
+            android:layout_width="0px"
+            android:layout_marginLeft="@dimen/margin7dp"
+            android:layout_weight="1"
+            android:background="@color/orange_btn"
+            android:drawableLeft="@drawable/qkxx_icon_qd"
+            android:gravity="center"
+            android:text="签到"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

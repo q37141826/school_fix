@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.qixiu.schoolfix">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- To acompleteWorklete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 用于写入缓存数据到扩展存储卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <application
+        android:name="com.qixiu.qixiu.application.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/appname"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".ui.acitivty.MainActivity"
+            android:launchMode="singleTask">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <!-- 如果某个界面有输入框，请用下面的风格，并且在layout上用fitsystemwindow=true -->
+        <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar" -->
+        <!-- android:windowSoftInputMode="adjustResize|stateHidden" -->
+        <activity android:name=".ui.acitivty.GoToActivity" />
+        <activity android:name=".ui.acitivty.guidepage.StartPageActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".ui.acitivty.LoginActivity"
+            android:label="登录界面"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.acitivty.mine.SettingActivity" />
+        <activity android:name=".ui.acitivty.mine.ChanngePasswordActivity" />
+        <activity android:name=".ui.acitivty.work_flow.CreateHardWorkActivity" />
+        <activity
+            android:name=".ui.acitivty.home.binding.BindingPhoneActivity"
+            android:label="@string/title_activity_binding_phone" />
+        <activity android:name=".ui.acitivty.home.binding.SelectedMechineCodeActivity" />
+        <activity android:name=".ui.acitivty.home.create_mechine.CreateMechineActivity" />
+        <activity android:name=".ui.acitivty.home.create_mechine.SelectAddressActivity" />
+        <activity android:name=".ui.acitivty.work_flow.CreateSoftWorkActivity" />
+        <activity android:name=".ui.acitivty.work_flow.details.HardWorkDetailsActivity" />
+        <activity android:name=".ui.acitivty.work_flow.details.SoftWorkDetailsActivity" />
+        <activity
+            android:name=".ui.acitivty.work_flow.problem.ProblemSelectActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".ui.acitivty.work_flow.problem.ProbemShowActivity" />
+        <activity
+            android:name=".ui.acitivty.work_flow.problem.ResovleActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".ui.acitivty.work_flow.report.ReportActivity" />
+        <activity android:name=".ui.acitivty.work_flow.report.SignNameActivity" />
+        <activity android:name=".ui.acitivty.work_flow.details.HardWorkReceiveActivity" />
+        <activity android:name=".ui.acitivty.work_flow.sign.SignWorkActivity" />
+        <activity android:name=".ui.acitivty.work_flow.sign.ServiceProgressActivity"></activity>
+    </application>
+
+</manifest>

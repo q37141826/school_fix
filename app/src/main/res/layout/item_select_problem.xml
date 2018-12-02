@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <com.qixiu.widget.LineControllerView
+        app:showRightArrow="true"
+        android:id="@+id/lineProblem"
+        style="@style/line_under"
+        android:layout_height="@dimen/margin47dp"
+        app:textPrimary="问题描述"></com.qixiu.widget.LineControllerView>
+
+    <View
+        android:background="@color/lineColor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin0.5dp"></View>
+
+
+
+</LinearLayout>

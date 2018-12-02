@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        style="@style/mine_text_grey"
+        android:text="客户信息" />
+
+    <com.qixiu.widget.LineControllerView
+        android:id="@+id/lineCreateDepartment"
+        style="@style/line_work"
+        app:showRightArrow="true"
+        app:textPrimary="报修单位"
+        app:textSecondary="什么幼儿园"></com.qixiu.widget.LineControllerView>
+    <View
+        android:layout_marginRight="@dimen/margin18dp"
+        android:layout_marginLeft="@dimen/margin18dp"
+        android:background="@color/lineColor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin0.5dp"></View>
+    <com.qixiu.widget.LineControllerView
+        android:id="@+id/lineCreatePerson"
+        style="@style/line_work"
+        app:textPrimary="报修人"
+        app:textSecondary="李老师"></com.qixiu.widget.LineControllerView>
+    <View
+        android:layout_marginRight="@dimen/margin18dp"
+        android:layout_marginLeft="@dimen/margin18dp"
+        android:background="@color/lineColor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin0.5dp"></View>
+    <com.qixiu.widget.LineControllerView
+        android:id="@+id/lineCreatePhone"
+        style="@style/line_work"
+        app:textPrimary="联系电话"
+        app:textSecondary="13554540382"></com.qixiu.widget.LineControllerView>
+    <View
+        android:layout_marginRight="@dimen/margin18dp"
+        android:layout_marginLeft="@dimen/margin18dp"
+        android:background="@color/lineColor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin0.5dp"></View>
+    <com.qixiu.widget.LineControllerView
+        android:id="@+id/lineExpectTime"
+        style="@style/line_work"
+        app:textPrimary="预约时间"
+        app:textSecondary="2018/01/11"></com.qixiu.widget.LineControllerView>
+    <View
+        android:layout_marginRight="@dimen/margin18dp"
+        android:layout_marginLeft="@dimen/margin18dp"
+        android:background="@color/lineColor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin0.5dp"></View>
+    <com.qixiu.widget.LineControllerView
+        android:id="@+id/lineRepairAddress"
+        style="@style/line_work"
+        app:textPrimary="详细地址"
+        app:textSecondary="地址"></com.qixiu.widget.LineControllerView>
+
+</LinearLayout>

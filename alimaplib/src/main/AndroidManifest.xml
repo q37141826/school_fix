@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.qixiu.alimaplib" >
+
+
+    <application>
+
+        <!--高德地图KEY-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="e4ab8734f9b5ffee6aeeff26f3ae85e1"/>
+
+        <service android:name="com.amap.api.location.APSService"></service>
+
+    </application>
+
+</manifest>

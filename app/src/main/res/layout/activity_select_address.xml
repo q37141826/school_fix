@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/back_grey"
+    tools:context="com.qixiu.schoolfix.ui.acitivty.home.create_mechine.SelectAddressActivity">
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin50dp">
+            <TextView
+                android:id="@+id/textViewSelectedAddress"
+                android:textColor="@color/black"
+                android:text="武汉"
+                style="@style/mine_text_grey" />
+            <EditText
+                android:background="@drawable/shape_editeext_back_grey"
+                android:id="@+id/edittextInputAddress"
+                android:drawableLeft="@drawable/ss_icon_ss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <com.qixiu.alimaplib.MapContainer
+            android:id="@+id/map_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--地图-->
+            <com.amap.api.maps.TextureMapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp" />
+        </com.qixiu.alimaplib.MapContainer>
+        </android.support.v4.widget.NestedScrollView>
+
+    </LinearLayout>
+</LinearLayout>

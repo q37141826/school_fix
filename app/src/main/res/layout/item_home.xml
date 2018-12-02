@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/margin122dp"
+    android:padding="@dimen/margin1dp"
+    android:gravity="center"
+    android:background="@color/back_grey"
+    android:layout_height="@dimen/margin122dp">
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="@dimen/margin120dp"
+        android:layout_height="@dimen/margin120dp">
+
+
+        <ImageView
+            android:id="@+id/imageViewHomeItem"
+            android:layout_width="@dimen/margin52dp"
+            android:layout_height="@dimen/margin52dp"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin5dp"
+            android:layout_below="@+id/imageViewHomeItem"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black_text" />
+        <TextView
+            android:paddingRight="@dimen/margin10dp"
+            android:paddingLeft="@dimen/margin10dp"
+            android:background="@drawable/red_port"
+            android:id="@+id/textViewUnDo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin25dp"
+            android:layout_marginTop="@dimen/margin25dp"
+            android:gravity="center"
+            android:text="3"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+</LinearLayout>

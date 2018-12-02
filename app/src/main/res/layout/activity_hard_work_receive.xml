@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.qixiu.schoolfix.ui.acitivty.work_flow.details.HardWorkReceiveActivity">
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/mine_text_grey"
+                android:text="产品信息" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin83dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iamgeViewProduct"
+                    android:layout_width="@dimen/margin73dp"
+                    android:layout_height="@dimen/margin70dp"
+                    android:layout_marginLeft="@dimen/margin14dp" />
+
+                <TextView
+                    android:id="@+id/textViewProductName"
+                    style="@style/mine_text_grey"
+                    android:background="@color/white"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/mine_text_grey"
+                android:text="设备信息" />
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/textViewMechineCode"
+                android:background="@drawable/under_line"
+                style="@style/line_under"
+                app:textPrimary="机器码"
+                app:textSecondary="1"></com.qixiu.widget.LineControllerView>
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/textViewDeviceCode"
+                style="@style/line_controller_style"
+                app:textPrimary="设备码"
+                app:textSecondary="1"></com.qixiu.widget.LineControllerView>
+            <include layout="@layout/part_work_details"></include>
+
+            <Button
+                android:id="@+id/btnRecice"
+                android:layout_marginBottom="@dimen/margin72dp"
+                android:background="@color/theme_color"
+                android:onClick="receive"
+                android:layout_marginTop="@dimen/margin14dp"
+                android:layout_marginRight="@dimen/margin23dp"
+                android:layout_marginLeft="@dimen/margin23dp"
+                android:text="接单"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin44dp" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

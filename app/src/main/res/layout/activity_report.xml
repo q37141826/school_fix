@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back_grey"
+    android:orientation="vertical"
+    tools:context="com.qixiu.schoolfix.ui.acitivty.work_flow.report.ReportActivity">
+
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:id="@+id/linearGotoProblem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:onClick="selectProblem"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/mine_text_grey"
+                        android:background="@color/white"
+                        android:text="问题描述" />
+
+                    <TextView
+                        android:paddingLeft="@dimen/margin18dp"
+                        android:id="@+id/textViewProblems"
+                        android:textColor="@color/alpha_black_80per"
+                        android:textSize="12sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"></TextView>
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin0.5dp"
+                        android:layout_marginLeft="@dimen/margin18dp"
+                        android:layout_marginRight="@dimen/margin18dp"
+                        android:background="@color/lineColor"></View>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/margin20dp"
+                    android:src="@drawable/smbd_butn_xiala" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:onClick="selectSulotions"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/mine_text_grey"
+                        android:background="@color/white"
+                        android:text="解决方案" />
+                    <TextView
+                        android:paddingLeft="@dimen/margin18dp"
+                        android:id="@+id/textViewSolutions"
+                        android:textColor="@color/alpha_black_80per"
+                        android:textSize="12sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"></TextView>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin0.5dp"
+                        android:layout_marginLeft="@dimen/margin18dp"
+                        android:layout_marginRight="@dimen/margin18dp"
+                        android:background="@color/lineColor"></View>
+                </LinearLayout>
+
+                <!--<ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginRight="@dimen/margin20dp"-->
+                    <!--android:src="@drawable/smbd_butn_xiala" />-->
+
+            </RelativeLayout>
+
+            <TextView
+                style="@style/mine_text_grey"
+                android:text="故障图片上传" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerPic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+
+            <TextView
+                style="@style/mine_text_grey"
+                android:text="用户确认签名" />
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:onClick="gotoSign"
+                    android:id="@+id/imageViewGotoSign"
+                    android:layout_width="@dimen/margin98dp"
+                    android:layout_height="@dimen/margin98dp"
+                    android:layout_marginLeft="@dimen/margin28dp"
+                    android:src="@mipmap/shizi" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

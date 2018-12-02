@@ -1,0 +1,217 @@
+package com.qixiu.schoolfix.ui.acitivty.home.binding;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.qixiu.qixiu.request.bean.BaseBean;
+
+import java.util.Base64;
+import java.util.List;
+
+/**
+ * Created by Administrator on 2018/11/27.
+ */
+
+public class RepairCompanyBean extends BaseBean<RepairCompanyBean.ResultBean> {
+
+
+    /**
+     * dataList : [{"id":"5b6c1e8c-3292-4295-b1c6-2625e1d0d7b2","schoolUnitGUID":"efb1dd4f-4851-4fb5-b69a-007d261deeeb","repairBusinessGUID":"9936f0b1-6953-4037-802a-297f728a97a4","repairBusinessName":"深圳NIZ供应商","repairBusinessTel":"13222222222","repairBusinessAddress":"深圳市宝安区","schoolUnitName":"上海市青浦区豫才中学","schoolUnitTel":"","schoolUnitMaster":""}]
+     * pageIndex : 1
+     * pageCount : 1
+     * pageSize : 1000
+     * rowCount : 1
+     */
+
+
+
+    public static class ResultBean {
+        private int pageIndex;
+        private int pageCount;
+        private int pageSize;
+        private int rowCount;
+        /**
+         * id : 5b6c1e8c-3292-4295-b1c6-2625e1d0d7b2
+         * schoolUnitGUID : efb1dd4f-4851-4fb5-b69a-007d261deeeb
+         * repairBusinessGUID : 9936f0b1-6953-4037-802a-297f728a97a4
+         * repairBusinessName : 深圳NIZ供应商
+         * repairBusinessTel : 13222222222
+         * repairBusinessAddress : 深圳市宝安区
+         * schoolUnitName : 上海市青浦区豫才中学
+         * schoolUnitTel :
+         * schoolUnitMaster :
+         */
+
+        private List<DataListBean> dataList;
+
+        public int getPageIndex() {
+            return pageIndex;
+        }
+
+        public void setPageIndex(int pageIndex) {
+            this.pageIndex = pageIndex;
+        }
+
+        public int getPageCount() {
+            return pageCount;
+        }
+
+        public void setPageCount(int pageCount) {
+            this.pageCount = pageCount;
+        }
+
+        public int getPageSize() {
+            return pageSize;
+        }
+
+        public void setPageSize(int pageSize) {
+            this.pageSize = pageSize;
+        }
+
+        public int getRowCount() {
+            return rowCount;
+        }
+
+        public void setRowCount(int rowCount) {
+            this.rowCount = rowCount;
+        }
+
+        public List<DataListBean> getDataList() {
+            return dataList;
+        }
+
+        public void setDataList(List<DataListBean> dataList) {
+            this.dataList = dataList;
+        }
+
+        public static class DataListBean implements Parcelable {
+
+            private String id;
+            private String schoolUnitGUID;
+            private String repairBusinessGUID;
+            private String repairBusinessName;
+            private String repairBusinessTel;
+            private String repairBusinessAddress;
+            private String schoolUnitName;
+            private String schoolUnitTel;
+            private String schoolUnitMaster;
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public String getSchoolUnitGUID() {
+                return schoolUnitGUID;
+            }
+
+            public void setSchoolUnitGUID(String schoolUnitGUID) {
+                this.schoolUnitGUID = schoolUnitGUID;
+            }
+
+            public String getRepairBusinessGUID() {
+                return repairBusinessGUID;
+            }
+
+            public void setRepairBusinessGUID(String repairBusinessGUID) {
+                this.repairBusinessGUID = repairBusinessGUID;
+            }
+
+            public String getRepairBusinessName() {
+                return repairBusinessName;
+            }
+
+            public void setRepairBusinessName(String repairBusinessName) {
+                this.repairBusinessName = repairBusinessName;
+            }
+
+            public String getRepairBusinessTel() {
+                return repairBusinessTel;
+            }
+
+            public void setRepairBusinessTel(String repairBusinessTel) {
+                this.repairBusinessTel = repairBusinessTel;
+            }
+
+            public String getRepairBusinessAddress() {
+                return repairBusinessAddress;
+            }
+
+            public void setRepairBusinessAddress(String repairBusinessAddress) {
+                this.repairBusinessAddress = repairBusinessAddress;
+            }
+
+            public String getSchoolUnitName() {
+                return schoolUnitName;
+            }
+
+            public void setSchoolUnitName(String schoolUnitName) {
+                this.schoolUnitName = schoolUnitName;
+            }
+
+            public String getSchoolUnitTel() {
+                return schoolUnitTel;
+            }
+
+            public void setSchoolUnitTel(String schoolUnitTel) {
+                this.schoolUnitTel = schoolUnitTel;
+            }
+
+            public String getSchoolUnitMaster() {
+                return schoolUnitMaster;
+            }
+
+            public void setSchoolUnitMaster(String schoolUnitMaster) {
+                this.schoolUnitMaster = schoolUnitMaster;
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(this.id);
+                dest.writeString(this.schoolUnitGUID);
+                dest.writeString(this.repairBusinessGUID);
+                dest.writeString(this.repairBusinessName);
+                dest.writeString(this.repairBusinessTel);
+                dest.writeString(this.repairBusinessAddress);
+                dest.writeString(this.schoolUnitName);
+                dest.writeString(this.schoolUnitTel);
+                dest.writeString(this.schoolUnitMaster);
+            }
+
+            public DataListBean() {
+            }
+
+            protected DataListBean(Parcel in) {
+                this.id = in.readString();
+                this.schoolUnitGUID = in.readString();
+                this.repairBusinessGUID = in.readString();
+                this.repairBusinessName = in.readString();
+                this.repairBusinessTel = in.readString();
+                this.repairBusinessAddress = in.readString();
+                this.schoolUnitName = in.readString();
+                this.schoolUnitTel = in.readString();
+                this.schoolUnitMaster = in.readString();
+            }
+
+            public static final Parcelable.Creator<DataListBean> CREATOR = new Parcelable.Creator<DataListBean>() {
+                @Override
+                public DataListBean createFromParcel(Parcel source) {
+                    return new DataListBean(source);
+                }
+
+                @Override
+                public DataListBean[] newArray(int size) {
+                    return new DataListBean[size];
+                }
+            };
+        }
+    }
+}

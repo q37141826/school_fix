@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back_grey"
+    android:orientation="vertical"
+    tools:context="com.qixiu.schoolfix.ui.acitivty.home.create_mechine.CreateMechineActivity">
+
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:text="设备信息"
+                style="@style/mine_text_grey" />
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineSchoolName"
+                app:textSecondaryColor="@color/black"
+                android:background="@drawable/under_line"
+                app:textPrimary="单位名称"
+                app:textSecondary="第三高中"
+                style="@style/line_controller_style"></com.qixiu.widget.LineControllerView>
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineProductName"
+                app:textSecondaryColor="@color/black"
+                android:background="@drawable/under_line"
+                app:textPrimary="产品名称"
+                app:textSecondary="第三高中"
+                style="@style/line_controller_style"></com.qixiu.widget.LineControllerView>
+            <RelativeLayout
+                android:background="@drawable/under_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin43dp">
+                <TextView
+                    android:textColor="@color/black"
+                    android:background="@color/white"
+                    android:layout_width="wrap_content"
+                    android:text="机器码"
+                    style="@style/mine_text_grey" />
+                <com.qixiu.wigit.myedittext.MyEditTextView
+                    android:id="@+id/editextMechineCode"
+                    app:my_edittext_text_size="18sp"
+                    app:my_edittext_hint_color="@color/hint_color_normol"
+                    app:my_edittext_text_color="@color/black"
+                    app:my_edittext_hint="请输入机器码"
+                    android:layout_marginLeft="@dimen/margin150dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </com.qixiu.wigit.myedittext.MyEditTextView>
+            </RelativeLayout>
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineBuyDate"
+                android:background="@drawable/under_line"
+                app:textPrimary="采购日期"
+                app:textSecondary="第三高中"
+                style="@style/line_controller_style"></com.qixiu.widget.LineControllerView>
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineLimitYears"
+                android:background="@drawable/under_line"
+                app:textPrimary="报废年限"
+                app:textSecondary="第三高中"
+                style="@style/line_controller_style"></com.qixiu.widget.LineControllerView>
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineMatainYears"
+                android:background="@drawable/under_line"
+                app:textPrimary="维护期限"
+                app:textSecondary="第三高中"
+                style="@style/line_controller_style"></com.qixiu.widget.LineControllerView>
+            <!--<com.qixiu.widget.LineControllerView-->
+                <!--android:id="@+id/lineIpAddress"-->
+                <!--android:background="@drawable/under_line"-->
+                <!--app:textPrimary="网络IP地址"-->
+                <!--app:textSecondary="第三高中"-->
+                <!--style="@style/line_controller_style"></com.qixiu.widget.LineControllerView>-->
+            <RelativeLayout
+                android:background="@drawable/under_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin43dp">
+                <TextView
+                    android:textColor="@color/black"
+                    android:background="@color/white"
+                    android:layout_width="wrap_content"
+                    android:text="网络IP地址"
+                    style="@style/mine_text_grey" />
+                <com.qixiu.wigit.myedittext.MyEditTextView
+                    android:id="@+id/editextIPAddress"
+                    app:my_edittext_text_size="18sp"
+                    app:my_edittext_hint_color="@color/hint_color_normol"
+                    app:my_edittext_text_color="@color/black"
+                    app:my_edittext_hint="请输入IP地址"
+                    android:layout_marginLeft="@dimen/margin150dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </com.qixiu.wigit.myedittext.MyEditTextView>
+            </RelativeLayout>
+            <TextView
+                android:text="设备地址"
+                style="@style/mine_text_grey" />
+
+            <com.qixiu.widget.LineControllerView
+                android:paddingTop="@dimen/margin5dp"
+                android:paddingBottom="@dimen/margin5dp"
+                app:sencondMarginLeft="@dimen/margin100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/lineAddress"
+                android:onClick="inputAddress"
+                style="@style/line_controller_style"
+                android:background="@drawable/under_line"
+                app:showRightArrow="true"
+                app:textPrimary="详细地址"
+                app:textSecondary="请输入详细地址"></com.qixiu.widget.LineControllerView>
+            <Button
+                android:onClick="createMechineCode"
+                android:layout_marginBottom="@dimen/margin41dp"
+                android:layout_marginTop="@dimen/margin41dp"
+                android:layout_marginRight="@dimen/margin18dp"
+                android:layout_marginLeft="@dimen/margin18dp"
+                android:background="@color/theme_color"
+                android:textSize="24sp"
+                android:text="完成"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin40dp" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</LinearLayout>

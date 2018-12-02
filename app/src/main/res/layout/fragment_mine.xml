@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mine_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"></RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/vg_title">
+
+        <TextView
+            style="@style/mine_text_grey"
+            android:text="基本资料" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineUserName"
+                style="@style/line_controller_style"
+                app:textPrimary="姓名"
+                app:textSecondary="先生"></com.qixiu.widget.LineControllerView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin0.5dp"
+                android:layout_marginLeft="@dimen/margin18dp"
+                android:layout_marginRight="@dimen/margin18dp"
+                android:background="@color/lineColor"></View>
+
+            <com.qixiu.widget.LineControllerView
+                android:id="@+id/lineUserPhone"
+                style="@style/line_controller_style"
+                app:textPrimary="手机"
+                app:textSecondary="13000000000"></com.qixiu.widget.LineControllerView>
+        </LinearLayout>
+
+        <TextView
+            style="@style/mine_text_grey"
+            android:text="企业信息" />
+
+        <com.qixiu.widget.LineControllerView
+            android:id="@+id/lineCompanyName"
+            style="@style/line_controller_style"
+            app:rightArrowIcon="@drawable/smbd_butn_xiala"
+            app:showRightArrow="true"
+            app:textPrimary="当前登录"
+            app:textSecondary="公司"></com.qixiu.widget.LineControllerView>
+
+        <TextView
+            style="@style/mine_text_grey"
+            android:text="更多" />
+
+        <com.qixiu.widget.LineControllerView
+            android:id="@+id/lineSetting"
+            style="@style/line_controller_style"
+            app:rightArrowIcon="@drawable/smbd_butn_xiala"
+            app:showRightArrow="true"
+            app:textPrimary="设置"></com.qixiu.widget.LineControllerView>
+    </LinearLayout>
+
+</LinearLayout>

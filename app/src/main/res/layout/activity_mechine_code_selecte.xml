@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back_grey"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin59dp">
+
+        <ImageView
+            android:onClick="finish"
+            android:id="@+id/imageViewBack"
+            android:paddingRight="@dimen/margin10dp"
+            android:paddingLeft="@dimen/margin10dp"
+            android:src="@drawable/tab_btn_back"
+            android:layout_marginLeft="@dimen/margin20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/margin35dp"
+            android:layout_centerVertical="true" />
+        <EditText
+            android:id="@+id/editextMechineCode"
+            android:layout_marginRight="@dimen/margin80dp"
+            android:layout_marginLeft="@dimen/margin60dp"
+            android:drawableLeft="@drawable/ss_icon_ss"
+            android:hint="请输入设备唯一码"
+            android:background="@drawable/shape_editeext_back_grey"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin40dp" />
+        <TextView
+            android:onClick="createCode"
+            android:textColor="@color/theme_color"
+            android:layout_marginRight="@dimen/margin20dp"
+            android:textSize="18sp"
+            android:text="新增"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recyclerViewMechineCode"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+</LinearLayout>
