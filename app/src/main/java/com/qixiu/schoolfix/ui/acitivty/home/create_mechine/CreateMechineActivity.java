@@ -14,9 +14,8 @@ import com.qixiu.qixiu.utils.ToastUtil;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 import com.qixiu.schoolfix.ui.acitivty.home.binding.MechineCodeListBean;
-import com.qixiu.schoolfix.ui.acitivty.home.binding.MechineDetailsBean;
 import com.qixiu.widget.LineControllerView;
 import com.qixiu.wigit.myedittext.MyEditTextView;
 
@@ -29,7 +28,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CreateMechineActivity extends RequstActivity {
+public class CreateMechineActivity extends RequestActivity {
     @BindView(R.id.lineSchoolName)
     LineControllerView lineSchoolName;
     @BindView(R.id.lineProductName)

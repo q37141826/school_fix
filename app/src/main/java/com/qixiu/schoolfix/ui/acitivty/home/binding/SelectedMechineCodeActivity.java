@@ -15,7 +15,7 @@ import com.qixiu.qixiu.utils.XrecyclerViewUtil;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.RequestMaker;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.RequestBean;
 import com.qixiu.schoolfix.ui.acitivty.home.create_mechine.CreateMechineActivity;
@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
  * Created by my on 2018/11/23.
  */
 
-public class SelectedMechineCodeActivity extends RequstActivity implements XRecyclerView.LoadingListener, OnRecyclerItemListener {
+public class SelectedMechineCodeActivity extends RequestActivity implements XRecyclerView.LoadingListener, OnRecyclerItemListener {
     @BindView(R.id.imageViewBack)
     ImageView imageViewBack;
     @BindView(R.id.editextMechineCode)

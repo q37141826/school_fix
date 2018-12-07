@@ -1,4 +1,4 @@
-package com.qixiu.schoolfix.ui.acitivty.work_flow;
+package com.qixiu.schoolfix.ui.acitivty.work_flow.create;
 
 import android.Manifest;
 import android.os.Bundle;

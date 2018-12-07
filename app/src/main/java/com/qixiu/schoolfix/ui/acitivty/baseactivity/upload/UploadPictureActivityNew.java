@@ -13,11 +13,11 @@ import com.qixiu.qixiu.request.OKHttpRequestModel;
 import com.qixiu.qixiu.request.OKHttpUIUpdataListener;
 import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
+import com.qixiu.qixiu.request.bean.ErrorBeanOne;
 import com.qixiu.qixiu.request.parameter.StringConstants;
 import com.qixiu.qixiu.utils.PictureCut;
 import com.qixiu.qixiu.utils.ToastUtil;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
-import com.qixiu.wigit.zprogress.ZProgressHUD;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ import okhttp3.Call;
  * TODO，从而回调就需要在主线程里面做了。
  */
 
-public abstract class UploadPictureActivityNew extends RequstActivity implements OnRecyclerItemListener, OKHttpUIUpdataListener<BaseBean>, AsyncTaskFactory.AsyncTaskInterface<Object, Object, String> {
+public abstract class UploadPictureActivityNew extends RequestActivity implements OnRecyclerItemListener, OKHttpUIUpdataListener<BaseBean>, AsyncTaskFactory.AsyncTaskInterface<Object, Object, String> {
     private ImageCaptureManager captureManager;
     public UpLoadPictureAdapter mRcAdapter;
     private int maxPictureCount = 9;
@@ -45,7 +45,6 @@ public abstract class UploadPictureActivityNew extends RequstActivity implements
     private boolean is_finish = true;//判断上传完毕后是否退出界面
     private boolean is_preview_can_delete = true;
     private OKHttpRequestModel mOkHttpRequestModel;
-    protected ZProgressHUD mZProgressHUD;
     private Map<String, String> mMap;
     private String mUrl;
     private BaseBean uploadbean;
@@ -79,7 +78,6 @@ public abstract class UploadPictureActivityNew extends RequstActivity implements
     @Override
     protected void onInitView() {
         super.onInitView();
-        mZProgressHUD = new ZProgressHUD(this);
         mZProgressHUD.setMessage("上传中...");
         initUpLoadView();
         mRecyclerView = getRecyclerView();
@@ -173,8 +171,6 @@ public abstract class UploadPictureActivityNew extends RequstActivity implements
             AsyncTask asyncTask = AsyncTaskFactory.CreateDefaultAsyncTask(UploadPictureActivityNew.this);
             asyncTask.execute();
         }
-
-
     }
 
     protected void setMaxPictureCount(int maxPictureCount) {
@@ -287,9 +283,15 @@ public abstract class UploadPictureActivityNew extends RequstActivity implements
             public void run() {
                 if (mZProgressHUD.isShowing()) {
                     mZProgressHUD.dismissWithFailure("上传失败");
+                }else {
+                    mZProgressHUD.dismiss();
                 }
                 if(c_codeBean!=null&&c_codeBean.getM()!=null){
                     ToastUtil.toast(c_codeBean.getM());
+                }else if(c_codeBean instanceof ErrorBeanOne){
+                    ErrorBeanOne errorBeanOne= (ErrorBeanOne) c_codeBean;
+                    ToastUtil.toast(errorBeanOne.getError().getMessage());
+                    onFailure(errorBeanOne,errorBeanOne.getError().getMessage());
                 }
             }
         });
@@ -305,6 +307,7 @@ public abstract class UploadPictureActivityNew extends RequstActivity implements
                 }
             }
         });
+        onError(e);
     }
 
     @Override

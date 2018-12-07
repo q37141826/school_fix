@@ -1,4 +1,4 @@
-package com.qixiu.schoolfix.ui.acitivty.work_flow;
+package com.qixiu.schoolfix.ui.acitivty.work_flow.create;
 
 import android.Manifest;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.qixiu.qixiu.google.zxing.client.android.CaptureActivity;
 import com.qixiu.qixiu.request.OKHttpRequestModel;
@@ -26,10 +27,21 @@ import com.qixiu.schoolfix.constant.ConstantString;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.model.UploadFileBean;
 import com.qixiu.schoolfix.ui.acitivty.baseactivity.upload.UploadPictureActivityNew;
-import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.ProblemSelectActivity;
+import com.qixiu.schoolfix.ui.acitivty.home.binding.MechineCodeListBean;
 import com.qixiu.schoolfix.ui.acitivty.home.binding.MechineDetailsBean;
 import com.qixiu.schoolfix.ui.acitivty.home.binding.SelectedMechineCodeActivity;
+import com.qixiu.schoolfix.ui.acitivty.work_flow.RequestMaker;
+import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.ProblemDataBean;
+import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.ProblemSelectActivity;
+import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.RequestBean;
+import com.qixiu.schoolfix.utils.LoginStatus;
+import com.qixiu.schoolfix.utils.reuestutil.UploadFileRequest;
 import com.qixiu.widget.LineControllerView;
+import com.qixiu.wigit.picker.MyPopOneListPicker;
+import com.qixiu.wigit.picker.SelectedDataBean;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,6 +53,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
+
+import static com.qixiu.qixiu.google.zxing.client.android.CaptureActivity.ZXING_INTENT;
 
 public class CreateHardWorkActivity extends UploadPictureActivityNew {
     String permission[] = {Manifest.permission.RECORD_AUDIO};
@@ -58,7 +72,7 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
     AudioRecoderUtils mAudioRecoderUtils;
     public String voice_file_path;
     @BindView(R.id.lineCreateDepartment)
-    LineControllerView lineCreateDepartment;
+    LineControllerView lineSchoolName;
     @BindView(R.id.lineCreatePerson)
     LineControllerView lineCreatePerson;
     @BindView(R.id.lineCreatePhone)
@@ -66,7 +80,7 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
     @BindView(R.id.lineExpectTime)
     LineControllerView lineExpectTime;
     @BindView(R.id.lineRepairAddress)
-    LineControllerView lineRepairAddress;
+    LineControllerView lineSchoolAddress;
     @BindView(R.id.lineProductType)
     LineControllerView lineProductType;
     @BindView(R.id.lineProductName)
@@ -81,6 +95,8 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
     LineControllerView lineDeviceCode;
     @BindView(R.id.lineMechinAddress)
     LineControllerView lineMechinAddress;
+    @BindView(R.id.textViewPrblems)
+    TextView textViewPrblems;
 
     private ImageView imageViewPop;
     private List<String> fileIds;
@@ -98,18 +114,24 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
     private String schoolUnitAddress;
     private String schoolUnitServiceName;
     private MechineDetailsBean detailsBean;
+    private SchoolListBean.ResultBean.DataListBean schoolBean;
+    private String selecteProblemIds;
+    private ProductListBean.ResultBean.DataListBean productBean;
+    private MechineCodeListBean.ResultBean.DataListBean selectMechineCode;
 
 
     @Override
     protected void onInitData() {
+        EventBus.getDefault().register(this);
         setMaxPictureCount(3);
-        mTitleView.setRightImage(getContext(), R.drawable.homepage_btn_sweep);
-        mTitleView.getRightText().setVisibility(View.VISIBLE);
+//        mTitleView.setRightImage(getContext(), R.drawable.tab_btn_sma);
+//        mTitleView.getRightText().setVisibility(View.VISIBLE);
+        lineExpectTime.setSecondaryText(TimeDataUtil.getTimeStamp(new Date().getTime(),TimeDataUtil.DEFULT_TIME_FORMAT));
         mTitleView.setRightListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CaptureActivity.class);
-                startActivityForResult(intent, CaptureActivity.ZXING_INTENT);
+                startActivityForResult(intent, ZXING_INTENT);
             }
         });
         mAudioRecoderUtils = new AudioRecoderUtils();
@@ -186,19 +208,25 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
-            scanId = data.getStringExtra(CaptureActivity.ZXING_VALUE);
-            post(ConstantUrl.mechineDetailsUrl + "?id=" + scanId, new HashMap(), new MechineDetailsBean());
+            if (requestCode == ZXING_INTENT) {
+                scanId = data.getStringExtra(CaptureActivity.ZXING_VALUE);
+                post(ConstantUrl.mechineDetailsUrl + "?id=" + scanId, new HashMap(), new MechineDetailsBean());
+            }
         }
     }
 
     public void uploadConfrim(View view) {
-        mZProgressHUD.show();
+        if (TextUtils.isEmpty(selecteProblemIds)) {
+            ToastUtil.toast("请选择问题描述");
+            return;
+        }
         fileIds = new ArrayList<>();
         fileNums = selectPhotos.size();
         for (int i = 0; i < selectPhotos.size(); i++) {
             uploadFile(selectPhotos.get(i));
         }
         if (!TextUtils.isEmpty(voice_file_path)) {
+            voiceUrl = "";
             uploadFile(voice_file_path);
         }
     }
@@ -215,9 +243,12 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
                         fileIds.add(uploadFileBean.getO());
                     }
                 }
-                if (fileIds.size() == fileNums && !TextUtils.isEmpty(voiceUrl)) {
-                    ToastUtil.toast("上传完成");// TODO: 2018/11/24 再去创建工单
-                    createWork();
+                if (fileIds.size() == fileNums) {
+                    if (!TextUtils.isEmpty(voice_file_path) && !TextUtils.isEmpty(voiceUrl)) {
+                        createWork();
+                    } else {
+                        createWork();
+                    }
                 }
             }
 
@@ -246,9 +277,9 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
         Map<String, String> map = new HashMap<>();
 //        map.put("workOrderGUID",);
 //
-//        map.put("deviceGUID",);
+        map.put("deviceGUID",selectMechineCode.getId());
 //
-//        map.put("repairUserGUID",);
+        map.put("repairUserGUID",LoginStatus.getLoginBean().getO().getId());
 //
 //        map.put("serviceUserGUID",);
 //
@@ -258,19 +289,19 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
 //
 //        map.put("workOrderSubmitTel",);
 //
-//        map.put("workOrderType",);
+        map.put("workOrderType", "待接单");
 //
 //        map.put("workOrderServiceNo",);
 //
         map.put("workOrderExpectTime", lineExpectTime.getSecondaryText().toString());
 //
-//        map.put("workOrderCstProblemRemark",);
+        map.put("workOrderCstProblemRemark",textViewPrblems.getText().toString());
 //
         map.put("workOrderProblemMP3Url", voiceUrl);
 //
 //        map.put("workOrderMP3",);
 //
-        map.put("workOrderCstProblemImgUrl", fileIds.get(0));
+        map.put("workOrderCstProblemImgUrl", UploadFileRequest.getUrlsStringSpell(fileIds, ";"));
 //
 //        map.put("workOrderGoTime",);
 //
@@ -302,7 +333,7 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
 //
 //        map.put("workOrderDestroyTime",);
 //
-//        map.put("cstProductProblemGUIDs",);
+        map.put("cstProductProblemGUIDs", selecteProblemIds);
 //
 //        map.put("repairProductProblemGUIDs",);
 //
@@ -316,7 +347,7 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
 //
 //        map.put("isDeleted",);
 //
-        map.put("createTime", TimeDataUtil.getTimeStamp(new Date().getTime()));
+//        map.put("createTime", TimeDataUtil.getTimeStamp(new Date().getTime()));
 //
 //        map.put("createGUID",);
 //
@@ -343,22 +374,22 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
         map.put("workOrderSubmitAddress", "企秀测试");
 //
 //        map.put("workOrderExpectEndTime",);
-
+        post(ConstantUrl.createWorkUrl, map, new BaseBean());
+        mZProgressHUD.show();
     }
 
     public void selectProblem(View view) {
-        if (TextUtils.isEmpty(scanId)) {
+        if (TextUtils.isEmpty(productGUID)) {
             ToastUtil.toast("请先选择设备信息");
             return;
         }
-        Preference.put(ConstantString.FROM_WHERE,"CREATE");
+        Preference.put(ConstantString.FROM_WHERE, this.getClass().getSimpleName());
         ProblemSelectActivity.start(getContext(), ProblemSelectActivity.class, productGUID);
-
     }
+
 
     @Override
     public void onSuccess(BaseBean data) {
-        mZProgressHUD.dismiss();
         if (data instanceof MechineDetailsBean) {
             detailsBean = (MechineDetailsBean) data;
             productGUID = detailsBean.getO().getProductGUID();
@@ -376,30 +407,130 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
             lineProductModel.setSecondaryText(productModel);
             lineMechineCode.setSecondaryText(detailsBean.getO().getDeviceMachineCode());
             lineMechinAddress.setSecondaryText(detailsBean.getO().getDeviceAddress());
-            lineRepairAddress.setSecondaryText(detailsBean.getO().getSchoolUnitAddress());
-            lineCreateDepartment.setSecondaryText(detailsBean.getO().getSchoolUnitName());
+            lineSchoolAddress.setSecondaryText(detailsBean.getO().getSchoolUnitAddress());
+            lineSchoolName.setSecondaryText(detailsBean.getO().getSchoolUnitName());
             lineProductName.setSecondaryText(productName);
-
-
+        }
+        if (data instanceof SchoolListBean) {//选择学校
+            SchoolListBean bean = (SchoolListBean) data;
+            List<SelectedDataBean> selectedDataBeans = new ArrayList<>();
+            for (int i = 0; i < bean.getO().getDataList().size(); i++) {
+                SelectedDataBean selectedDataBean = new SelectedDataBean(bean.getO().getDataList().get(i).getId(), bean.getO().getDataList().get(i).getSchoolUnitName());
+                selectedDataBean.setData(bean.getO().getDataList().get(i));
+                selectedDataBeans.add(selectedDataBean);
+            }
+            MyPopOneListPicker schoolPicker = new MyPopOneListPicker(getContext(), selectedDataBeans, new MyPopOneListPicker.Pop_selectedListenner() {
+                @Override
+                public void getData(SelectedDataBean data) {
+                    schoolBean = (SchoolListBean.ResultBean.DataListBean) data.getData();
+                    schoolUnitGUID = schoolBean.getSchoolUnitGUID();
+                    lineSchoolName.setSecondaryText(schoolBean.getSchoolUnitName());
+                    lineSchoolAddress.setSecondaryText(schoolBean.getRepairBusinessAddress());
+                    lineCreatePhone.setSecondaryText(schoolBean.getSchoolUnitTel());
+                    lineCreatePerson.setSecondaryText(schoolBean.getSchoolUnitMaster());
+                }
+            });
+            schoolPicker.show();
+        }
+        if (data instanceof ProductListBean) {
+            ProductListBean bean = (ProductListBean) data;
+            List<SelectedDataBean> selectedDataBeans = new ArrayList<>();
+            for (int i = 0; i < bean.getO().getDataList().size(); i++) {
+                SelectedDataBean selectedDataBean = new SelectedDataBean(bean.getO().getDataList().get(i).getId(), bean.getO().getDataList().get(i).getProductName());
+                selectedDataBean.setData(bean.getO().getDataList().get(i));
+                selectedDataBeans.add(selectedDataBean);
+            }
+            MyPopOneListPicker productPicker = new MyPopOneListPicker(getContext(), selectedDataBeans, new MyPopOneListPicker.Pop_selectedListenner() {
+                @Override
+                public void getData(SelectedDataBean data) {
+                    productBean = (ProductListBean.ResultBean.DataListBean) data.getData();
+                    lineProductName.setSecondaryText(productBean.getProductName());
+                    lineProductModel.setSecondaryText(productBean.getProductModel());
+                    lineProductBrand.setSecondaryText(productBean.getProductBrand());
+                    productGUID = productBean.getProductGUID();
+                }
+            });
+            productPicker.show();
         }
         super.onSuccess(data);
+        mZProgressHUD.dismiss();
     }
 
     @Override
     public void onError(Exception e) {
-
+        mZProgressHUD.dismiss();
     }
 
     @Override
     public void onFailure(C_CodeBean c_codeBean, String m) {
+        mZProgressHUD.dismiss();
+    }
+
+    @Subscribe
+    public void getMechineCodeEvent(MechineCodeListBean.ResultBean.DataListBean bean) {
+        selectMechineCode = bean;
+        lineMechineCode.setSecondaryText(bean.getDeviceMachineCode());
+        lineMechinAddress.setSecondaryText(bean.getDeviceAddress());
+        lineDeviceCode.setSecondaryText(bean.getDeviceCode());
+    }
+
+    @Subscribe
+    public void getProblemsEvent(ArrayList<ProblemDataBean.ResultBean.DataListBean> dataListBean) {
+        selecteProblemIds = UploadFileRequest.getIdsStringSpell(dataListBean, ";");
+        StringBuffer problemRemarks = new StringBuffer("");
+        for (int i = 0; i < dataListBean.size(); i++) {
+            if (i == dataListBean.size() - 1) {
+                problemRemarks.append(dataListBean.get(i).getProductProblemRemark());
+            } else {
+                problemRemarks.append(dataListBean.get(i).getProductProblemRemark() + ";\n");
+            }
+        }
+        textViewPrblems.setText(problemRemarks.toString());
 
     }
 
     public void gotoSelectMechineCode(View view) {
         if (TextUtils.isEmpty(productGUID)) {
-            ToastUtil.toast("请先扫描二维码");
+            ToastUtil.toast("请先选择设备信息");
             return;
         }
-        SelectedMechineCodeActivity.start(getContext(), SelectedMechineCodeActivity.class,detailsBean.getO());
+        MechineDetailsBean.ResultBean resultBean = new MechineDetailsBean.ResultBean();
+        resultBean.setProductGUID(productGUID);
+        resultBean.setSchoolUnitGUID(schoolUnitGUID);
+        resultBean.setRepairBusinessGUID(schoolBean.getRepairBusinessGUID());
+        SelectedMechineCodeActivity.start(getContext(), SelectedMechineCodeActivity.class, resultBean);
+    }
+
+
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+
+    //选择设备
+    public void selectDevice(View view) {
+        if (schoolBean == null) {
+            ToastUtil.toast("请先选择单位");
+            return;
+        }
+        Map<String, String> map = new HashMap<>();
+        map.put("schoolUnitGUID", schoolBean.getSchoolUnitGUID());
+        RequestBean request = RequestMaker.getRequest(map);
+        request.setOrder("productName desc");
+        post(ConstantUrl.productListUrl02, request, new ProductListBean());
+    }
+
+    //选择学校
+    public void selecteUnit(View view) {
+        Map<String, String> map = new HashMap<>();
+        map.put("repairBusinessGUID", LoginStatus.getLoginBean().getO().getRepairBusinessGUID());
+        RequestBean request = RequestMaker.getRequest(map);
+        request.setOrder("repairBusinessName desc");
+        post(ConstantUrl.schoolListUrl, request, new SchoolListBean());
     }
 }

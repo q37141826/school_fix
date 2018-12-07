@@ -11,7 +11,7 @@ import com.qixiu.qixiu.utils.ToastUtil;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.RequestMaker;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.RequestBean;
 import com.qixiu.schoolfix.utils.LoginStatus;
@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 /**
  * A login screen that offers login via email/password.
  */
-public class BindingPhoneActivity extends RequstActivity {
+public class BindingPhoneActivity extends RequestActivity {
 
 
     @BindView(R.id.lineCompanyName)
@@ -94,7 +94,7 @@ public class BindingPhoneActivity extends RequstActivity {
             lineAddress.setSecondaryText(mechineDetailsBean.getO().getSchoolUnitAddress());
             linePhone.setSecondaryText(mechineDetailsBean.getO().getSchoolUnitTel());
             lineProductName.setSecondaryText(mechineDetailsBean.getO().getProductName());
-
+            lineServiceName.setSecondaryText(mechineDetailsBean.getO().getSchoolUnitServiceName());
 
 
             lineMaintainAddress.setSecondaryText(LoginStatus.getLoginBean().getO().getRepairBusinessAddress());

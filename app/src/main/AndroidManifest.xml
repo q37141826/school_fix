@@ -56,30 +56,27 @@
         <!-- android:windowSoftInputMode="adjustResize|stateHidden" -->
         <activity android:name=".ui.acitivty.GoToActivity" />
         <activity android:name=".ui.acitivty.guidepage.StartPageActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.acitivty.LoginActivity"
             android:label="登录界面"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateHidden">
-
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".ui.acitivty.mine.SettingActivity" />
         <activity android:name=".ui.acitivty.mine.ChanngePasswordActivity" />
-        <activity android:name=".ui.acitivty.work_flow.CreateHardWorkActivity" />
+        <activity android:name=".ui.acitivty.work_flow.create.CreateHardWorkActivity" />
         <activity
             android:name=".ui.acitivty.home.binding.BindingPhoneActivity"
             android:label="@string/title_activity_binding_phone" />
         <activity android:name=".ui.acitivty.home.binding.SelectedMechineCodeActivity" />
         <activity android:name=".ui.acitivty.home.create_mechine.CreateMechineActivity" />
         <activity android:name=".ui.acitivty.home.create_mechine.SelectAddressActivity" />
-        <activity android:name=".ui.acitivty.work_flow.CreateSoftWorkActivity" />
+        <activity android:name=".ui.acitivty.work_flow.create.CreateSoftWorkActivity" />
         <activity android:name=".ui.acitivty.work_flow.details.HardWorkDetailsActivity" />
         <activity android:name=".ui.acitivty.work_flow.details.SoftWorkDetailsActivity" />
         <activity
@@ -95,7 +92,19 @@
         <activity android:name=".ui.acitivty.work_flow.report.SignNameActivity" />
         <activity android:name=".ui.acitivty.work_flow.details.HardWorkReceiveActivity" />
         <activity android:name=".ui.acitivty.work_flow.sign.SignWorkActivity" />
-        <activity android:name=".ui.acitivty.work_flow.sign.ServiceProgressActivity"></activity>
+        <activity
+            android:name=".ui.acitivty.work_flow.sign.ServiceProgressActivity"
+            android:label="服务进度" />
+        <activity
+            android:name=".ui.acitivty.inspection.InspectionActivity"
+            android:label="巡检管理" />
+        <activity android:name=".ui.acitivty.inspection.school_check.SchoolCheckMechineListActiviy" />
+        <activity android:name=".ui.acitivty.inspection.school_check.CheckItemsActivity" />
+        <activity android:name=".ui.acitivty.inspection.check_route.CheckRouteActivity" />
+        <activity android:name=".ui.acitivty.inspection.check_details.CheckDetailsActivity" />
+        <activity android:name=".ui.acitivty.inspection.history.HistoryActivity" />
+        <activity android:name=".ui.acitivty.inspection.RouteMapActivity" />
+        <activity android:name=".ui.acitivty.knowledge_share.KnowledgeShareListActivity"></activity>
     </application>
 
 </manifest>

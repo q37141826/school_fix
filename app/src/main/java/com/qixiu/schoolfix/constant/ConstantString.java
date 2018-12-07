@@ -24,4 +24,7 @@ public class ConstantString {
     public static final String FROM_WHERE="FROM_WHERE";
     public static final String NULL_ID="00000000-0000-0000-0000-000000000000";
 
+    public static final String IS_EDIBLE="IS_EDIBLE";
+
+
 }

@@ -12,7 +12,13 @@ import java.util.List;
  * Created by my on 2018/11/24.
  */
 
-public class ProblemDataBean extends BaseBean<ProblemDataBean.ResultBean>{
+/*
+*
+
+* */
+
+public class ProblemDataBean extends BaseBean<ProblemDataBean.ResultBean> {
+
 
 
     public static class ResultBean {
@@ -25,7 +31,7 @@ public class ProblemDataBean extends BaseBean<ProblemDataBean.ResultBean>{
          * productGUID : 50bb2acd-7694-436f-8be7-08d64c5ba3ec
          * productProblemRemark : 设备过热
          * tenantId :
-         * isDeleted : false
+         * isDeleted : 0
          * createTime :
          * createGUID :
          * createdName :
@@ -79,14 +85,12 @@ public class ProblemDataBean extends BaseBean<ProblemDataBean.ResultBean>{
             this.dataList = dataList;
         }
 
-        public static class DataListBean implements Parcelable,IdIntef {
-
-
+        public static class DataListBean implements Parcelable,IdIntef{
             private String id;
             private String productGUID;
             private String productProblemRemark;
             private String tenantId;
-            private boolean isDeleted;
+            private int isDeleted;
             private String createTime;
             private String createGUID;
             private String createdName;
@@ -96,16 +100,9 @@ public class ProblemDataBean extends BaseBean<ProblemDataBean.ResultBean>{
             private String approveState;
             private String approveGUID;
             private String approveTime;
-            private boolean last=false;
-            private  boolean isSelected=false;
 
-            public boolean isSelected() {
-                return isSelected;
-            }
 
-            public void setSelected(boolean selected) {
-                isSelected = selected;
-            }
+
 
             public boolean isLast() {
                 return last;
@@ -115,18 +112,21 @@ public class ProblemDataBean extends BaseBean<ProblemDataBean.ResultBean>{
                 this.last = last;
             }
 
-            public boolean isDeleted() {
-                return isDeleted;
+            public boolean isSelected() {
+                return isSelected;
             }
 
-            public void setDeleted(boolean deleted) {
-                isDeleted = deleted;
+            public void setSelected(boolean selected) {
+                isSelected = selected;
             }
-            @Override
+
+            private boolean last=false;
+            private  boolean isSelected=false;
+
             public String getId() {
                 return id;
             }
-            @Override
+
             public void setId(String id) {
                 this.id = id;
             }
@@ -155,11 +155,11 @@ public class ProblemDataBean extends BaseBean<ProblemDataBean.ResultBean>{
                 this.tenantId = tenantId;
             }
 
-            public boolean isIsDeleted() {
+            public int getIsDeleted() {
                 return isDeleted;
             }
 
-            public void setIsDeleted(boolean isDeleted) {
+            public void setIsDeleted(int isDeleted) {
                 this.isDeleted = isDeleted;
             }
 
@@ -246,7 +246,7 @@ public class ProblemDataBean extends BaseBean<ProblemDataBean.ResultBean>{
                 dest.writeString(this.productGUID);
                 dest.writeString(this.productProblemRemark);
                 dest.writeString(this.tenantId);
-                dest.writeByte(this.isDeleted ? (byte) 1 : (byte) 0);
+                dest.writeInt(this.isDeleted);
                 dest.writeString(this.createTime);
                 dest.writeString(this.createGUID);
                 dest.writeString(this.createdName);
@@ -268,7 +268,7 @@ public class ProblemDataBean extends BaseBean<ProblemDataBean.ResultBean>{
                 this.productGUID = in.readString();
                 this.productProblemRemark = in.readString();
                 this.tenantId = in.readString();
-                this.isDeleted = in.readByte() != 0;
+                this.isDeleted = in.readInt();
                 this.createTime = in.readString();
                 this.createGUID = in.readString();
                 this.createdName = in.readString();
@@ -282,7 +282,7 @@ public class ProblemDataBean extends BaseBean<ProblemDataBean.ResultBean>{
                 this.isSelected = in.readByte() != 0;
             }
 
-            public static final Parcelable.Creator<DataListBean> CREATOR = new Parcelable.Creator<DataListBean>() {
+            public static final Creator<DataListBean> CREATOR = new Creator<DataListBean>() {
                 @Override
                 public DataListBean createFromParcel(Parcel source) {
                     return new DataListBean(source);

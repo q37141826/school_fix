@@ -8,9 +8,9 @@ import com.qixiu.qixiu.request.bean.C_CodeBean;
 import com.qixiu.qixiu.utils.Preference;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.ui.acitivty.LoginActivity;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 
-public class SettingActivity extends RequstActivity {
+public class SettingActivity extends RequestActivity {
 
 
     @Override

@@ -17,7 +17,7 @@ import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantString;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 import com.qixiu.widget.LineControllerView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -30,7 +30,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ResovleActivity extends RequstActivity implements OnRecyclerItemListener {
+public class ResovleActivity extends RequestActivity implements OnRecyclerItemListener {
 
 
     @BindView(R.id.recyclerView)

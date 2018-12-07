@@ -25,14 +25,14 @@ import com.qixiu.alimaplib.result.AmapClickResultBean;
 import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
 import com.qixiu.schoolfix.R;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SelectAddressActivity extends RequstActivity implements AMap.OnMapLongClickListener, GeocodeSearch.OnGeocodeSearchListener, AMap.OnMapClickListener {
+public class SelectAddressActivity extends RequestActivity implements AMap.OnMapLongClickListener, GeocodeSearch.OnGeocodeSearchListener, AMap.OnMapClickListener {
     @BindView(R.id.textViewSelectedAddress)
     TextView textViewSelectedAddress;
     @BindView(R.id.edittextInputAddress)

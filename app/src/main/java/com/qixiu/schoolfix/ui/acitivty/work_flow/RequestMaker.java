@@ -13,7 +13,6 @@ import java.util.Set;
 
 public class RequestMaker {
 
-
     public static RequestBean getMechineRequest(String productGUID) {
         RequestBean requestIntef = new RequestBean();
 

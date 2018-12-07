@@ -17,7 +17,7 @@ import com.qixiu.qixiu.utils.ToastUtil;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantString;
 import com.qixiu.schoolfix.constant.ConstantUrl;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 import com.qixiu.schoolfix.utils.LoginStatus;
 import com.qixiu.wigit.myedittext.MyEditTextView;
 
@@ -27,7 +27,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LoginActivity extends RequstActivity {
+public class LoginActivity extends RequestActivity {
 
     @BindView(R.id.edittextId)
     MyEditTextView edittextId;

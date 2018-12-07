@@ -15,7 +15,7 @@ import com.qixiu.qixiu.utils.ToastUtil;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.RequestMaker;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.RequestBean;
 import com.qixiu.schoolfix.utils.LoginStatus;
@@ -35,7 +35,7 @@ import butterknife.ButterKnife;
 import static com.qixiu.schoolfix.constant.ConstantUrl.giveOrderUrl;
 import static com.qixiu.schoolfix.ui.acitivty.work_flow.details.HardWorkDetailsActivity.ORDER_WATING;
 
-public class HardWorkReceiveActivity extends RequstActivity {
+public class HardWorkReceiveActivity extends RequestActivity {
 
 
     @BindView(R.id.iamgeViewProduct)
@@ -105,9 +105,11 @@ public class HardWorkReceiveActivity extends RequstActivity {
             textViewContactPhone.setSecondaryText(workDetailsBean.getO().getWorkOrderSubmitTel());
             textViewAddress.setSecondaryText(workDetailsBean.getO().getSchoolUnitAddress());
             textViewCity.setSecondaryText(workDetailsBean.getO().getSchoolUnitArea());
-            textViewExpectTime.setSecondaryText(workDetailsBean.getO().getWorkOrderExpectTime() .substring(0,10)+ "至" +
-                    workDetailsBean.getO().getWorkOrderExpectEndTime().substring(0,10));
-
+            try {
+                textViewExpectTime.setSecondaryText(workDetailsBean.getO().getWorkOrderExpectTime().substring(5, 20) + "至" +
+                        workDetailsBean.getO().getWorkOrderExpectEndTime().substring(10, 20));
+            } catch (Exception e) {
+            }
             textViewHandelPerson.setSecondaryText(LoginStatus.getLoginBean().getO().getRepairBusinessName());
             textViewTicketNumber.setSecondaryText(workDetailsBean.getO().getWorkOrderServiceNo());
             textViewCommitTime.setSecondaryText(workDetailsBean.getO().getWorkOrderCreatime());
@@ -118,7 +120,7 @@ public class HardWorkReceiveActivity extends RequstActivity {
 
         }
         if (data.getUrl().equals(ConstantUrl.receiveUrl)) {
-            ToastUtil.toast(mTitleView.getTitle()+"成功");
+            ToastUtil.toast(btnRecice.getText() + "成功");
             finish();
         }
         if (data instanceof RepairPersonBean) {

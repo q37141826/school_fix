@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin40dp"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/margin24dp">
+
+        <TextView
+            style="@style/text_black"
+            android:layout_centerVertical="true"
+            android:text="检测项目"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin20dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:button="@null"
+                android:background="@drawable/selector_check_item"
+                android:id="@+id/radioYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <RadioButton
+                android:button="@null"
+                android:background="@drawable/selector_check_item"
+                android:id="@+id/radioNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin43dp" />
+        </RadioGroup>
+
+    </RelativeLayout>
+    <View
+        android:background="@color/lineColor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin0.5dp"></View>
+</android.support.constraint.ConstraintLayout>

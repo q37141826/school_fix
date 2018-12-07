@@ -19,16 +19,16 @@ import okhttp3.Call;
  * Created by my on 2018/8/23.
  */
 
-public abstract class RequstActivity extends TitleActivity implements OKHttpUIUpdataListener<BaseBean> {
+public abstract class RequestActivity extends TitleActivity implements OKHttpUIUpdataListener<BaseBean> {
 
     OKHttpRequestModel okHttpRequestModel = new OKHttpRequestModel(this);
-    private ZProgressHUD zProgressHUD;
+    public ZProgressHUD mZProgressHUD;
 
 
     public void post(String url, Map map, BaseBean bean) {
 //        okHttpRequestModel.okhHttpPost(url, map, bean);
         RequestUtils.okPost(url, map, bean, this, this);
-        zProgressHUD.show();
+        mZProgressHUD.show();
 
     }
 
@@ -37,17 +37,17 @@ public abstract class RequstActivity extends TitleActivity implements OKHttpUIUp
         Gson gson = new Gson();
         String json = gson.toJson(ReuestBean);
         RequestUtils.post(url, json, bean, this, this);
-        zProgressHUD.show();
+        mZProgressHUD.show();
     }
 
     public void get(String url, Map map, BaseBean bean) {
         okHttpRequestModel.okHttpGet(url, map, bean);
-        zProgressHUD.show();
+        mZProgressHUD.show();
     }
 
     @Override
     protected void onInitView() {
-        zProgressHUD = new ZProgressHUD(getContext());
+        mZProgressHUD = new ZProgressHUD(getContext());
         super.onInitView();
     }
 
@@ -56,7 +56,7 @@ public abstract class RequstActivity extends TitleActivity implements OKHttpUIUp
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                zProgressHUD.dismiss();
+                mZProgressHUD.dismiss();
                 onSuccess(data);
             }
         });
@@ -67,7 +67,7 @@ public abstract class RequstActivity extends TitleActivity implements OKHttpUIUp
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                zProgressHUD.dismiss();
+                mZProgressHUD.dismiss();
                 onError(e);
             }
         });
@@ -80,9 +80,13 @@ public abstract class RequstActivity extends TitleActivity implements OKHttpUIUp
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    zProgressHUD.dismiss();
-                    ToastUtil.toast(errorBeanOne.getError().getMessage());
-                    onFailure(c_codeBean, c_codeBean.getM());
+                    mZProgressHUD.dismiss();
+                    try {
+                        ToastUtil.toast(errorBeanOne.getError().getMessage());
+                        onFailure(c_codeBean, c_codeBean.getM());
+                    } catch (Exception e) {
+
+                    }
                 }
             });
         }

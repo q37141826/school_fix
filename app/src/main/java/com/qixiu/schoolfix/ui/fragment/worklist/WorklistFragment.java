@@ -9,7 +9,7 @@ import com.qixiu.qixiu.utils.Preference;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.action.IntentAction;
 import com.qixiu.schoolfix.constant.ConstantString;
-import com.qixiu.schoolfix.ui.acitivty.work_flow.CreateHardWorkActivity;
+import com.qixiu.schoolfix.ui.acitivty.work_flow.create.CreateHardWorkActivity;
 import com.qixiu.schoolfix.ui.fragment.basefragment.base.BaseFragment;
 import com.qixiu.schoolfix.ui.fragment.basefragment.base.MenueFragment;
 import com.qixiu.wigit.hviewpager.HackyViewPager;

@@ -45,42 +45,57 @@ public class ConstantUrl {
 
 
     //创建设备
-    public final static String createEqupmentList = BuildConfig.BASE_URL +    "/api/services/app/SHDevice/CreateByDto";
+    public final static String createEqupmentList = BuildConfig.BASE_URL + "/api/services/app/SHDevice/CreateByDto";
 
     //修改设备
-    public final static String modifyEqupmentList = BuildConfig.BASE_URL +    "/api/services/app/SHDevice/UpdateByDto";
+    public final static String modifyEqupmentList = BuildConfig.BASE_URL + "/api/services/app/SHDevice/UpdateByDto";
 
 
     //问题解决方案
-    public final static String getProductProblemSolutionList = BuildConfig.BASE_URL +  "/api/services/app/SHProductProblemSolution/GetProductProblemSolution";
+    public final static String getProductProblemSolutionList = BuildConfig.BASE_URL + "/api/services/app/SHProductProblemSolution/GetProductProblemSolution";
 
     //维护商列表
-    public final static String getRepairCompanyList = BuildConfig.BASE_URL +   "/api/services/app/SHRepairBusiness/GetViewPageBySschool";
+    public final static String getRepairCompanyList = BuildConfig.BASE_URL + "/api/services/app/SHRepairBusiness/GetViewPageBySschool";
 
-       //二维码绑定设备
-    public final static String bindingUrl = BuildConfig.BASE_URL +   "/api/services/app/SHDevice/UpdateByDto";
+    //二维码绑定设备
+    public final static String bindingUrl = BuildConfig.BASE_URL + "/api/services/app/SHDevice/UpdateByDto";
 
 
     //接单
-    public final static String receiveUrl = BuildConfig.BASE_URL +   "/api/services/app/SHWorkOrder/UpdateByDto";
+    public final static String receiveUrl = BuildConfig.BASE_URL + "/api/services/app/SHWorkOrder/UpdateByDto";
 
     //签到
-    public final static String signUrl = BuildConfig.BASE_URL +   "/api/services/app/SHWorkOrder/UpdateByDto";
+    public final static String signUrl = BuildConfig.BASE_URL + "/api/services/app/SHWorkOrder/UpdateByDto";
 
     //保存设施报告
-    public final static String  saveReportUrl = BuildConfig.BASE_URL +  "/api/services/app/SHWorkOrder/UpdateByDto";
+    public final static String saveReportUrl = BuildConfig.BASE_URL + "/api/services/app/SHWorkOrder/UpdateByDto";
 
 
     //维修人员列表
-    public final static String  repairPersonUrl = BuildConfig.BASE_URL +   "/api/services/app/myUser/GetViewPage";
+    public final static String repairPersonUrl = BuildConfig.BASE_URL + "/api/services/app/myUser/GetViewPage";
 
+
+    //产品列表
+    public final static String productListUrl = BuildConfig.BASE_URL +  "/api/services/app/SHProduct/GetViewPage";
+
+    //创建工单的产品列表
+    public final static String productListUrl02 = BuildConfig.BASE_URL +   "/api/services/app/SHProduct/GetViewPageBySchool";
+
+    //学校列表
+    public final static String schoolListUrl = BuildConfig.BASE_URL + "/api/services/app/SHRepairBusiness/GetViewPageBySschool";
+
+    //创建工单
+    public final static String createWorkUrl = BuildConfig.BASE_URL + "/api/services/app/SHWorkOrder/CreateByDto";
     //指派工单
-    public final static String  giveOrderUrl = BuildConfig.BASE_URL +    "/api/services/app/SHWorkOrder/UpdateByDto";
+    public final static String giveOrderUrl = BuildConfig.BASE_URL + "/api/services/app/SHWorkOrder/UpdateByDto";
 
     //转交工单
 
-    public final static String  transferOrderUrl = BuildConfig.BASE_URL +     "/api/services/app/SHWorkOrder/TransferWorkOrder";
+    public final static String transferOrderUrl = BuildConfig.BASE_URL + "/api/services/app/SHWorkOrder/TransferWorkOrder";
 
     //服务完成
-    public final static String  completeWorkUrl = BuildConfig.BASE_URL +  "/api/services/app/SHWorkOrder/UpdateByDto";
+    public final static String completeWorkUrl = BuildConfig.BASE_URL + "/api/services/app/SHWorkOrder/UpdateByDto";
+
+    // 获取文章类型
+    public final static String shareTypeUrl = BuildConfig.BASE_URL + "/api/services/app/ZSKArticleType/GetView";
 }

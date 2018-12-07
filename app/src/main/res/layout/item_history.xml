@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/margin67dp"
+    android:layout_marginLeft="@dimen/margin21dp"
+    android:layout_marginTop="@dimen/margin9dp"
+    android:layout_marginRight="@dimen/margin18dp"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/margin13dp"
+    android:paddingTop="@dimen/margin10dp"
+    android:orientation="vertical">
+    <TextView
+        android:text="学校"
+        style="@style/text_black" />
+    <TextView
+        android:layout_marginTop="@dimen/margin10dp"
+        android:text="学校"
+        style="@style/text_normal" />
+</LinearLayout>

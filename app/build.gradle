@@ -40,6 +40,12 @@ android {
             keyAlias "qixiu"
             keyPassword "qixiu888"
         }
+        release {
+            storeFile file('qixiu.jks')
+            storePassword "qixiu888"
+            keyAlias "qixiu"
+            keyPassword "qixiu888"
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

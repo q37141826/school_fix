@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.qixiu.schoolfix.ui.acitivty.work_flow.CreateHardWorkActivity">
+    tools:context="com.qixiu.schoolfix.ui.acitivty.work_flow.create.CreateHardWorkActivity">
 
     <RelativeLayout
         android:id="@+id/vg_title"
@@ -34,24 +34,25 @@
                 app:textPrimary="类型"
                 app:textSecondary="硬件设备"></com.qixiu.widget.LineControllerView>
             <com.qixiu.widget.LineControllerView
+                android:onClick="selectDevice"
                 android:id="@+id/lineProductName"
                 android:background="@drawable/under_line"
                 style="@style/line_work"
                 app:showRightArrow="true"
                 app:textPrimary="名称"
-                app:textSecondary="监控设备"></com.qixiu.widget.LineControllerView>
+                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
             <com.qixiu.widget.LineControllerView
                 android:id="@+id/lineProductModel"
                 android:background="@drawable/under_line"
                 style="@style/line_work"
                 app:textPrimary="型号"
-                app:textSecondary="ZXT1500"></com.qixiu.widget.LineControllerView>
+                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
             <com.qixiu.widget.LineControllerView
                 android:id="@+id/lineProductBrand"
                 android:background="@drawable/under_line"
                 style="@style/line_work"
                 app:textPrimary="品牌"
-                app:textSecondary="水滴"></com.qixiu.widget.LineControllerView>
+                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
             <TextView
                 style="@style/mine_text_grey"
                 android:text="设备信息" />
@@ -62,20 +63,21 @@
                 style="@style/line_work"
                 app:showRightArrow="true"
                 app:textPrimary="机器码"
-                app:textSecondary="水滴"></com.qixiu.widget.LineControllerView>
+                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
             <com.qixiu.widget.LineControllerView
                 android:background="@drawable/under_line"
                 android:id="@+id/lineDeviceCode"
                 style="@style/line_work"
                 app:textPrimary="设备码"
-                app:textSecondary="水滴"></com.qixiu.widget.LineControllerView>
+                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
             <com.qixiu.widget.LineControllerView
                 android:id="@+id/lineMechinAddress"
                 android:background="@drawable/under_line"
                 style="@style/line_work"
+                app:sencondMarginRight="@dimen/margin80dp"
                 app:showRightArrow="true"
                 app:textPrimary="详细地址"
-                app:textSecondary="水滴"></com.qixiu.widget.LineControllerView>
+                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
 
             <include layout="@layout/part_work_problem_describe"></include>
         </LinearLayout>

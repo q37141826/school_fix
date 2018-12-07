@@ -38,7 +38,7 @@
                 style="@style/line_controller_style"
                 android:background="@drawable/under_line"
                 app:textPrimary="服务对象"
-                app:textSecondary="第三高中"></com.qixiu.widget.LineControllerView>
+                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
 
 
             <com.qixiu.widget.LineControllerView
@@ -46,14 +46,14 @@
                 style="@style/line_controller_style"
                 android:background="@drawable/under_line"
                 app:textPrimary="电话"
-                app:textSecondary="第三高中"></com.qixiu.widget.LineControllerView>
+                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
 
             <com.qixiu.widget.LineControllerView
                 android:id="@+id/lineAddress"
                 style="@style/line_controller_style"
                 android:background="@drawable/under_line"
                 app:textPrimary="详细地址"
-                app:textSecondary="第三高中"></com.qixiu.widget.LineControllerView>
+                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
 
 
             <TextView

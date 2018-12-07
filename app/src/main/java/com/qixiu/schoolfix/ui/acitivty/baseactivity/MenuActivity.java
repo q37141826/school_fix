@@ -12,7 +12,7 @@ import java.util.List;
  * Created by my on 2018/8/23.
  */
 
-public abstract class MenuActivity extends RequstActivity {
+public abstract class MenuActivity extends RequestActivity {
 
     public void initFragment(List<BaseFragment> fragments, List<String> titles, TabLayout tablayout, ViewPager viewPager) {
        BaseFragmentAdapter adapter = new BaseFragmentAdapter(getSupportFragmentManager(), fragments);//注意这个地方  fragmentmanager  在fragment里面不要用getSurrpotFragmentmanager

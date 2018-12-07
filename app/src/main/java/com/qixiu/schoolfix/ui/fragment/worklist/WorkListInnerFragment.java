@@ -1,7 +1,6 @@
 package com.qixiu.schoolfix.ui.fragment.worklist;
 
 import android.content.Context;
-import android.os.Debug;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,7 +21,6 @@ import com.qixiu.schoolfix.constant.ConstantString;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.details.HardWorkDetailsActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.details.HardWorkReceiveActivity;
-import com.qixiu.schoolfix.ui.acitivty.work_flow.details.SoftWorkDetailsActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.details.WorkDetailsBean;
 import com.qixiu.schoolfix.ui.fragment.basefragment.base.RequstFragment;
 
@@ -85,7 +83,7 @@ public class WorkListInnerFragment extends RequstFragment implements XRecyclerVi
         }
         if (data instanceof WorkDetailsBean) {
             WorkDetailsBean workDetailsBean = (WorkDetailsBean) data;
-            if (workDetailsBean.getO().getDeviceType() == 2) {
+//            if (workDetailsBean.getO().getDeviceType() == 2) {
                 if (type.equals(types[0])) {
                     HardWorkReceiveActivity.start(getContext(), HardWorkReceiveActivity.class, selectedId);
                 } else if (type.equals(types[1])) {
@@ -97,9 +95,9 @@ public class WorkListInnerFragment extends RequstFragment implements XRecyclerVi
                 }else {
                     HardWorkDetailsActivity.start(getContext(), HardWorkDetailsActivity.class, selectedId);
                 }
-            } else {
-                SoftWorkDetailsActivity.start(getContext(), SoftWorkDetailsActivity.class, selectedId);
-            }
+//            } else {
+//                SoftWorkDetailsActivity.start(getContext(), SoftWorkDetailsActivity.class, selectedId);
+//            }
         }
 
 

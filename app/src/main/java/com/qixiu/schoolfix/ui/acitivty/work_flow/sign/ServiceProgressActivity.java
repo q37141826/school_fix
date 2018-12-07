@@ -14,7 +14,7 @@ import com.qixiu.qixiu.utils.ToastUtil;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.details.HardWorkDetailsActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.details.WorkDetailsBean;
 
@@ -26,7 +26,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ServiceProgressActivity extends RequstActivity {
+public class ServiceProgressActivity extends RequestActivity {
 
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;

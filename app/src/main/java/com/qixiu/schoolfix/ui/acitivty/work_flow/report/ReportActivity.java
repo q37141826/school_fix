@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Config;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -61,7 +60,9 @@ public class ReportActivity extends UploadPictureActivityNew {
 
     @Override
     protected void onInitViewNew() {
-//        EventBus.getDefault().register(this);
+        if (!EventBus.getDefault().isRegistered(this)) {//加上判断
+            EventBus.getDefault().register(this);
+        }
         mTitleView.setTitle("实施报告");
         recyclerPic.setLayoutManager(new GridLayoutManager(getContext(), 3));
         resultBean = getIntent().getParcelableExtra(IntentDataKeyConstant.DATA);
@@ -75,8 +76,6 @@ public class ReportActivity extends UploadPictureActivityNew {
         });
         setMaxPictureCount(3);
     }
-
-
 
 
     private void resolveData() {
@@ -103,11 +102,11 @@ public class ReportActivity extends UploadPictureActivityNew {
             urlsStringSpell = resultBean.getWorkOrderErrorImgUrls();
             String[] images = urlsStringSpell.split(";");
             for (int i = 0; i < images.length; i++) {
-                selectPhotos.add( BuildConfig.BASE_URL +images[i]);
+                selectPhotos.add(BuildConfig.BASE_URL + images[i]);
             }
             mRcAdapter.refreshData(selectPhotos);
             signUrl = resultBean.getWorkOrderUserSignImgUrl();
-            Glide.with(getContext()).load(BuildConfig.BASE_URL +signUrl).into(imageViewGotoSign);
+            Glide.with(getContext()).load(BuildConfig.BASE_URL + signUrl).into(imageViewGotoSign);
         }
     }
 
@@ -121,8 +120,8 @@ public class ReportActivity extends UploadPictureActivityNew {
             ToastUtil.toast("请选择现场照片");
             return;
         }
-        if(!TextUtils.isEmpty(signUrl)){
-            signPath=BuildConfig.BASE_URL+signUrl;
+        if (!TextUtils.isEmpty(signUrl)) {
+            signPath = BuildConfig.BASE_URL + signUrl;
         }
         if (TextUtils.isEmpty(signPath)) {
             ToastUtil.toast("请填写签名");
@@ -242,7 +241,13 @@ public class ReportActivity extends UploadPictureActivityNew {
 
     @OnClick({R.id.linearGotoProblem})
     public void selectProblem(View view) {
-        ProblemSelectActivity.start(getContext(), ProblemSelectActivity.class, resultBean.getProductGUID());
+//        ProblemSelectActivity.start(getContext(), ProblemSelectActivity.class, resultBean.getProductGUID());
+        if(selectedProblemResoveListBeans!=null){
+            selectedProblemResoveListBeans.getProblemBeans().get(0).setProductGUID( resultBean.getProductGUID());
+            ProblemSelectActivity.start(getContext(), ProblemSelectActivity.class,selectedProblemResoveListBeans);
+        }else {
+            ProblemSelectActivity.start(getContext(), ProblemSelectActivity.class, resultBean.getProductGUID());
+        }
     }
 
     public void selectSulotions(View view) {
@@ -279,17 +284,22 @@ public class ReportActivity extends UploadPictureActivityNew {
     @Subscribe
     public void getSignEvent(String path) {
         signPath = path;
+        signUrl="";
         Glide.with(getContext()).load(path).into(imageViewGotoSign);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
 
     @Override
     public void onItemClick(View v, RecyclerView.Adapter adapter, Object data) {
         super.onItemClick(v, adapter, data);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+        super.onDestroy();
     }
 }

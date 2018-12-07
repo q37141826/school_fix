@@ -168,6 +168,7 @@ public class LineControllerView extends FrameLayout {
                 params.addRule(RelativeLayout.RIGHT_OF, mPrimaryTextView.getId());
                 break;
         }
+         getSecondaryTextView().setLayoutParams(params);
     }
 
     private void initViews() {

@@ -15,7 +15,7 @@ import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantString;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.RequestMaker;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.RequestBean;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.report.ReportActivity;
@@ -37,7 +37,7 @@ import butterknife.OnClick;
 
 import static com.qixiu.schoolfix.constant.ConstantUrl.transferOrderUrl;
 
-public class HardWorkDetailsActivity extends RequstActivity {
+public class HardWorkDetailsActivity extends RequestActivity {
     public static final String ORDER_WATING = "待派单";//工单状态(1,待接单;2,待派单;3,已派单;4,服务中;5,完成;6,作废)
     public static final String ORDER_RELEASE = "已派单";//工单状态(1,待接单;2,待派单;3,已派单;4,服务中;5,完成;6,作废)
     public static final String ORDER_PROCESSING = "服务中";//工单状态(1,待接单;2,待派单;3,已派单;4,服务中;5,完成;6,作废)
@@ -132,15 +132,14 @@ public class HardWorkDetailsActivity extends RequstActivity {
             textViewAddress.setSecondaryText(workDetailsBean.getO().getSchoolUnitAddress());
             textViewCity.setSecondaryText(workDetailsBean.getO().getSchoolUnitArea());
             try {
-                textViewExpectTime.setSecondaryText(workDetailsBean.getO().getWorkOrderExpectTime().substring(0, 10)
-                        + "至" + workDetailsBean.getO().getWorkOrderExpectEndTime().substring(0, 10));
-            }catch (Exception e){
+                textViewExpectTime.setSecondaryText(workDetailsBean.getO().getWorkOrderExpectTime().substring(5, workDetailsBean.getO().getWorkOrderExpectTime().length()) + "至" +
+                        workDetailsBean.getO().getWorkOrderExpectEndTime().substring(10, workDetailsBean.getO().getWorkOrderExpectEndTime().length()));
+            } catch (Exception e) {
 
             }
             textViewHandelPerson.setSecondaryText(workDetailsBean.getO().getRepairUserName());
             textViewTicketNumber.setSecondaryText(workDetailsBean.getO().getWorkOrderServiceNo());
             textViewCommitTime.setSecondaryText(workDetailsBean.getO().getWorkOrderCreatime());
-
 
 
         }
@@ -154,20 +153,20 @@ public class HardWorkDetailsActivity extends RequstActivity {
                 selectedDataBean.setData(repairPersonBean.getO().getDataList().get(i));
                 datas.add(selectedDataBean);
             }
-            MyPopOneListPicker picker=new MyPopOneListPicker(getContext(), datas, new MyPopOneListPicker.Pop_selectedListenner() {
+            MyPopOneListPicker picker = new MyPopOneListPicker(getContext(), datas, new MyPopOneListPicker.Pop_selectedListenner() {
                 @Override
                 public void getData(SelectedDataBean data) {
-                    Map<String,String>  map=new HashMap();
-                    map.put("workOrderGUID",workDetailsBean.getO().getId());
+                    Map<String, String> map = new HashMap();
+                    map.put("workOrderGUID", workDetailsBean.getO().getId());
                     map.put("oldReceiveUserGUID", LoginStatus.getLoginBean().getO().getId());
-                    map.put("newReceiveUserGUID",data.getId());
-                    post(transferOrderUrl,map,new BaseBean());
+                    map.put("newReceiveUserGUID", data.getId());
+                    post(transferOrderUrl, map, new BaseBean());
                 }
             });
             picker.setTitle("选择转交人");
             picker.show();
         }
-        if(data.getUrl().equals(transferOrderUrl)){
+        if (data.getUrl().equals(transferOrderUrl)) {
             ToastUtil.toast("转交成功");
             finish();
         }
@@ -207,7 +206,7 @@ public class HardWorkDetailsActivity extends RequstActivity {
 
     //完成
     public void completeWork(View view) {
-        ServiceProgressActivity.start(getContext(),ServiceProgressActivity.class, workDetailsBean.getO());
+        ServiceProgressActivity.start(getContext(), ServiceProgressActivity.class, workDetailsBean.getO());
     }
 
 

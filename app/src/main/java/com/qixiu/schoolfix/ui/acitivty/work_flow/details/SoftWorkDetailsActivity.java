@@ -5,9 +5,9 @@ import android.view.View;
 import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
 import com.qixiu.schoolfix.R;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 
-public class SoftWorkDetailsActivity extends RequstActivity {
+public class SoftWorkDetailsActivity extends RequestActivity {
 
 
     @Override

@@ -21,7 +21,7 @@ import com.qixiu.qixiu.utils.ToastUtil;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.details.WorkDetailsBean;
 
 import java.text.SimpleDateFormat;
@@ -34,7 +34,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SignWorkActivity extends RequstActivity implements SignAdapter.ClickListenner, AMapLocationListener, LocationResultStrIntf {
+public class SignWorkActivity extends RequestActivity implements SignAdapter.ClickListenner, AMapLocationListener, LocationResultStrIntf {
 
     static final int SIGN_GO = 1;
     static final int SIGN_IN = 2;
@@ -55,12 +55,19 @@ public class SignWorkActivity extends RequstActivity implements SignAdapter.Clic
     //声明mLocationOption对象
     public AMapLocationClientOption mLocationOption = null;
     private String address;
+    private double latitude;
+    private double longitude;
 
     @Override
     protected void onInitData() {
         initePermission();
         initLocation();
         resultBean = getIntent().getParcelableExtra(IntentDataKeyConstant.DATA);
+        if(resultBean.getWorkOrderAssignTime()==null){
+            ToastUtil.toast("数据非法");
+            finish();
+            return;
+        }
         workOrderAssignTime = TimeDataUtil.timeStrToLong(resultBean.getWorkOrderAssignTime(), timeFormat);
         mTitleView.setTitle("考勤记录");
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
@@ -221,14 +228,20 @@ public class SignWorkActivity extends RequstActivity implements SignAdapter.Clic
             case SIGN_GO:
                 map.put("workOrderGoTime", TimeDataUtil.getTimeStamp(new Date().getTime(),timeFormat));
                 map.put("workOrderGoAddress", address);
+                map.put("workOrderGoX", latitude+"");
+                map.put("workOrderGoY", longitude+"");
                 break;
             case SIGN_IN:
                 map.put("workOrderSignInTime", TimeDataUtil.getTimeStamp(new Date().getTime(),timeFormat));
                 map.put("workOrderSignInAddress", address);
+                map.put("workOrderSignInX", latitude+"");
+                map.put("workOrderSignInY", longitude+"");
                 break;
             case SIGN_OUT:
                 map.put("workOrderSignOutTime", TimeDataUtil.getTimeStamp(new Date().getTime(),timeFormat));
                 map.put("workOrderSignOutAddress", address);
+                map.put("workOrderSignOutTimeX", latitude+"");
+                map.put("workOrderSignOutTimeY", longitude+"");
                 break;
         }
         post(ConstantUrl.signUrl,map,new BaseBean());
@@ -241,8 +254,10 @@ public class SignWorkActivity extends RequstActivity implements SignAdapter.Clic
             if (amapLocation.getErrorCode() == 0) {
                 //定位成功回调信息，设置相关消息
                 amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                double latitude = amapLocation.getLatitude();//获取纬度
-                double longitude = amapLocation.getLongitude();//获取经度
+                //获取纬度
+                latitude = amapLocation.getLatitude();
+                //获取经度
+                longitude = amapLocation.getLongitude();
                 amapLocation.getAccuracy();//获取精度信息
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date(amapLocation.getTime());

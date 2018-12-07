@@ -34,7 +34,6 @@
         android:background="@drawable/under_line"
         android:id="@+id/textViewAddress"
         style="@style/line_under"
-        app:showRightArrow="true"
         app:textPrimary="地址"
         app:textSecondary="-"></com.qixiu.widget.LineControllerView>
 
@@ -49,7 +48,6 @@
         android:background="@drawable/under_line"
         android:id="@+id/textViewContactPhone"
         style="@style/line_controller_style"
-        app:showRightArrow="true"
         app:textPrimary="电话"
         app:textSecondary="-"></com.qixiu.widget.LineControllerView>
 
@@ -61,6 +59,7 @@
         android:background="@drawable/under_line"
         android:id="@+id/textViewExpectTime"
         style="@style/line_under"
+        android:layout_height="wrap_content"
         app:textPrimary="期望上门时间"
         app:textSecondary="-"></com.qixiu.widget.LineControllerView>
 

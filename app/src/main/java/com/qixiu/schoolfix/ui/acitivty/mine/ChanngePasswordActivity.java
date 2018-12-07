@@ -9,7 +9,8 @@ import com.qixiu.qixiu.utils.ToastUtil;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.ui.acitivty.LoginActivity;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
+import com.qixiu.schoolfix.utils.LoginStatus;
 import com.qixiu.wigit.myedittext.MyEditTextView;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 
-public class ChanngePasswordActivity extends RequstActivity {
+public class ChanngePasswordActivity extends RequestActivity {
 
     @BindView(R.id.ediitextOriginPsw)
     MyEditTextView ediitextOriginPsw;
@@ -69,6 +70,7 @@ public class ChanngePasswordActivity extends RequstActivity {
         Map<String, String> map = new HashMap<>();
         map.put("password", newPsw);
         map.put("oldPassword", oldPsw);
+        map.put("id",LoginStatus.getLoginBean().getO().getId());
         post(ConstantUrl.changePswUrl, map, new BaseBean());
     }
 

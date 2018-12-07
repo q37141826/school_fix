@@ -10,7 +10,7 @@ import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
 import com.qixiu.qixiu.utils.PictureCut;
 import com.qixiu.schoolfix.R;
-import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequstActivity;
+import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 import com.qixiu.wigit.PaletteView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -18,7 +18,7 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SignNameActivity extends RequstActivity {
+public class SignNameActivity extends RequestActivity {
 
     Bitmap signatuerBitamp;
     @BindView(R.id.paletteview)

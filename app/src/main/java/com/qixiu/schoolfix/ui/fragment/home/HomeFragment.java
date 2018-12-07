@@ -33,8 +33,10 @@ import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.action.IntentAction;
 import com.qixiu.schoolfix.constant.ConstantString;
 import com.qixiu.schoolfix.constant.ConstantUrl;
-import com.qixiu.schoolfix.ui.acitivty.work_flow.CreateSoftWorkActivity;
 import com.qixiu.schoolfix.ui.acitivty.home.binding.BindingPhoneActivity;
+import com.qixiu.schoolfix.ui.acitivty.inspection.InspectionActivity;
+import com.qixiu.schoolfix.ui.acitivty.knowledge_share.KnowledgeShareListActivity;
+import com.qixiu.schoolfix.ui.acitivty.work_flow.create.CreateSoftWorkActivity;
 import com.qixiu.schoolfix.ui.fragment.basefragment.base.RequstFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -55,7 +57,7 @@ public class HomeFragment extends RequstFragment implements OnRecyclerItemListen
             R.drawable.sy_icon_zsfx, R.drawable.sy_icon_xjgl, R.drawable.homepage_btn_sweep,};
     String homeTitles[] = {"待接单", "待处理", "创建工单", "知识分享", "巡检管理", "扫码绑定",};
     int action[] = {IntentAction.GOTO_WAIT_HANDLER, IntentAction.GOTO_WAIT_HANDLE, IntentAction.GOTO_CREATE,
-            IntentAction.GOTO_ACTIVITY, IntentAction.GOTO_ACTIVITY, IntentAction.GOTO_SCAN};
+            IntentAction.GOTO_SHARE, IntentAction.GOTO_INSPECTION, IntentAction.GOTO_SCAN};
     @BindView(R.id.textViewFinished)
     TextView textViewFinished;
     @BindView(R.id.textViewPresed)
@@ -154,7 +156,8 @@ public class HomeFragment extends RequstFragment implements OnRecyclerItemListen
     public void onItemClick(View v, RecyclerView.Adapter adapter, Object data) {
         if (data instanceof HomeGotoBean) {
             HomeGotoBean bean = (HomeGotoBean) data;
-            if (bean.getAction() == IntentAction.GOTO_ACTIVITY || bean.getAction() == IntentAction.GOTO_CREATE) {
+
+            if (bean.getAction() == IntentAction.GOTO_SHARE || bean.getAction() == IntentAction.GOTO_CREATE) {
                 if (bean.getGotoActivity() == null) {
                     ToastUtil.toast("敬请期待");
                     return;
@@ -164,6 +167,9 @@ public class HomeFragment extends RequstFragment implements OnRecyclerItemListen
             } else if (bean.getAction() == IntentAction.GOTO_SCAN) {
                 Intent intent = new Intent(getContext(), CaptureActivity.class);
                 startActivityForResult(intent, CaptureActivity.ZXING_INTENT);
+            } else if (bean.getAction() == IntentAction.GOTO_INSPECTION) {
+                Intent intent = new Intent(getContext(), bean.getGotoActivity());
+                startActivity(intent);
             } else {
                 EventBus.getDefault().post(bean);
             }
@@ -175,7 +181,7 @@ public class HomeFragment extends RequstFragment implements OnRecyclerItemListen
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
             String productCode = data.getStringExtra(CaptureActivity.ZXING_VALUE);
-            BindingPhoneActivity.start(getContext(),BindingPhoneActivity.class,productCode);
+            BindingPhoneActivity.start(getContext(), BindingPhoneActivity.class, productCode);
         }
     }
 
@@ -206,6 +212,12 @@ public class HomeFragment extends RequstFragment implements OnRecyclerItemListen
                 }
                 if (datas.get(i).getAction() == IntentAction.GOTO_CREATE) {
                     datas.get(i).setGotoActivity(CreateSoftWorkActivity.class);
+                }
+                if (datas.get(i).getAction() == IntentAction.GOTO_INSPECTION) {
+                    datas.get(i).setGotoActivity(InspectionActivity.class);
+                }
+                if (datas.get(i).getAction() == IntentAction.GOTO_SHARE) {
+                    datas.get(i).setGotoActivity(KnowledgeShareListActivity.class);
                 }
 
             }

@@ -25,12 +25,15 @@
                 style="@style/mine_text_grey"
                 android:background="@color/white"
                 android:text="问题描述" />
-
+            <TextView
+                android:id="@+id/textViewPrblems"
+                android:text=""
+                style="@style/text_normal"/>
             <android.support.v7.widget.RecyclerView
+                android:visibility="gone"
                 android:id="@+id/recyclerViewProblemDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
             </android.support.v7.widget.RecyclerView>
 
             <View

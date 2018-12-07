@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back_grey"
+    android:orientation="vertical"
+    tools:context="com.qixiu.schoolfix.ui.acitivty.inspection.InspectionActivity">
+
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin44dp"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/margin18dp"
+            android:paddingRight="@dimen/margin25dp">
+
+            <ImageView
+                android:id="@+id/imageViewHead"
+                android:layout_width="@dimen/margin34dp"
+                android:layout_height="@dimen/margin34dp" />
+
+            <TextView
+                android:id="@+id/textViewName"
+                style="@style/text_normal"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin12dp"
+                android:layout_toRightOf="@+id/imageViewHead"
+                android:text="姓名"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/textViewDate"
+                style="@style/text_normal"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="周几日期"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin44dp"
+            android:layout_marginTop="@dimen/margin12dp"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/margin18dp">
+
+
+            <TextView
+                android:id="@+id/textViewRoute"
+                style="@style/text_normal"
+                android:layout_centerVertical="true"
+                android:text="巡检路线"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:onClick="gotoRouteMap"
+                android:id="@+id/imageViewAddressIcon"
+                style="@style/text_normal"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin61dp"
+                android:src="@drawable/jcgl_icon_dt"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:onClick="checkRoute"
+                android:id="@+id/imageViewMarkIcon"
+                style="@style/text_normal"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin19dp"
+                android:src="@drawable/jcgl_icon_fda"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin28dp"
+            android:layout_marginTop="@dimen/margin12dp"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/margin20dp"
+            android:paddingRight="@dimen/margin20dp">
+
+            <TextView
+                android:id="@+id/textViewInspectPoint"
+                style="@style/text_normal"
+                android:layout_centerVertical="true"
+                android:text="巡检点"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/textViewSelection"
+                style="@style/text_normal"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawablePadding="@dimen/margin7dp"
+                android:drawableRight="@drawable/jcgl_icon_sanj"
+                android:text="全部"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin0.5dp"
+            android:background="@color/lineColor"></View>
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/xrecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+
+
+    </LinearLayout>
+</LinearLayout>

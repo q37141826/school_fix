@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin67dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="@dimen/margin19dp"
+        android:layout_marginRight="@dimen/margin20dp"
+        android:layout_marginTop="@dimen/margin12dp"
+        android:background="@color/white">
+
+        <TextView
+            style="@style/text_black"
+            android:layout_marginLeft="@dimen/margin13dp"
+            android:layout_marginTop="@dimen/margin12dp"
+            android:text="学校" />
+
+        <TextView
+            style="@style/text_normal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/margin12dp"
+            android:layout_marginLeft="@dimen/margin12dp"
+            android:text="每月15号" />
+        <TextView
+            android:gravity="center"
+            android:layout_height="@dimen/margin32dp"
+            android:layout_width="@dimen/margin53dp"
+            android:text="设定为当前线路"
+            android:layout_marginRight="@dimen/margin12dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/theme_color"
+            android:textColor="@color/white"
+            style="@style/text_normal" />
+    </RelativeLayout>
+</LinearLayout>
