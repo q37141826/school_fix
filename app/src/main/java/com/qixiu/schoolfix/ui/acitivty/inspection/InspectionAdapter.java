@@ -5,7 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.qixiu.qixiu.recyclerview_lib.RecyclerBaseAdapter;
-import com.qixiu.qixiu.recyclerview_lib.RecyclerBaseHolder;
+import com.qixiu.qixiu.recyclerview_lib.RecyclerDataBindingHolder;
+import com.qixiu.schoolfix.BR;
 import com.qixiu.schoolfix.R;
 
 /**
@@ -25,15 +26,16 @@ public class InspectionAdapter extends RecyclerBaseAdapter {
         return new InspectHolder(itemView,context,this);
     }
 
-    public class InspectHolder extends RecyclerBaseHolder {
+    public class InspectHolder extends RecyclerDataBindingHolder {
 
         public InspectHolder(View itemView, Context context, RecyclerView.Adapter adapter) {
             super(itemView, context, adapter);
         }
 
-        @Override
-        public void bindHolder(int position) {
 
+        @Override
+        public int getVaribleId() {
+            return BR.checkListBean;
         }
     }
 }

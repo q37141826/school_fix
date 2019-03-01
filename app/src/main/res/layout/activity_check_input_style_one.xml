@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.acitivty.inspection.school_check.CheckInputStyleOneActivity">
+
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/back_grey"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_check_title"
+                android:text="学校交换机当前与教育连接的端口" />
+
+            <View style="@style/line_grey"></View>
+
+            <LinearLayout style="@style/linearlayout_check">
+
+                <TextView
+                    style="@style/text_check_resolve"
+                    android:text="端口号：" />
+
+                <EditText
+                    android:id="@+id/edttextCode"
+                    style="@style/text_check_edittext"
+                    android:hint="请输入端口号" />
+            </LinearLayout>
+
+            <View style="@style/line_grey"></View>
+
+            <LinearLayout style="@style/linearlayout_check">
+
+                <TextView
+                    style="@style/text_check_resolve"
+                    android:text="电信纤芯号：" />
+
+                <EditText
+                    android:id="@+id/edittextChipCode"
+                    style="@style/text_check_edittext"
+                    android:hint="请输入电信纤芯号" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_check_title"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:text="学校交换机与教育网连接类型" />
+
+            <View style="@style/line_grey"></View>
+
+            <LinearLayout style="@style/linearlayout_check">
+
+                <TextView
+                    style="@style/text_check_resolve"
+                    android:text="光模块型号：" />
+
+                <EditText
+                    android:id="@+id/edittextModuleType"
+                    style="@style/text_check_edittext"
+                    android:hint="请输入光模块型号" />
+            </LinearLayout>
+
+            <View style="@style/line_grey"></View>
+
+            <LinearLayout style="@style/linearlayout_check">
+
+                <TextView
+                    style="@style/text_check_resolve"
+                    android:text="网线: " />
+
+                <EditText
+                    android:id="@+id/editextNetLine"
+                    style="@style/text_check_edittext"
+                    android:hint="请输入网线" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_check_title"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:text="连接教育网的光模块光纤跳纤信息" />
+
+            <View style="@style/line_grey"></View>
+
+            <LinearLayout style="@style/linearlayout_check">
+
+                <TextView
+                    style="@style/text_check_resolve"
+                    android:text="跳纤接口： " />
+
+                <EditText
+                    android:id="@+id/edittextInterface"
+                    style="@style/text_check_edittext"
+                    android:hint="请输入跳纤接口" />
+            </LinearLayout>
+
+            <View style="@style/line_grey"></View>
+
+            <LinearLayout style="@style/linearlayout_check">
+
+                <TextView
+                    style="@style/text_check_resolve"
+                    android:text="跳纤长度：" />
+
+                <EditText
+                    android:id="@+id/edittextInterfaceLength"
+                    style="@style/text_check_edittext"
+                    android:hint="请输入跳纤长度" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_check_title"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:text="交换机外观及端口使用情况" />
+
+            <View style="@style/line_grey"></View>
+
+            <LinearLayout style="@style/linearlayout_check">
+
+                <TextView
+                    style="@style/text_check_resolve"
+                    android:text="机框式：" />
+
+                <EditText
+                    android:id="@+id/edittextInterface02"
+                    style="@style/text_check_edittext"
+                    android:hint="请输入跳纤接口" />
+            </LinearLayout>
+
+            <View style="@style/line_grey"></View>
+
+            <LinearLayout style="@style/linearlayout_check">
+
+                <TextView
+                    style="@style/text_check_resolve"
+                    android:text="1U机架式：" />
+
+                <EditText
+                    android:id="@+id/edittextInterfaceLength02"
+                    style="@style/text_check_edittext"
+                    android:hint="请输入跳纤长度" />
+            </LinearLayout>
+
+            <View style="@style/line_grey"></View>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin44dp"
+                android:background="@color/white"></View>
+
+            <View style="@style/line_grey"></View>
+
+            <LinearLayout style="@style/linearlayout_check">
+
+                <LinearLayout
+                    style="@style/linearlayout_check"
+                    android:layout_width="0px"
+                    android:layout_weight="1">
+
+                    <TextView
+                        style="@style/text_check_resolve"
+                        android:text="光口数量：" />
+
+                    <EditText
+                        android:id="@+id/edittextOpticalApertureNum"
+                        style="@style/text_check_edittext"
+                        android:hint="0"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/margin1dp"
+                    android:layout_height="@dimen/margin15dp"
+                    android:background="@color/back_grey"></View>
+
+                <LinearLayout
+                    style="@style/linearlayout_check"
+                    android:layout_width="0px"
+                    android:layout_weight="1">
+
+                    <TextView
+                        style="@style/text_check_resolve"
+                        android:text="光口使用数量：" />
+
+                    <EditText
+                        android:id="@+id/edittextOpticalApertureUsedNum"
+                        style="@style/text_check_edittext"
+                        android:hint="0"
+                        android:inputType="number" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/line_grey"></View>
+
+            <LinearLayout style="@style/linearlayout_check">
+
+                <LinearLayout
+                    style="@style/linearlayout_check"
+                    android:layout_width="0px"
+                    android:layout_weight="1">
+
+                    <TextView
+                        style="@style/text_check_resolve"
+                        android:text="电口数量：" />
+
+                    <EditText
+                        android:id="@+id/edittextElectricNum"
+                        style="@style/text_check_edittext"
+                        android:hint="0"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/margin1dp"
+                    android:layout_height="@dimen/margin15dp"
+                    android:background="@color/back_grey"></View>
+
+                <LinearLayout
+                    style="@style/linearlayout_check"
+                    android:layout_width="0px"
+                    android:layout_weight="1">
+
+                    <TextView
+                        style="@style/text_check_resolve"
+                        android:text="电口使用数量：" />
+
+                    <EditText
+                        android:id="@+id/edittextElectricUsedNum"
+                        style="@style/text_check_edittext"
+                        android:hint="0"
+                        android:inputType="number" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <TextView
+                style="@style/text_check_title"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:text="交换机电源信息" />
+
+            <View style="@style/line_grey"></View>
+
+            <LinearLayout style="@style/linearlayout_check">
+
+                <TextView
+                    style="@style/text_check_resolve"
+                    android:text="安装电源数量：" />
+
+                <EditText
+                    android:id="@+id/edittextEnergeNum"
+                    style="@style/text_check_edittext"
+                    android:hint="请输入数量：" />
+            </LinearLayout>
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchPowerSafe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingRight="@dimen/margin10dp"
+                app:edittext_hint="请输入处理措施"
+                app:textResovleTitle="处理措施："
+                app:textTitle="电源线是否固定安全"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <View style="@style/line_grey"></View>
+
+
+            <TextView
+                style="@style/text_check_title"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:text="交换机线路连接情况" />
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchLineState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingRight="@dimen/margin10dp"
+                app:edittext_hint="请输入处理措施"
+                app:textResovleTitle="处理措施："
+                app:textTitle="是否整齐"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <View style="@style/line_grey"></View>
+
+            <TextView
+                style="@style/text_check_title"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:text="交换机上有新增线路" />
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchPowerNewlyAdded"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingRight="@dimen/margin10dp"
+                app:edittext_hint="请输入处理措施"
+                app:textResovleTitle="处理措施："
+                app:textTitle="是否新增"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <View style="@style/line_grey"></View>
+
+            <TextView
+                style="@style/text_check_title"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:text="交换机散热风扇情况" />
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchPowerIsWarning"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingRight="@dimen/margin10dp"
+                app:edittext_hint="请输入处理措施"
+                app:textResovleTitle="处理措施："
+                app:textTitle="是否报警"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <TextView
+                style="@style/text_check_title"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:text="交换机周边灰尘是否清理" />
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchPowerClear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingRight="@dimen/margin10dp"
+                app:edittext_hint="请输入处理措施"
+                app:textResovleTitle="处理措施："
+                app:textTitle="是否清理"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <include layout="@layout/include_check_foot"></include>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

@@ -13,15 +13,17 @@ import com.qixiu.qixiu.request.bean.C_CodeBean;
 import com.qixiu.qixiu.utils.ToastUtil;
 import com.qixiu.qixiu.utils.XrecyclerViewUtil;
 import com.qixiu.schoolfix.R;
+import com.qixiu.schoolfix.constant.ConstantString;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
 import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
-import com.qixiu.schoolfix.ui.acitivty.work_flow.RequestMaker;
+import com.qixiu.schoolfix.utils.reuestutil.RequestMaker;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.RequestBean;
 import com.qixiu.schoolfix.ui.acitivty.home.create_mechine.CreateMechineActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +42,7 @@ public class SelectedMechineCodeActivity extends RequestActivity implements XRec
     EditText editextMechineCode;
     @BindView(R.id.recyclerViewMechineCode)
     XRecyclerView recyclerViewMechineCode;
-//    @BindView(R.id.textViewMechineCode)
+    //    @BindView(R.id.textViewMechineCode)
 //    TextView textViewMechineCode;
 //    @BindView(R.id.imageViewSelected)
 //    ImageView imageViewSelected;
@@ -87,8 +89,6 @@ public class SelectedMechineCodeActivity extends RequestActivity implements XRec
     protected void onInitData() {
         detailsBean = getIntent().getParcelableExtra(IntentDataKeyConstant.DATA);
 
-
-
     }
 
     @Override
@@ -107,7 +107,7 @@ public class SelectedMechineCodeActivity extends RequestActivity implements XRec
     }
 
     public void createCode(View view) {
-        if(mechineCodeListBean.getO().getDataList().size()==0){
+        if (mechineCodeListBean.getO().getDataList().size() == 0) {
             ToastUtil.toast("前请联系系统管理员");
             return;
         }
@@ -135,8 +135,8 @@ public class SelectedMechineCodeActivity extends RequestActivity implements XRec
 
     @Override
     public void onItemClick(View v, RecyclerView.Adapter adapter, Object data) {
-        if(data instanceof MechineCodeListBean.ResultBean.DataListBean){
-            MechineCodeListBean.ResultBean.DataListBean dataListBean= (MechineCodeListBean.ResultBean.DataListBean) data;
+        if (data instanceof MechineCodeListBean.ResultBean.DataListBean) {
+            MechineCodeListBean.ResultBean.DataListBean dataListBean = (MechineCodeListBean.ResultBean.DataListBean) data;
             EventBus.getDefault().post(dataListBean);
             finish();
         }
@@ -145,9 +145,17 @@ public class SelectedMechineCodeActivity extends RequestActivity implements XRec
     public void getData() {
         Map<String, String> map = new HashMap<>();
         map.put("productGUID", detailsBean.getProductGUID());
-        map.put("repairBusinessGUID", detailsBean.getRepairBusinessGUID());
+//        map.put("repairBusinessGUID", detailsBean.getRepairBusinessGUID());
         map.put("schoolUnitGUID", detailsBean.getSchoolUnitGUID());
-        RequestBean mechineRequest = RequestMaker.getRequest(map);
+//        RequestBean mechineRequest = RequestMaker.getRequest(map);
+        List<String[]> datas=new ArrayList<>();
+        String data01[]={"productGUID","uniqueidentifier","eq",detailsBean.getProductGUID()};
+        String data02[]={"schoolUnitGUID","uniqueidentifier","eq",detailsBean.getSchoolUnitGUID()};
+        String data03[]={"qrCodeGUID","uniqueidentifier","eq",ConstantString.NULL_ID};
+        datas.add(data01);
+        datas.add(data02);
+        datas.add(data03);
+        RequestBean mechineRequest = RequestMaker.getRequests(datas,"CreateTime desc","and");
         post(ConstantUrl.mechineCodeList, mechineRequest, new MechineCodeListBean());
     }
 }

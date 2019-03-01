@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.text.format.Time;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -42,6 +43,8 @@ public class DatePicker extends WheelPicker {
     private String yearLabel = "年", monthLabel = "月", dayLabel = "日";
     private int selectedYearIndex = 0, selectedMonthIndex = 0, selectedDayIndex = 0;
     private int mode = YEAR_MONTH_DAY;
+
+    private boolean isBeforeShow = true;
 
     /**
      * 安卓开发应避免使用枚举类（enum），因为相比于静态常量enum会花费两倍以上的内存。
@@ -110,6 +113,34 @@ public class DatePicker extends WheelPicker {
             years.add(String.valueOf(i));
         }
     }
+
+
+    /**
+     * Sets range.
+     *
+     * @param starmonth the start year
+     * @param endMonth  the end year
+     */
+    public void setOnMonth(int starmonth, int endMonth) {
+        years.clear();
+        for (int i = starmonth; i <= endMonth; i++) {
+            months.add(String.valueOf(i));
+        }
+    }
+
+    /**
+     * Sets range.
+     *
+     * @param starDay the start year
+     * @param endDay  the end year
+     */
+    public void setOnDay(int starDay, int endDay) {
+        years.clear();
+        for (int i = starDay; i <= endDay; i++) {
+            months.add(String.valueOf(i));
+        }
+    }
+
 
     private int findItemIndex(ArrayList<String> items, int item) {
         //折半查找有序元素的索引
@@ -300,6 +331,8 @@ public class DatePicker extends WheelPicker {
         }
         return layout;
     }
+
+
 
     private int stringToYearMonthDay(String text) {
         if (text.startsWith("0")) {

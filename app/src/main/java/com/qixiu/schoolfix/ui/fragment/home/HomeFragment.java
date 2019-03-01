@@ -36,7 +36,7 @@ import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.ui.acitivty.home.binding.BindingPhoneActivity;
 import com.qixiu.schoolfix.ui.acitivty.inspection.InspectionActivity;
 import com.qixiu.schoolfix.ui.acitivty.knowledge_share.KnowledgeShareListActivity;
-import com.qixiu.schoolfix.ui.acitivty.work_flow.create.CreateSoftWorkActivity;
+import com.qixiu.schoolfix.ui.acitivty.work_flow.create.CreateHardWorkActivity;
 import com.qixiu.schoolfix.ui.fragment.basefragment.base.RequstFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -211,7 +211,7 @@ public class HomeFragment extends RequstFragment implements OnRecyclerItemListen
                     datas.get(i).setGotoActivity(CaptureActivity.class);
                 }
                 if (datas.get(i).getAction() == IntentAction.GOTO_CREATE) {
-                    datas.get(i).setGotoActivity(CreateSoftWorkActivity.class);
+                    datas.get(i).setGotoActivity(CreateHardWorkActivity.class);
                 }
                 if (datas.get(i).getAction() == IntentAction.GOTO_INSPECTION) {
                     datas.get(i).setGotoActivity(InspectionActivity.class);

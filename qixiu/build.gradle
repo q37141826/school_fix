@@ -29,6 +29,9 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -71,4 +74,6 @@ dependencies {
 
     //轮播图
     implementation 'com.jude:rollviewpager:1.4.6'
+
+    compile 'com.contrarywind:Android-PickerView:3.2.7'
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.acitivty.inspection.school_check.TeacherSignActivity">
+
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/back_grey"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/margin208dp"
+            android:layout_height="@dimen/margin208dp"
+            android:layout_marginTop="@dimen/margin52dp"
+            android:background="@color/white" />
+
+        <TextView
+            style="@style/text_normal"
+            android:layout_marginTop="@dimen/margin18dp"
+            android:text="学校老师扫一扫签名确认"
+            android:textSize="16sp" />
+
+        <Button
+            style="@style/btn_theme"
+            android:layout_marginTop="@dimen/margin104dp"
+            android:text="确定" />
+    </LinearLayout>
+
+
+</LinearLayout>

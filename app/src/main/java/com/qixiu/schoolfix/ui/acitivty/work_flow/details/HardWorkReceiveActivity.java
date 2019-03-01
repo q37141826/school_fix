@@ -1,29 +1,36 @@
 package com.qixiu.schoolfix.ui.acitivty.work_flow.details;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.TimePickerView;
 import com.bumptech.glide.Glide;
 import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
+import com.qixiu.qixiu.utils.DownLoadFileUtils;
 import com.qixiu.qixiu.utils.TimeDataUtil;
 import com.qixiu.qixiu.utils.ToastUtil;
+import com.qixiu.qixiu.utils.audio.SoundUtils;
+import com.qixiu.schoolfix.BuildConfig;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
 import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
-import com.qixiu.schoolfix.ui.acitivty.work_flow.RequestMaker;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.RequestBean;
 import com.qixiu.schoolfix.utils.LoginStatus;
+import com.qixiu.schoolfix.utils.reuestutil.RequestMaker;
 import com.qixiu.widget.LineControllerView;
 import com.qixiu.wigit.picker.MyPopOneListPicker;
 import com.qixiu.wigit.picker.SelectedDataBean;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -70,8 +77,23 @@ public class HardWorkReceiveActivity extends RequestActivity {
     LinearLayout lineearLayoutSignOrFinish;
     @BindView(R.id.btnRecice)
     Button btnRecice;
+    @BindView(R.id.textViewPrblems)
+    TextView textViewPrblems;
+    @BindView(R.id.recyclerViewPic)
+    RecyclerView recyclerViewPic;
+    @BindView(R.id.imageViewSound)
+    ImageView imageViewSound;
+    @BindView(R.id.iamgeView_play_voice)
+    ImageView iamgeViewPlayVoice;
+    @BindView(R.id.linearProblem)
+    LinearLayout linearProblem;
     private String id;
     private WorkDetailsBean workDetailsBean;
+
+    SelectedDataBean selectePerson;//选中的人
+
+    @BindView(R.id.imageViewGotoProblem)
+    ImageView imageViewGotoProblem;
 
     @Override
     protected void onInitData() {
@@ -88,6 +110,7 @@ public class HardWorkReceiveActivity extends RequestActivity {
         mTitleView.setTitle("齐科信息");
         id = getIntent().getStringExtra(IntentDataKeyConstant.DATA);
         post(ConstantUrl.workDetailsUrl + id, new HashMap(), new WorkDetailsBean());
+        imageViewGotoProblem.setVisibility(View.GONE);
     }
 
     @Override
@@ -106,8 +129,7 @@ public class HardWorkReceiveActivity extends RequestActivity {
             textViewAddress.setSecondaryText(workDetailsBean.getO().getSchoolUnitAddress());
             textViewCity.setSecondaryText(workDetailsBean.getO().getSchoolUnitArea());
             try {
-                textViewExpectTime.setSecondaryText(workDetailsBean.getO().getWorkOrderExpectTime().substring(5, 20) + "至" +
-                        workDetailsBean.getO().getWorkOrderExpectEndTime().substring(10, 20));
+                textViewExpectTime.setSecondaryText(workDetailsBean.getO().getWorkOrderExpectTime());
             } catch (Exception e) {
             }
             textViewHandelPerson.setSecondaryText(LoginStatus.getLoginBean().getO().getRepairBusinessName());
@@ -117,7 +139,30 @@ public class HardWorkReceiveActivity extends RequestActivity {
             if (workDetailsBean.getO().getWorkOrderTypeStr().equals(ORDER_WATING)) {
                 btnRecice.setText("指派");
             }
-
+            HardWorkDetailsDataSetting.setProblemPic(recyclerViewPic, workDetailsBean.getO().getWorkOrderCstProblemImgUrl(), getActivity());
+            textViewPrblems.setText(workDetailsBean.getO().getWorkOrderCstProblemRemark());
+            imageViewSound.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (TextUtils.isEmpty(workDetailsBean.getO().getWorkOrderProblemMP3Url())) {
+                        ToastUtil.toast("音频文件丢失了");
+                        return;
+                    }
+                    showProgress();
+                    String url = BuildConfig.BASE_URL + workDetailsBean.getO().getWorkOrderProblemMP3Url().replace("'", "");
+                    DownLoadFileUtils.InitFile.callFile(url.replace("\\", "/"), new DownLoadFileUtils.FileCallBack() {
+                        @Override
+                        public void callBack(String path) {
+                            mZProgressHUD.dismiss();
+                            if (TextUtils.isEmpty(path)) {
+                                ToastUtil.toast("音频文件丢失了");
+                                return;
+                            }
+                            SoundUtils.playFile(getContext(), path);
+                        }
+                    });
+                }
+            });
         }
         if (data.getUrl().equals(ConstantUrl.receiveUrl)) {
             ToastUtil.toast(btnRecice.getText() + "成功");
@@ -132,24 +177,45 @@ public class HardWorkReceiveActivity extends RequestActivity {
                 selectedDataBean.setData(repairPersonBean.getO().getDataList().get(i));
                 datas.add(selectedDataBean);
             }
+
             MyPopOneListPicker picker = new MyPopOneListPicker(getContext(), datas, new MyPopOneListPicker.Pop_selectedListenner() {
                 @Override
                 public void getData(SelectedDataBean data) {
-                    Map<String, String> map = new HashMap();
-                    map.put("id", workDetailsBean.getO().getId());
-                    map.put("repairUserGUID", data.getId());
-                    map.put("workOrderAssignTime", TimeDataUtil.getTimeStamp(new Date().getTime(), TimeDataUtil.DEFULT_TIME_FORMAT));
-                    map.put("workOrderType", "已派单");
-                    post(giveOrderUrl, map, new BaseBean());
+                    selectePerson = data;
+                    TimePickerView pvTime = new TimePickerView.Builder(getActivity(), new TimePickerView.OnTimeSelectListener() {
+                        @Override
+                        public void onTimeSelect(Date date, View v) {//选中事件回调
+                            if (new Date().getTime() > date.getTime()) {
+                                ToastUtil.toast("时间不正确");
+                                return;
+                            }
+                            textViewExpectTime.setSecondaryText(TimeDataUtil.getTimeStamp(date.getTime(), TimeDataUtil.DEFULT_TIME_FORMAT));
+                            setRecivePerson(TimeDataUtil.getTimeStamp(date.getTime(), TimeDataUtil.DEFULT_TIME_FORMAT));
+                        }
+                    })
+                            .setType(new boolean[]{true, true, true, true, true, false})
+                            .build();
+                    Calendar instance = Calendar.getInstance();
+                    instance.set(TimeDataUtil.getYear(), TimeDataUtil.getMonth(), TimeDataUtil.getDay());
+                    pvTime.setDate(instance);//注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
+                    pvTime.show();
                 }
             });
             picker.setTitle("选择指派人");
             picker.show();
         }
-//        if(giveOrderUrl.equals(data.getUrl())){
-//            ToastUtil.toast("指派成功");
-//        }
 
+    }
+
+
+    public void setRecivePerson(String time) {
+        Map<String, String> map = new HashMap();
+        map.put("id", workDetailsBean.getO().getId());
+        map.put("repairUserGUID", selectePerson.getId());
+        map.put("workOrderAssignTime", time);
+        map.put("workOrderExpectTime", time);
+        map.put("workOrderType", "已派单");
+        post(giveOrderUrl, map, new BaseBean());
     }
 
     @Override

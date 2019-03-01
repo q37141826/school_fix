@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/linearlayout_check"
+        android:layout_height="@dimen/margin84dp"
+        android:layout_marginTop="@dimen/margin15dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_check_resolve"
+            android:text="其它点检内容及建议：" />
+
+        <EditText
+            android:id="@+id/edittextOther"
+            style="@style/text_check_edittext"
+            android:layout_marginTop="@dimen/margin15dp"
+            android:hint="请输入内容" />
+    </LinearLayout>
+
+    <com.qixiu.widget.LineControllerView
+        android:onClick="signNameClick"
+        android:id="@+id/lineConSign"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin44dp"
+        android:layout_marginTop="@dimen/margin10dp"
+        android:background="@color/white"
+        app:showRightArrow="false"
+        app:textPrimary="点检维护人员签名："
+        app:textPrimarySize="16sp"
+        app:textSecondary="点击签名"
+        app:textSecondaryColor="@color/low_grey"
+        app:textSecondarySize="14sp"></com.qixiu.widget.LineControllerView>
+
+    <Button
+        android:onClick="confirmCheck"
+        android:id="@+id/btnConfirm"
+        style="@style/btn_theme"
+        android:text="确定" />
+</LinearLayout>

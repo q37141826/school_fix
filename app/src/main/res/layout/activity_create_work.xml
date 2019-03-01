@@ -23,61 +23,122 @@
             android:orientation="vertical">
 
             <include layout="@layout/part_creatwork_message01"></include>
-            <TextView
-                style="@style/mine_text_grey"
-                android:text="产品信息" />
-            <com.qixiu.widget.LineControllerView
-                android:id="@+id/lineProductType"
-                android:background="@drawable/under_line"
-                style="@style/line_work"
-                app:showRightArrow="true"
-                app:textPrimary="类型"
-                app:textSecondary="硬件设备"></com.qixiu.widget.LineControllerView>
-            <com.qixiu.widget.LineControllerView
-                android:onClick="selectDevice"
-                android:id="@+id/lineProductName"
-                android:background="@drawable/under_line"
-                style="@style/line_work"
-                app:showRightArrow="true"
-                app:textPrimary="名称"
-                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
-            <com.qixiu.widget.LineControllerView
-                android:id="@+id/lineProductModel"
-                android:background="@drawable/under_line"
-                style="@style/line_work"
-                app:textPrimary="型号"
-                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
-            <com.qixiu.widget.LineControllerView
-                android:id="@+id/lineProductBrand"
-                android:background="@drawable/under_line"
-                style="@style/line_work"
-                app:textPrimary="品牌"
-                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
-            <TextView
-                style="@style/mine_text_grey"
-                android:text="设备信息" />
-            <com.qixiu.widget.LineControllerView
-                android:onClick="gotoSelectMechineCode"
-                android:id="@+id/lineMechineCode"
-                android:background="@drawable/under_line"
-                style="@style/line_work"
-                app:showRightArrow="true"
-                app:textPrimary="机器码"
-                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
-            <com.qixiu.widget.LineControllerView
-                android:background="@drawable/under_line"
-                android:id="@+id/lineDeviceCode"
-                style="@style/line_work"
-                app:textPrimary="设备码"
-                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
-            <com.qixiu.widget.LineControllerView
-                android:id="@+id/lineMechinAddress"
-                android:background="@drawable/under_line"
-                style="@style/line_work"
-                app:sencondMarginRight="@dimen/margin80dp"
-                app:showRightArrow="true"
-                app:textPrimary="详细地址"
-                app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+            <LinearLayout
+                android:id="@+id/linearlayout_soft"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/mine_text_grey"
+                    android:text="产品信息"></TextView>
+
+                <com.qixiu.widget.LineControllerView
+                    android:id="@+id/lineSoft"
+                    app:showRightArrow="true"
+                    style="@style/line_work"
+                    android:background="@drawable/under_line"
+                    android:onClick="changeHardSoft"
+                    app:textPrimary="类型"
+                    app:textSecondary="软件项目"></com.qixiu.widget.LineControllerView>
+
+                <com.qixiu.widget.LineControllerView
+                    android:id="@+id/lineSystemName"
+                    android:onClick="selectSoft"
+                    style="@style/line_work"
+                    android:background="@drawable/under_line"
+                    app:textPrimary="名称"
+                    app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+                <com.qixiu.widget.LineControllerView
+                    android:id="@+id/lineConstructure"
+                    style="@style/line_work"
+                    android:background="@drawable/under_line"
+                    app:textPrimary="架构"
+                    app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+                <com.qixiu.widget.LineControllerView
+                    android:id="@+id/lineBrand"
+                    style="@style/line_work"
+                    android:background="@drawable/under_line"
+                    app:textPrimary="品牌"
+                    app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearlayout_hard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/mine_text_grey"
+                    android:text="产品信息" />
+
+                <com.qixiu.widget.LineControllerView
+                    android:id="@+id/lineProductType"
+                    style="@style/line_work"
+                    android:background="@drawable/under_line"
+                    android:onClick="changeHardSoft"
+                    app:showRightArrow="true"
+                    app:textPrimary="类型"
+                    app:textSecondary="硬件设备"></com.qixiu.widget.LineControllerView>
+
+                <com.qixiu.widget.LineControllerView
+                    android:id="@+id/lineProductName"
+                    style="@style/line_work"
+                    android:background="@drawable/under_line"
+                    android:onClick="selectDevice"
+                    app:showRightArrow="true"
+                    app:textPrimary="名称"
+                    app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+                <com.qixiu.widget.LineControllerView
+                    android:id="@+id/lineProductModel"
+                    style="@style/line_work"
+                    android:background="@drawable/under_line"
+                    app:textPrimary="型号"
+                    app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+                <com.qixiu.widget.LineControllerView
+                    android:id="@+id/lineProductBrand"
+                    style="@style/line_work"
+                    android:background="@drawable/under_line"
+                    app:textPrimary="品牌"
+                    app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+                <TextView
+                    style="@style/mine_text_grey"
+                    android:text="设备信息" />
+
+                <com.qixiu.widget.LineControllerView
+                    android:id="@+id/lineMechineCode"
+                    style="@style/line_work"
+                    android:background="@drawable/under_line"
+                    android:onClick="gotoSelectMechineCode"
+                    app:showRightArrow="true"
+                    app:textPrimary="机器码"
+                    app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+                <com.qixiu.widget.LineControllerView
+                    android:id="@+id/lineDeviceCode"
+                    style="@style/line_work"
+                    android:background="@drawable/under_line"
+                    app:textPrimary="设备码"
+                    app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+
+                <com.qixiu.widget.LineControllerView
+                    android:id="@+id/lineMechinAddress"
+                    style="@style/line_work"
+                    android:background="@drawable/under_line"
+                    app:sencondMarginRight="@dimen/margin80dp"
+                    app:showRightArrow="true"
+                    app:textPrimary="详细地址"
+                    app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+            </LinearLayout>
+
 
             <include layout="@layout/part_work_problem_describe"></include>
         </LinearLayout>

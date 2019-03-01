@@ -21,23 +21,26 @@ import okhttp3.Call;
 
 public abstract class RequestActivity extends TitleActivity implements OKHttpUIUpdataListener<BaseBean> {
 
-    OKHttpRequestModel okHttpRequestModel = new OKHttpRequestModel(this);
+    public OKHttpRequestModel okHttpRequestModel = new OKHttpRequestModel(this);
     public ZProgressHUD mZProgressHUD;
 
 
     public void post(String url, Map map, BaseBean bean) {
-//        okHttpRequestModel.okhHttpPost(url, map, bean);
         RequestUtils.okPost(url, map, bean, this, this);
-        mZProgressHUD.show();
+        showProgress();
+    }
 
+    public void showProgress() {
+        if (mZProgressHUD != null) {
+            mZProgressHUD.show();
+        }
     }
 
     public void post(String url, BaseRequestIntef ReuestBean, BaseBean bean) {
-//        okHttpRequestModel.okhHttpPost(url, map, bean);
         Gson gson = new Gson();
         String json = gson.toJson(ReuestBean);
         RequestUtils.post(url, json, bean, this, this);
-        mZProgressHUD.show();
+        showProgress();
     }
 
     public void get(String url, Map map, BaseBean bean) {
@@ -100,4 +103,16 @@ public abstract class RequestActivity extends TitleActivity implements OKHttpUIU
     public abstract void onFailure(C_CodeBean c_codeBean, String m);
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mZProgressHUD != null) {
+            mZProgressHUD.dismiss();
+        }
+    }
 }

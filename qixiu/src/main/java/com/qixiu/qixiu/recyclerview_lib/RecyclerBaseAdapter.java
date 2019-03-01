@@ -89,7 +89,6 @@ public abstract class RecyclerBaseAdapter<D, H extends RecyclerBaseHolder> exten
             //TODO: 发现使用View.inflater布局显示异常，因此推荐使用LayoutInflater
             itemView =
                     LayoutInflater.from(parent.getContext()).inflate(getLayoutId(), parent, false);
-
         } else {
 
             itemView = getLayoutView(parent.getContext());

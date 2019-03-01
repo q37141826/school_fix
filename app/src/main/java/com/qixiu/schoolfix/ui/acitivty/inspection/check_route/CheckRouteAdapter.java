@@ -1,6 +1,8 @@
 package com.qixiu.schoolfix.ui.acitivty.inspection.check_route;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -13,6 +15,12 @@ import com.qixiu.schoolfix.R;
  */
 
 public class CheckRouteAdapter extends RecyclerBaseAdapter {
+    private ViewDataBinding bind;
+    int varableId;
+
+    public void setVarableId(int varableId) {
+        this.varableId = varableId;
+    }
 
     @Override
     public int getLayoutId() {
@@ -21,18 +29,19 @@ public class CheckRouteAdapter extends RecyclerBaseAdapter {
 
     @Override
     public Object createViewHolder(View itemView, Context context, int viewType) {
-        return new CheckRouteHolder(itemView,context,this);
+        return new CheckRouteHolder(itemView, context, this);
     }
 
     public class CheckRouteHolder extends RecyclerBaseHolder {
 
         public CheckRouteHolder(View itemView, Context context, RecyclerView.Adapter adapter) {
             super(itemView, context, adapter);
+            bind = DataBindingUtil.bind(itemView);
         }
 
         @Override
         public void bindHolder(int position) {
-
+            bind.setVariable(varableId,mData);
         }
     }
 }

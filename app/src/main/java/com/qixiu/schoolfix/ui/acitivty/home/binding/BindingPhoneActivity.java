@@ -12,7 +12,7 @@ import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
 import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
-import com.qixiu.schoolfix.ui.acitivty.work_flow.RequestMaker;
+import com.qixiu.schoolfix.utils.reuestutil.RequestMaker;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.RequestBean;
 import com.qixiu.schoolfix.utils.LoginStatus;
 import com.qixiu.widget.LineControllerView;

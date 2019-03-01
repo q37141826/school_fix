@@ -1,5 +1,6 @@
 package com.qixiu.schoolfix.ui.acitivty.work_flow.report;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
 import com.qixiu.qixiu.utils.PictureCut;
 import com.qixiu.schoolfix.R;
+import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
 import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 import com.qixiu.wigit.PaletteView;
 
@@ -19,7 +21,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SignNameActivity extends RequestActivity {
-
     Bitmap signatuerBitamp;
     @BindView(R.id.paletteview)
     PaletteView paletteview;
@@ -72,6 +73,9 @@ public class SignNameActivity extends RequestActivity {
                 //上传图片
                 String path = PictureCut.saveBitmapToSdcard(signatuerBitamp);
                 EventBus.getDefault().post(path);
+                Intent inent=new Intent();
+                inent.putExtra(IntentDataKeyConstant.FILE_PATH,path);
+                setResult(1000,inent);
                 finish();
             }
         });

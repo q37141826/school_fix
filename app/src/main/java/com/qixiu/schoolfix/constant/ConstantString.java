@@ -25,6 +25,7 @@ public class ConstantString {
     public static final String NULL_ID="00000000-0000-0000-0000-000000000000";
 
     public static final String IS_EDIBLE="IS_EDIBLE";
+    public static final String FILE_KEY="File";
 
 
 }

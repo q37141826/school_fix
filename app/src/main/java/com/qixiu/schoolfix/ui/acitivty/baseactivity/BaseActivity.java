@@ -36,7 +36,6 @@ import com.qixiu.qixiu.application.NetStatusCheck;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import me.leolin.shortcutbadger.ShortcutBadger;
@@ -91,6 +90,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         intent.putExtra(IntentDataKeyConstant.DATA,data);
         context.startActivity(intent);
     }
+
 
     //检查权限
     public boolean hasPermission(String... permission) {

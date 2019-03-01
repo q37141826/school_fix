@@ -1,5 +1,7 @@
 package com.qixiu.schoolfix.utils.reuestutil;
 
+import android.text.TextUtils;
+
 import com.qixiu.qixiu.request.OKHttpRequestModel;
 import com.qixiu.qixiu.request.OKHttpUIUpdataListener;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
@@ -30,6 +32,10 @@ public class UploadFileRequest {
     }
 
     public static void uploadFile(String path,UploadFileCallBack callBack) {
+        if(TextUtils.isEmpty(path)){
+            callBack.call(null);
+            return;
+        }
         if(path.startsWith(BuildConfig.BASE_URL)){
             UploadFileBean uploadFileBean=new UploadFileBean();
             uploadFileBean.setO(path.replace(BuildConfig.BASE_URL,""));

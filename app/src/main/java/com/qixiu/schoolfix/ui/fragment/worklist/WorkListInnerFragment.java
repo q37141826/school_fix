@@ -100,8 +100,11 @@ public class WorkListInnerFragment extends RequstFragment implements XRecyclerVi
 //            }
         }
 
+        try {
+            XrecyclerViewUtil.stopXrecyclerRefreshLoading(recyclerViewWorlList);
+        }catch (Exception e){
 
-        XrecyclerViewUtil.stopXrecyclerRefreshLoading(recyclerViewWorlList);
+        }
     }
 
     @Override

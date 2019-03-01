@@ -93,7 +93,7 @@ public class LoginActivity extends RequestActivity {
             LoginBean bean = (LoginBean) data;
             Gson gson=new Gson();
             String loginStr = gson.toJson(bean);
-            Preference.put(ConstantString.USERBEAN,loginStr);
+            LoginStatus.saveData(loginStr);
             LoginStatus.setLoginBean();
             Preference.put(ConstantString.USERID, bean.getO().getId());
             Preference.put(ConstantString.USERNAME, bean.getO().getUserName());

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.acitivty.inspection.school_check.CheckInputHouseActivity">
+
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_below="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/back_grey"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_check_title"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:text="机房环境" />
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchPowerSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="电力箱电闸是否正常"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchFoorWater"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="静电地板下是否有杂物积水"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchFireInPeriod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="机房内灭火器是否在有效期内"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchWarningMechine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="空调、烟感、警铃、防爆灯，UPS是否正常"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchDampToxin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="机柜内温湿度及传感器数据是否正常"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchEnvironmentalData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="机房内环控监测设备数据采集是否正常"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <View style="@style/line_grey"></View>
+
+            <TextView
+                style="@style/text_check_title"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:text="机房环境" />
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchLineNeat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="强弱电线路是否整齐"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchNewlyAddLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="机房内是否无新增线缆"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchIsLinked"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="设备电源线是否整齐、合理，所有设备电
+源线是否连接到PDU上"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchSignClear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="所有线路、设备以及电源线标签是否清楚"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <TextView
+                style="@style/text_check_title"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:text="机房卫生检查" />
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchDustClean"
+                app:changeShow="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="设备是否除尘"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                app:changeShow="false"
+                android:id="@+id/switchHouseClean"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="机房是否清扫"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                app:changeShow="false"
+
+                android:id="@+id/switchImpurityStacking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="机房是否无杂物堆放"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                app:changeShow="false"
+
+                android:id="@+id/switchCameraRecord"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="各机房拍照记录"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <include layout="@layout/include_check_foot"></include>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

@@ -25,6 +25,7 @@ public abstract class RecyclerBaseHolder<D> extends RecyclerView.ViewHolder {
         this.mAdapter = adapter;
     }
 
+
     public void setData(D data) {
         this.mData = data;
         this.itemView.setTag(data);

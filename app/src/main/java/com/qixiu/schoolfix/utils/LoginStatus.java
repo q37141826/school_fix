@@ -61,4 +61,7 @@ public final class LoginStatus {
     }
 
 
+    public static void saveData(String loginStr) {
+        Preference.put(ConstantString.USERBEAN,loginStr);
+    }
 }

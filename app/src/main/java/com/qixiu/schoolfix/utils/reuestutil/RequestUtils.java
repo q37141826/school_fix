@@ -13,13 +13,6 @@ import com.qixiu.schoolfix.constant.ConstantString;
 import java.io.IOException;
 import java.util.Map;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -59,44 +52,28 @@ public class RequestUtils {
         Gson gson = new Gson();
         String json = gson.toJson(map);
         baseBean.setUrl(url);
-        if(map.keySet().size()==0){
-            json="{}";
+        if (map.keySet().size() == 0) {
+            json = "{}";
         }
-        post(url, json, baseBean, listener,  activity);
+        post(url, json, baseBean, listener, activity);
     }
 
 
-    public static void post(String url, String json, BaseBean baseBean, OKHttpUIUpdataListener listener,Activity activity) {
-        exception = null;
-        Observable observable = Observable.create(new ObservableOnSubscribe<String>() {
+    public static void post(String url, String json, BaseBean baseBean, OKHttpUIUpdataListener listener, Activity activity) {
+        new Thread(new Runnable() {
             @Override
-            public void subscribe(ObservableEmitter<String> e) throws Exception {
-                e.onNext(url);
-                e.onComplete();
-            }
-        })
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread());
-        Observer observer = new Observer<String>() {
-            private Response response;
-
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(String value) {
+            public void run() {
+                exception = null;
                 //业务内容
                 RequestBody body = RequestBody.create(JSON, json);
                 Request request = new Request.Builder()
                         .addHeader("Authorization", header01)
                         .addHeader("X-Requested-With", header02)
-                        .addHeader("YdmSessionId", (Preference.get(ConstantString.USERID,"")))
+                        .addHeader("YdmSessionId", (Preference.get(ConstantString.USERID, "")))
                         .url(url)
                         .post(body)
                         .build();
-                response = null;
+                Response response = null;
                 try {
                     response = okHttpClient.newCall(request).execute();
                     if (response.isSuccessful()) {
@@ -104,63 +81,53 @@ public class RequestUtils {
                     } else {
                         exception = new IOException("Unexpected code " + response);
                     }
-                } catch (IOException e) {
-                    exception = e;
-                    e.printStackTrace();
-                }
-            }
 
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-               parseData();
-            }
-
-            private void parseData() {
-                if (exception == null) {
-                    if (response.isSuccessful()) {
-                        String result = null;
-                        try {
-                            result = response.body().string();
-                            Log.e("data",result);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        //这个地方进行解析
-                        Gson gson = new Gson();
-                        try {
-                            BaseBean resultBean = gson.fromJson(result, baseBean.getClass());
-                            resultBean.setUrl(url);
-                            if(!resultBean.getC()){
-                                ErrorBeanOne errorBeanOne = gson.fromJson(result, ErrorBeanOne.class);
-                                listener.onFailure(errorBeanOne);
-                            }else {
-                                listener.onSuccess(resultBean,0);
-                            }
-                        } catch (Exception e) {
+                    if (exception == null) {
+                        if (response.isSuccessful()) {
+                            String result = null;
                             try {
-                                ErrorBeanOne errorBeanOne = gson.fromJson(result, ErrorBeanOne.class);
-                                listener.onFailure(errorBeanOne);
-                            }catch (Exception e0){
+                                result = response.body().string();
+                                Log.e("data", result);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            //这个地方进行解析
+                            Gson gson = new Gson();
+                            try {
+                                BaseBean resultBean = gson.fromJson(result, baseBean.getClass());
+                                resultBean.setUrl(url);
+                                if (!resultBean.getC()) {
+                                    ErrorBeanOne errorBeanOne = gson.fromJson(result, ErrorBeanOne.class);
+                                    listener.onFailure(errorBeanOne);
+                                    Log.e("step","有结果失败"+errorBeanOne.getM());
+                                } else {
+                                    listener.onSuccess(resultBean, 0);
+                                    Log.e("step","有结果成功");
+                                }
+                            } catch (Exception e) {
                                 try {
+                                    ErrorBeanOne errorBeanOne = gson.fromJson(result, ErrorBeanOne.class);
+                                    listener.onFailure(errorBeanOne);
+                                } catch (Exception e0) {
+                                    try {
 
-                                }catch (Exception e2){
+                                    } catch (Exception e2) {
 
+                                    }
                                 }
                             }
                         }
+                    } else {
+                        listener.onError(null, exception, 0);
+                        Log.e("step",exception.toString());
                     }
-                } else {
-                    listener.onError(null, exception, 0);
+                } catch (IOException e) {
+                    exception = e;
+                    Log.e("step",exception.toString());
+                    e.printStackTrace();
                 }
-
             }
-        };
-        observable.subscribe(observer);
+        }).start();
     }
 
 

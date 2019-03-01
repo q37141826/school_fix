@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.acitivty.inspection.school_check.CheckNetEquipmentActivity">
+
+    <RelativeLayout
+        android:id="@+id/vg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/back_grey"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_check_title"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:text="行为管理设备日志检查" />
+
+            <View style="@style/line_grey"></View>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="日志检查"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <LinearLayout style="@style/linearlayout_check">
+
+                <LinearLayout
+                    android:paddingLeft="@dimen/margin5dp"
+                    style="@style/linearlayout_check"
+                    android:layout_width="0px"
+                    android:layout_weight="1">
+
+                    <TextView
+                        style="@style/text_check_resolve"
+                        android:text="无线AP登记数量：" />
+
+                    <TextView
+                        style="@style/text_check_edittext"
+                        android:text="0" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/margin1dp"
+                    android:layout_height="@dimen/margin15dp"
+                    android:background="@color/back_grey"></View>
+
+                <LinearLayout
+                    android:paddingLeft="@dimen/margin5dp"
+                    style="@style/linearlayout_check"
+                    android:layout_width="0px"
+                    android:layout_weight="1">
+
+                    <TextView
+                        style="@style/text_check_resolve"
+                        android:text="无线AP在线数量" />
+
+                    <TextView
+                        style="@style/text_check_edittext"
+                        android:text="0" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linearlayout_check"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin15dp"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/margin10dp"
+                android:paddingBottom="@dimen/margin10dp">
+
+                <TextView
+                    style="@style/text_check_resolve"
+                    android:text="无线AP不在线原因：" />
+
+                <EditText
+                    style="@style/text_check_edittext"
+                    android:layout_marginTop="@dimen/margin15dp"
+                    android:hint="描述200字以内"
+                    android:maxLength="200" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linearlayout_check"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin15dp"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/margin10dp"
+                android:paddingBottom="@dimen/margin10dp">
+
+                <TextView
+                    style="@style/text_check_resolve"
+                    android:text="核心到各分机房光缆可用芯数情况" />
+
+                <EditText
+                    style="@style/text_check_edittext"
+                    android:layout_marginTop="@dimen/margin15dp"
+                    android:hint="描述200字以内"
+                    android:maxLength="200" />
+            </LinearLayout>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="核心到各分机房是否无光纤收发器"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <LinearLayout
+                style="@style/linearlayout_check"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin15dp"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/margin10dp"
+                android:paddingBottom="@dimen/margin10dp">
+
+                <TextView
+                    style="@style/text_check_resolve"
+                    android:text="光纤收发器替换整改情况" />
+
+                <EditText
+                    style="@style/text_check_edittext"
+                    android:layout_marginTop="@dimen/margin15dp"
+                    android:hint="描述200字以内"
+                    android:maxLength="200" />
+            </LinearLayout>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="各机房网络设备网管地址是否可访问"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="各机房网络设备日志检查是否正常"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="各机房网络设备光纤损耗检测是否正常"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="NVR监控主机是否正常"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+            <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:edittext_hint="请输入处置情况"
+                app:textResovleTitle="处置措施："
+                app:textTitle="服务器是否正常工作"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
+
+
+            <include layout="@layout/include_check_foot"></include>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

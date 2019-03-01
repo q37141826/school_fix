@@ -22,7 +22,7 @@ import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.constant.IntentDataKeyConstant;
 import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.create.CreateHardWorkActivity;
-import com.qixiu.schoolfix.ui.acitivty.work_flow.RequestMaker;
+import com.qixiu.schoolfix.utils.reuestutil.RequestMaker;
 import com.qixiu.widget.LineControllerView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -58,12 +58,7 @@ public class ProblemSelectActivity extends RequestActivity implements OnRecycler
         lastBean.setProductProblemRemark("");
         mTitleView.setTitle("问题定位");
         productGUID = getIntent().getStringExtra(IntentDataKeyConstant.DATA);
-        if (TextUtils.isEmpty(productGUID)) {
-            selectedProblemResoveListBeans = getIntent().getParcelableExtra(IntentDataKeyConstant.DATA);
-            productGUID = selectedProblemResoveListBeans.getProblemBeans().get(0).getProductGUID();
-        }
-        RequestBean mechineRequest = RequestMaker.getMechineRequest(productGUID);
-        post(ConstantUrl.problemListUrl, mechineRequest, new ProblemDataBean());
+
         mTitleView.setRightText("确定");
         mTitleView.getRightText().setTextColor(getResources().getColor(R.color.theme_color));
         mTitleView.setRightListener(new View.OnClickListener() {
@@ -82,7 +77,16 @@ public class ProblemSelectActivity extends RequestActivity implements OnRecycler
                 }
             }
         });
-//        post(ConstantUrl.problemListUrl, map, requestIntef,new BaseBean());
+
+        if (TextUtils.isEmpty(productGUID)) {
+            if(selectedProblemResoveListBeans==null){
+                return;
+            }
+            selectedProblemResoveListBeans = getIntent().getParcelableExtra(IntentDataKeyConstant.DATA);
+            productGUID = selectedProblemResoveListBeans.getProblemBeans().get(0).getProductGUID();
+        }
+        RequestBean mechineRequest = RequestMaker.getMechineRequest(productGUID);
+        post(ConstantUrl.problemListUrl, mechineRequest, new ProblemDataBean());
     }
 
     private void gotoSolution() {

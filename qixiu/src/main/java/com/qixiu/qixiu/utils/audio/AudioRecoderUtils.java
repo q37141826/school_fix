@@ -63,12 +63,18 @@ public class AudioRecoderUtils {
    /* ②setAudioSource/setVedioSource */
             mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);// 设置麦克风
    /* ②设置音频文件的编码：AAC/AMR_NB/AMR_MB/Default 声音的（波形）的采样 */
-            mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+//            mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+            mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
    /*
     * ②设置输出文件的格式：THREE_GPP/MPEG-4/RAW_AMR/Default THREE_GPP(3gp格式
     * ，H263视频/ARM音频编码)、MPEG-4、RAW_AMR(只支持音频且音频编码要求为AMR_NB)
     */
             mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+//            filePath = FolderPath + System.currentTimeMillis() + ".amr";
+
+            mMediaRecorder.setAudioSamplingRate(8000);
+            mMediaRecorder.setAudioChannels(1);
+            mMediaRecorder.setAudioEncodingBitRate(64);
             filePath = FolderPath + System.currentTimeMillis() + ".amr";
    /* ③准备 */
             mMediaRecorder.setOutputFile(filePath);
@@ -190,6 +196,7 @@ public class AudioRecoderUtils {
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setFocusable(true);
         popupWindow.setClippingEnabled(false);
+        touchView.setClickable(true);
         touchView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

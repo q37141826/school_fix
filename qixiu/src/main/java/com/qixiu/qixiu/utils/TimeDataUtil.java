@@ -223,7 +223,7 @@ public class TimeDataUtil {
         }
     }
 
-    public int getYear() {
+    public  static int getYear() {
         String time = "";
         Time t = new Time();
         t.set(System.currentTimeMillis());
@@ -235,18 +235,25 @@ public class TimeDataUtil {
         return year;
     }
 
-    public int getMonth() {
+    public static int getMonth() {
         String time = "";
         Time t = new Time();
         t.set(System.currentTimeMillis());
         int year = t.year;
-        int month = t.month + 1;
+        int month = t.month ;
         int day = t.monthDay;
         int minute = t.minute;
         int hour = t.hour;
         return month;
     }
-
+    public static int getDay() {
+        Time t = new Time();
+        t.set(System.currentTimeMillis());
+        int year = t.year;
+        int month = t.month + 1;
+        int day = t.monthDay;
+        return day;
+    }
     /**
      * 返回文字描述的日期
      *
@@ -349,6 +356,12 @@ public class TimeDataUtil {
         return after - before >= 0;
     }
 
+
+    /*
+    * @params  before
+    * @params  after
+    * @params  format
+    * */
     public static boolean is_early(String before, String after, String format) {
         Date date_before = strToDate(before, format);
         Date date_after = strToDate(after, format);
@@ -437,6 +450,11 @@ public class TimeDataUtil {
             this.seconds = seconds;
         }
     }
+
+
+
+
+
 
 
     public static void showDatePickers(final TextView text, Activity activity) {

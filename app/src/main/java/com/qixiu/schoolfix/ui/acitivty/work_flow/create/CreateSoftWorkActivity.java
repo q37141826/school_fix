@@ -123,4 +123,7 @@ public class CreateSoftWorkActivity extends UploadPictureActivityNew {
     public void onFailure(C_CodeBean c_codeBean, String m) {
 
     }
+
+    public void changeHardSoft(View view) {
+    }
 }

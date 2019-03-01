@@ -21,26 +21,34 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <include layout="@layout/part_creatwork_message01"></include>
-            <TextView
-                android:text="产品信息"
-                style="@style/mine_text_grey"
-                ></TextView>
-            <com.qixiu.widget.LineControllerView
-                app:textPrimary="类型"
-                app:textSecondary="软件项目"
-                style="@style/line_work"></com.qixiu.widget.LineControllerView>
-            <com.qixiu.widget.LineControllerView
-                app:textPrimary="名称"
-                app:textSecondary="运维系统"
-                style="@style/line_work"></com.qixiu.widget.LineControllerView>
-            <com.qixiu.widget.LineControllerView
-                app:textPrimary="架构"
-                app:textSecondary="运维系统"
-                style="@style/line_work"></com.qixiu.widget.LineControllerView>
-            <com.qixiu.widget.LineControllerView
-                app:textPrimary="品牌"
-                app:textSecondary="运维系统"
-                style="@style/line_work"></com.qixiu.widget.LineControllerView>
+            <LinearLayout
+                android:id="@+id/linearlayout_soft"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="产品信息"
+                    style="@style/mine_text_grey"
+                    ></TextView>
+                <com.qixiu.widget.LineControllerView
+                    android:onClick="changeHardSoft"
+                    app:textPrimary="类型"
+                    app:textSecondary="软件项目"
+                    style="@style/line_work"></com.qixiu.widget.LineControllerView>
+                <com.qixiu.widget.LineControllerView
+                    app:textPrimary="名称"
+                    app:textSecondary="运维系统"
+                    style="@style/line_work"></com.qixiu.widget.LineControllerView>
+                <com.qixiu.widget.LineControllerView
+                    app:textPrimary="架构"
+                    app:textSecondary="运维系统"
+                    style="@style/line_work"></com.qixiu.widget.LineControllerView>
+                <com.qixiu.widget.LineControllerView
+                    app:textPrimary="品牌"
+                    app:textSecondary="运维系统"
+                    style="@style/line_work"></com.qixiu.widget.LineControllerView>
+            </LinearLayout>
+
             <include layout="@layout/part_work_problem_describe"></include>
         </LinearLayout>
 

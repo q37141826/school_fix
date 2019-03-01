@@ -104,7 +104,13 @@
         <activity android:name=".ui.acitivty.inspection.check_details.CheckDetailsActivity" />
         <activity android:name=".ui.acitivty.inspection.history.HistoryActivity" />
         <activity android:name=".ui.acitivty.inspection.RouteMapActivity" />
-        <activity android:name=".ui.acitivty.knowledge_share.KnowledgeShareListActivity"></activity>
+        <activity android:name=".ui.acitivty.knowledge_share.KnowledgeShareListActivity" />
+        <activity android:name=".ui.acitivty.knowledge_share.details.UploadCommentsActiviity" />
+        <activity android:name=".ui.acitivty.knowledge_share.details.KownledgeWebActivity" />
+        <activity android:name=".ui.acitivty.inspection.school_check.CheckInputStyleOneActivity" />
+        <activity android:name=".ui.acitivty.inspection.school_check.CheckInputHouseActivity" />
+        <activity android:name=".ui.acitivty.inspection.school_check.CheckNetEquipmentActivity" />
+        <activity android:name=".ui.acitivty.inspection.school_check.TeacherSignActivity"></activity>
     </application>
 
 </manifest>

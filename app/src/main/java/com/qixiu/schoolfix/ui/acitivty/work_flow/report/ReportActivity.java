@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
+import com.qixiu.qixiu.utils.CommonUtils;
 import com.qixiu.qixiu.utils.ToastUtil;
 import com.qixiu.schoolfix.BuildConfig;
 import com.qixiu.schoolfix.R;
@@ -82,8 +83,16 @@ public class ReportActivity extends UploadPictureActivityNew {
         if (!TextUtils.isEmpty(resultBean.getWorkOrderRepairSolutionRemark())) {
             textViewProblems.setText(resultBean.getWorkOrderRepairProblemRemark());
             textViewSolutions.setText(resultBean.getWorkOrderRepairSolutionRemark());
-            String[] problemsIds = resultBean.getRepairProductProblemGUIDs().split(";");
-            String[] solutionsIds = resultBean.getProductProblemSolutionGUID().split(";");
+            String[] problemsIds;
+            String[] solutionsIds;
+            try {
+                problemsIds = resultBean.getRepairProductProblemGUIDs().split(";");
+                solutionsIds = resultBean.getProductProblemSolutionGUID().split(";");
+            } catch (Exception e) {
+                ToastUtil.toast("该工单没有问题描述");
+                return;
+            }
+
             selectedProblemResoveListBeans = new SelectedProblemResoveListBeans();
             List<ProblemDataBean.ResultBean.DataListBean> problems = new ArrayList<>();
             for (int i = 0; i < problemsIds.length; i++) {
@@ -123,10 +132,11 @@ public class ReportActivity extends UploadPictureActivityNew {
         if (!TextUtils.isEmpty(signUrl)) {
             signPath = BuildConfig.BASE_URL + signUrl;
         }
-        if (TextUtils.isEmpty(signPath)) {
-            ToastUtil.toast("请填写签名");
-            return;
-        }
+//        if (TextUtils.isEmpty(signPath)) {
+//            ToastUtil.toast("请填写签名");
+//            mZProgressHUD.dismiss();
+//            return;
+//        }
         List<String> imagesUrls = new ArrayList<>();
         for (int i = 0; i < selectPhotos.size(); i++) {
             UploadFileRequest.uploadFile(selectPhotos.get(i), new UploadFileRequest.UploadFileCallBack<UploadFileBean>() {
@@ -150,7 +160,9 @@ public class ReportActivity extends UploadPictureActivityNew {
         UploadFileRequest.uploadFile(signPath, new UploadFileRequest.UploadFileCallBack<UploadFileBean>() {
             @Override
             public void call(UploadFileBean uploadFileBean) {
-                signUrl = uploadFileBean.getO();
+                if(uploadFileBean!=null){
+                    signUrl = uploadFileBean.getO();
+                }
                 checkAndSave(imagesUrls);
             }
 
@@ -168,7 +180,7 @@ public class ReportActivity extends UploadPictureActivityNew {
     }
 
     private void checkAndSave(List<String> imagesUrls) {
-        if (selectPhotos.size() == imagesUrls.size() && !TextUtils.isEmpty(signUrl)) {
+        if (selectPhotos.size() == imagesUrls.size()) {
             urlsStringSpell = UploadFileRequest.getUrlsStringSpell(imagesUrls, ";");
             repairProductProblemGUIDs = UploadFileRequest.getIdsStringSpell(selectedProblemResoveListBeans.getProblemBeans(), ";");
             productProblemSolutionGUID = UploadFileRequest.getIdsStringSpell(selectedProblemResoveListBeans.getResoveBeans(), ";");
@@ -180,7 +192,7 @@ public class ReportActivity extends UploadPictureActivityNew {
         Map<String, String> map = new HashMap();
         map.put("id", resultBean.getId());
         map.put("workOrderErrorImgUrls", urlsStringSpell);
-        map.put("workOrderUserSignImgUrl", signUrl);
+        CommonUtils.putDataIntoMap(map, "workOrderUserSignImgUrl", signUrl);
         map.put("repairProductProblemGUIDs", repairProductProblemGUIDs);
         map.put("workOrderRepairProblemRemark", textViewProblems.getText().toString());
         map.put("productProblemSolutionGUID", productProblemSolutionGUID);
@@ -242,10 +254,10 @@ public class ReportActivity extends UploadPictureActivityNew {
     @OnClick({R.id.linearGotoProblem})
     public void selectProblem(View view) {
 //        ProblemSelectActivity.start(getContext(), ProblemSelectActivity.class, resultBean.getProductGUID());
-        if(selectedProblemResoveListBeans!=null){
-            selectedProblemResoveListBeans.getProblemBeans().get(0).setProductGUID( resultBean.getProductGUID());
-            ProblemSelectActivity.start(getContext(), ProblemSelectActivity.class,selectedProblemResoveListBeans);
-        }else {
+        if (selectedProblemResoveListBeans != null) {
+            selectedProblemResoveListBeans.getProblemBeans().get(0).setProductGUID(resultBean.getProductGUID());
+            ProblemSelectActivity.start(getContext(), ProblemSelectActivity.class, selectedProblemResoveListBeans);
+        } else {
             ProblemSelectActivity.start(getContext(), ProblemSelectActivity.class, resultBean.getProductGUID());
         }
     }
@@ -284,7 +296,7 @@ public class ReportActivity extends UploadPictureActivityNew {
     @Subscribe
     public void getSignEvent(String path) {
         signPath = path;
-        signUrl="";
+        signUrl = "";
         Glide.with(getContext()).load(path).into(imageViewGotoSign);
     }
 

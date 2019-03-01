@@ -63,7 +63,7 @@ public class SignWorkActivity extends RequestActivity implements SignAdapter.Cli
         initePermission();
         initLocation();
         resultBean = getIntent().getParcelableExtra(IntentDataKeyConstant.DATA);
-        if(resultBean.getWorkOrderAssignTime()==null){
+        if (resultBean.getWorkOrderAssignTime() == null) {
             ToastUtil.toast("数据非法");
             finish();
             return;
@@ -78,8 +78,8 @@ public class SignWorkActivity extends RequestActivity implements SignAdapter.Cli
     }
 
     private void initePermission() {
-        if(!hasPermission(LoactionUtils.loactionPermissions)){
-            hasRequse(1,LoactionUtils.loactionPermissions);
+        if (!hasPermission(LoactionUtils.loactionPermissions)) {
+            hasRequse(1, LoactionUtils.loactionPermissions);
             return;
         }
     }
@@ -187,7 +187,7 @@ public class SignWorkActivity extends RequestActivity implements SignAdapter.Cli
 
     @Override
     public void onSuccess(BaseBean data) {
-        if(data.getUrl().equals(ConstantUrl.signUrl)){
+        if (data.getUrl().equals(ConstantUrl.signUrl)) {
             ToastUtil.toast("签名成功");
             finish();
         }
@@ -218,7 +218,7 @@ public class SignWorkActivity extends RequestActivity implements SignAdapter.Cli
 
     @Override
     public void click() {
-        if(TextUtils.isEmpty(address)){
+        if (TextUtils.isEmpty(address)) {
             ToastUtil.toast("定位中请稍等");
             return;
         }
@@ -226,25 +226,25 @@ public class SignWorkActivity extends RequestActivity implements SignAdapter.Cli
         map.put("id", resultBean.getId());
         switch (currentStep) {
             case SIGN_GO:
-                map.put("workOrderGoTime", TimeDataUtil.getTimeStamp(new Date().getTime(),timeFormat));
+                map.put("workOrderGoTime", TimeDataUtil.getTimeStamp(new Date().getTime(), timeFormat));
                 map.put("workOrderGoAddress", address);
-                map.put("workOrderGoX", latitude+"");
-                map.put("workOrderGoY", longitude+"");
+                map.put("workOrderGoX", latitude + "");
+                map.put("workOrderGoY", longitude + "");
                 break;
             case SIGN_IN:
-                map.put("workOrderSignInTime", TimeDataUtil.getTimeStamp(new Date().getTime(),timeFormat));
+                map.put("workOrderSignInTime", TimeDataUtil.getTimeStamp(new Date().getTime(), timeFormat));
                 map.put("workOrderSignInAddress", address);
-                map.put("workOrderSignInX", latitude+"");
-                map.put("workOrderSignInY", longitude+"");
+                map.put("workOrderSignInX", latitude + "");
+                map.put("workOrderSignInY", longitude + "");
                 break;
             case SIGN_OUT:
-                map.put("workOrderSignOutTime", TimeDataUtil.getTimeStamp(new Date().getTime(),timeFormat));
+                map.put("workOrderSignOutTime", TimeDataUtil.getTimeStamp(new Date().getTime(), timeFormat));
                 map.put("workOrderSignOutAddress", address);
-                map.put("workOrderSignOutTimeX", latitude+"");
-                map.put("workOrderSignOutTimeY", longitude+"");
+                map.put("workOrderSignOutTimeX", latitude + "");
+                map.put("workOrderSignOutTimeY", longitude + "");
                 break;
         }
-        post(ConstantUrl.signUrl,map,new BaseBean());
+        post(ConstantUrl.signUrl, map, new BaseBean());
     }
 
 
@@ -275,7 +275,7 @@ public class SignWorkActivity extends RequestActivity implements SignAdapter.Cli
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(!hasPermission(LoactionUtils.loactionPermissions)){
+        if (!hasPermission(LoactionUtils.loactionPermissions)) {
             ToastUtil.toast("请允许定位");
             return;
         }

@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.qixiu.qixiu.request.OKHttpRequestModel;
 import com.qixiu.qixiu.request.OKHttpUIUpdataListener;
 import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
+import com.qixiu.qixiu.utils.CommonUtils;
 import com.qixiu.qixiu.utils.Preference;
 import com.qixiu.qixiu.utils.TimeDataUtil;
 import com.qixiu.qixiu.utils.ToastUtil;
@@ -30,7 +32,7 @@ import com.qixiu.schoolfix.ui.acitivty.baseactivity.upload.UploadPictureActivity
 import com.qixiu.schoolfix.ui.acitivty.home.binding.MechineCodeListBean;
 import com.qixiu.schoolfix.ui.acitivty.home.binding.MechineDetailsBean;
 import com.qixiu.schoolfix.ui.acitivty.home.binding.SelectedMechineCodeActivity;
-import com.qixiu.schoolfix.ui.acitivty.work_flow.RequestMaker;
+import com.qixiu.schoolfix.utils.reuestutil.RequestMaker;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.ProblemDataBean;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.ProblemSelectActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.RequestBean;
@@ -97,6 +99,18 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
     LineControllerView lineMechinAddress;
     @BindView(R.id.textViewPrblems)
     TextView textViewPrblems;
+    @BindView(R.id.lineSoft)
+    LineControllerView lineSoft;
+    @BindView(R.id.lineSystemName)
+    LineControllerView lineSystemName;
+    @BindView(R.id.lineConstructure)
+    LineControllerView lineConstructure;
+    @BindView(R.id.lineBrand)
+    LineControllerView lineBrand;
+    @BindView(R.id.linearlayout_soft)
+    LinearLayout linearlayoutSoft;
+    @BindView(R.id.linearlayout_hard)
+    LinearLayout linearlayoutHard;
 
     private ImageView imageViewPop;
     private List<String> fileIds;
@@ -118,6 +132,7 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
     private String selecteProblemIds;
     private ProductListBean.ResultBean.DataListBean productBean;
     private MechineCodeListBean.ResultBean.DataListBean selectMechineCode;
+    private boolean is_soft = false;//目前是创建软件还是创建硬件维修
 
 
     @Override
@@ -126,7 +141,7 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
         setMaxPictureCount(3);
 //        mTitleView.setRightImage(getContext(), R.drawable.tab_btn_sma);
 //        mTitleView.getRightText().setVisibility(View.VISIBLE);
-        lineExpectTime.setSecondaryText(TimeDataUtil.getTimeStamp(new Date().getTime(),TimeDataUtil.DEFULT_TIME_FORMAT));
+        lineExpectTime.setSecondaryText(TimeDataUtil.getTimeStamp(new Date().getTime(), TimeDataUtil.DEFULT_TIME_FORMAT));
         mTitleView.setRightListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -216,12 +231,28 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
     }
 
     public void uploadConfrim(View view) {
+        if (schoolBean == null) {
+            ToastUtil.toast("请先选择单位");
+            return;
+        }
+        if (TextUtils.isEmpty(productGUID) && !is_soft) {
+            ToastUtil.toast("请选择产品");
+            return;
+        }
+        if (!is_soft && selectMechineCode == null) {
+            ToastUtil.toast("请选择设备码");
+            return;
+        }
         if (TextUtils.isEmpty(selecteProblemIds)) {
             ToastUtil.toast("请选择问题描述");
             return;
         }
         fileIds = new ArrayList<>();
         fileNums = selectPhotos.size();
+        if (selectPhotos.size() == 0 && TextUtils.isEmpty(voice_file_path)) {
+            createWork();
+            return;
+        }
         for (int i = 0; i < selectPhotos.size(); i++) {
             uploadFile(selectPhotos.get(i));
         }
@@ -260,7 +291,10 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
 
             @Override
             public void onFailure(C_CodeBean c_codeBean) {
-                ToastUtil.toast(c_codeBean.getM());
+                try {
+                    ToastUtil.toast(c_codeBean.getM());
+                } catch (Exception e) {
+                }
                 mZProgressHUD.dismiss();
             }
         });
@@ -275,11 +309,12 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
 
     private void createWork() {
         Map<String, String> map = new HashMap<>();
-//        map.put("workOrderGUID",);
+//        map.put("workOrderGUID",);//
+        if (selectMechineCode != null) {
+            map.put("deviceGUID", selectMechineCode.getId());
+        }
 //
-        map.put("deviceGUID",selectMechineCode.getId());
-//
-        map.put("repairUserGUID",LoginStatus.getLoginBean().getO().getId());
+        map.put("repairUserGUID", LoginStatus.getLoginBean().getO().getId());
 //
 //        map.put("serviceUserGUID",);
 //
@@ -295,13 +330,13 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
 //
         map.put("workOrderExpectTime", lineExpectTime.getSecondaryText().toString());
 //
-        map.put("workOrderCstProblemRemark",textViewPrblems.getText().toString());
+        map.put("workOrderCstProblemRemark", textViewPrblems.getText().toString());
 //
-        map.put("workOrderProblemMP3Url", voiceUrl);
+        CommonUtils.putDataIntoMap(map, "workOrderProblemMP3Url", voiceUrl);
 //
 //        map.put("workOrderMP3",);
 //
-        map.put("workOrderCstProblemImgUrl", UploadFileRequest.getUrlsStringSpell(fileIds, ";"));
+        CommonUtils.putDataIntoMap(map, "workOrderCstProblemImgUrl", UploadFileRequest.getUrlsStringSpell(fileIds, ";"));
 //
 //        map.put("workOrderGoTime",);
 //
@@ -321,7 +356,7 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
 //
 //        map.put("qrCodeGUID",);
 //
-        map.put("workOrderCreatime", TimeDataUtil.getTimeStamp(new Date().getTime()));
+//        map.put("workOrderCreatime", TimeDataUtil.getTimeStamp(new Date().getTime()));
 //
 //        map.put("workOrderReceiveTime",);
 //
@@ -379,7 +414,7 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
     }
 
     public void selectProblem(View view) {
-        if (TextUtils.isEmpty(productGUID)) {
+        if (TextUtils.isEmpty(productGUID) && !is_soft) {
             ToastUtil.toast("请先选择设备信息");
             return;
         }
@@ -428,6 +463,13 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
                     lineSchoolAddress.setSecondaryText(schoolBean.getRepairBusinessAddress());
                     lineCreatePhone.setSecondaryText(schoolBean.getSchoolUnitTel());
                     lineCreatePerson.setSecondaryText(schoolBean.getSchoolUnitMaster());
+                    //选择学校之后要清除产品 问题描述信息
+                    clearProduct();
+                    if (!is_soft) {
+                        clearMechineCode();
+                    }
+                    //选择学校或者选择产品后，问题要清除
+                    clearProblem();
                 }
             });
             schoolPicker.show();
@@ -447,13 +489,71 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
                     lineProductName.setSecondaryText(productBean.getProductName());
                     lineProductModel.setSecondaryText(productBean.getProductModel());
                     lineProductBrand.setSecondaryText(productBean.getProductBrand());
+                    productBean.setSoft(!is_soft);
                     productGUID = productBean.getProductGUID();
+                    clearMechineCode();
+                    clearProblem();
                 }
             });
             productPicker.show();
         }
+
+        if (data instanceof SoftListBean) {
+            SoftListBean bean = (SoftListBean) data;
+            List<SelectedDataBean> selectedDataBeans = new ArrayList<>();
+            for (int i = 0; i < bean.getO().getDataList().size(); i++) {
+                SelectedDataBean selectedDataBean = new SelectedDataBean(bean.getO().getDataList().get(i).getId(),
+                        bean.getO().getDataList().get(i).getDeviceSoftName());
+                selectedDataBean.setData(bean.getO().getDataList().get(i));
+                selectedDataBeans.add(selectedDataBean);
+            }
+            MyPopOneListPicker popOneListPicker = new MyPopOneListPicker(getContext(), selectedDataBeans, new MyPopOneListPicker.Pop_selectedListenner() {
+                @Override
+                public void getData(SelectedDataBean data) {
+                    SoftListBean.ResultBean.DataListBean bean = (SoftListBean.ResultBean.DataListBean) data.getData();
+                    productGUID = bean.getProductGUID();
+                    lineBrand.setSecondaryText(bean.getDeviceSoftBrand());
+                    lineSystemName.setSecondaryText(bean.getDeviceSoftName());
+                    lineConstructure.setSecondaryText(bean.getDeviceSoftFrameworkStr());
+                    clearProblem();
+                }
+            });
+            popOneListPicker.show();
+        }
+
+
         super.onSuccess(data);
         mZProgressHUD.dismiss();
+        if (data.getUrl().equals(ConstantUrl.createWorkUrl)) {
+            ToastUtil.toast("创建成功");
+            finish();
+            return;
+        }
+    }
+
+    //清除设备码
+    private void clearMechineCode() {
+        selectMechineCode = null;
+        lineMechineCode.setSecondaryText("-");
+        lineMechinAddress.setSecondaryText("-");
+        lineDeviceCode.setSecondaryText("-");
+    }
+
+    //清除问题
+    private void clearProblem() {
+        textViewPrblems.setText("");
+        selecteProblemIds = "";
+    }
+
+    //清除产品
+    private void clearProduct() {
+        productGUID = "";
+        lineProductName.setSecondaryText("-");
+        lineProductModel.setSecondaryText("-");
+        lineBrand.setSecondaryText("-");
+        lineSystemName.setSecondaryText("-");
+        lineConstructure.setSecondaryText("-");
+        lineProductBrand.setSecondaryText("-");
     }
 
     @Override
@@ -472,6 +572,8 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
         lineMechineCode.setSecondaryText(bean.getDeviceMachineCode());
         lineMechinAddress.setSecondaryText(bean.getDeviceAddress());
         lineDeviceCode.setSecondaryText(bean.getDeviceCode());
+        //选完之后清除一下问题
+        clearProblem();
     }
 
     @Subscribe
@@ -502,9 +604,6 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
     }
 
 
-
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -532,5 +631,47 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
         RequestBean request = RequestMaker.getRequest(map);
         request.setOrder("repairBusinessName desc");
         post(ConstantUrl.schoolListUrl, request, new SchoolListBean());
+    }
+
+
+    //切换是软件还是硬件
+    public void changeHardSoft(View view) {
+        List<SelectedDataBean> datas = new ArrayList<>();
+        SelectedDataBean selectedDataBean = new SelectedDataBean("0", "软件设备");
+        datas.add(selectedDataBean);
+        selectedDataBean = new SelectedDataBean("1", "硬件设备");
+        datas.add(selectedDataBean);
+        MyPopOneListPicker popOneListPicker = new MyPopOneListPicker(getContext(), datas, new MyPopOneListPicker.Pop_selectedListenner() {
+            @Override
+            public void getData(SelectedDataBean data) {
+                if (data.getId().equals("0")) {
+                    is_soft = true;
+                } else {
+                    is_soft = false;
+                }
+                linearlayoutSoft.setVisibility(is_soft ? View.VISIBLE : View.GONE);
+                linearlayoutHard.setVisibility(!is_soft ? View.VISIBLE : View.GONE);
+                clearProblem();
+                clearMechineCode();
+                clearProduct();
+            }
+        });
+        popOneListPicker.show();
+    }
+
+
+    //选择软件名称
+    public void selectSoft(View view) {
+        Map<String, String> map = new HashMap<>();
+        map.put("deviceType", "软件");
+        RequestBean request = RequestMaker.getRequest(map, "CreateTime desc", "nvarchar", "eq");
+//        List<String[]> datas = new ArrayList<>();
+//        String data01[] = {"deviceType", "uniqueidentifier", "eq", "软件"};
+//        String data03[]={"qrCodeGUID","uniqueidentifier","eq",ConstantString.NULL_ID};
+//        String data02[]={"deviceMachineCode","nvarchar","like",ConstantString.NULL_ID};
+//        datas.add(data01);
+//        datas.add(data02);
+//        datas.add(data03);
+        post(ConstantUrl.mechineCodeList, request, new SoftListBean());
     }
 }

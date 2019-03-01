@@ -29,6 +29,7 @@
     <color name="mark_start_alpa">#f4a057</color>
     <color name="font_grey">@color/txt_4D4D4D</color>
     <color name="hint_color_normol">#a9a9a9</color>
+    <color name="low_grey">#FF9A9A9A</color>
     <color name="txt_EBECF8">#ebecf8</color>
 
 
@@ -41,7 +42,7 @@
 
     <!--zxing用到的颜色-->
     <color name="txt_6AB63B">#6AB63B</color>
-    <color name="line_color">#f6f6f6</color>
+    <color name="line_color">#16000000</color>
     <color name="line_color_text">#f0f0f0</color>
     <color name="txt_62b330">#62b330</color>
     <color name="bg_ffa54d">#ffa54d</color>
