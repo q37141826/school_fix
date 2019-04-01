@@ -30,6 +30,10 @@
 
     </style>
 
+    <style name="line_check" parent="line_controller_style">
+        <item name="sencondLayout">toFirstRight</item>
+    </style>
+
     <style name="line_under" parent="line_controller_style">
         <item name="background">@drawable/under_line</item>
 

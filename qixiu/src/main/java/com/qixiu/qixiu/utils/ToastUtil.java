@@ -36,9 +36,18 @@ public class ToastUtil {
         showToast(BaseApplication.getApp(), content);
     }
 
+
+    public static void toastNew(String content) {
+        showToast(BaseApplication.getContext(), content);
+    }
+
     public static void toast(int contentId) {
 
         showToast(BaseApplication.getApp(), contentId);
+    }
+    public static void toastNew(int contentId) {
+
+        showToast(BaseApplication.getContext(), contentId);
     }
 
     /**

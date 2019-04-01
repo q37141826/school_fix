@@ -10,6 +10,7 @@ import com.qixiu.qixiu.utils.ToastUtil;
 import com.qixiu.schoolfix.model.BaseRequestIntef;
 import com.qixiu.schoolfix.utils.reuestutil.RequestUtils;
 import com.qixiu.wigit.zprogress.ZProgressHUD;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.Map;
 
@@ -67,6 +68,9 @@ public abstract class RequestActivity extends TitleActivity implements OKHttpUIU
 
     @Override
     public void onError(Call call, Exception e, int i) {
+        if (call!=null&&call.isCanceled()) {
+            return;
+        }
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -106,6 +110,7 @@ public abstract class RequestActivity extends TitleActivity implements OKHttpUIU
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        OkHttpUtils.getInstance().cancelTag(getActivity());
     }
 
     @Override
@@ -115,4 +120,6 @@ public abstract class RequestActivity extends TitleActivity implements OKHttpUIU
             mZProgressHUD.dismiss();
         }
     }
+
+
 }

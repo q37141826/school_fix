@@ -225,7 +225,7 @@ public class CheckRouteBean extends BaseBean<CheckRouteBean.ResultBean> {
                 this.approveGUID = approveGUID;
             }
 
-            public Object getApproveTime() {
+            public String getApproveTime() {
                 return approveTime;
             }
 

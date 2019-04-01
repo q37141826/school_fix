@@ -110,7 +110,9 @@
         <activity android:name=".ui.acitivty.inspection.school_check.CheckInputStyleOneActivity" />
         <activity android:name=".ui.acitivty.inspection.school_check.CheckInputHouseActivity" />
         <activity android:name=".ui.acitivty.inspection.school_check.CheckNetEquipmentActivity" />
-        <activity android:name=".ui.acitivty.inspection.school_check.TeacherSignActivity"></activity>
+        <activity android:name=".ui.acitivty.inspection.school_check.TeacherSignActivity" />
+        <activity android:name=".ui.acitivty.inspection.school_check.GotoQrCodeWebActivity" />
+        <activity android:name=".ui.acitivty.inspection.school_check.QRCheckActivity"></activity>
     </application>
 
 </manifest>

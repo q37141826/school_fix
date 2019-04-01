@@ -60,18 +60,18 @@ public class CreateMechineActivity extends RequestActivity {
         EventBus.getDefault().register(this);
 
         resultBean = getIntent().getParcelableExtra(IntentDataKeyConstant.DATA);
-        if(resultBean.isModify()){
+        if (resultBean.isModify()) {
             mTitleView.setTitle("修改设备");
             editextIPAddress.setText(resultBean.getDeviceIpAddress());
             editextMechineCode.setText(resultBean.getDeviceMachineCode());
             lineAddress.setSecondaryText(resultBean.getDeviceAddress());
-            amapClickResultBean=new AmapClickResultBean();
+            amapClickResultBean = new AmapClickResultBean();
             amapClickResultBean.setAddress(resultBean.getDeviceAddress());
-            double x=Double.parseDouble(resultBean.getDeviceMapX());
-            double y=Double.parseDouble(resultBean.getDeviceMapX());
-            LatLng latLng=new LatLng(x,y);
+            double x = Double.parseDouble(resultBean.getDeviceMapX());
+            double y = Double.parseDouble(resultBean.getDeviceMapX());
+            LatLng latLng = new LatLng(x, y);
             amapClickResultBean.setLatLng(latLng);
-        }else {
+        } else {
             mTitleView.setTitle("新增设备");
 
         }
@@ -81,9 +81,9 @@ public class CreateMechineActivity extends RequestActivity {
         lineSchoolName.setSecondaryText(resultBean.getSchoolUnitName());
         lineProductName.setSecondaryText(resultBean.getProductName());
 
-        lineLimitYears.setSecondaryText(resultBean.getDeviceNotUseYears()+"");
-        lineMatainYears.setSecondaryText(resultBean.getDeviceRepairBeginDate().substring(0,10)
-                +"至"+resultBean.getDeviceRepairEndDate().substring(0,10));
+        lineLimitYears.setSecondaryText(resultBean.getDeviceNotUseYears() + "");
+        lineMatainYears.setSecondaryText(resultBean.getDeviceRepairBeginDate().substring(0, 10)
+                + "至" + resultBean.getDeviceRepairEndDate().substring(0, 10));
     }
 
     @Override
@@ -98,11 +98,11 @@ public class CreateMechineActivity extends RequestActivity {
 
     @Override
     public void onSuccess(BaseBean data) {
-        if(data.getUrl().equals(ConstantUrl.modifyEqupmentList)){
+        if (data.getUrl().equals(ConstantUrl.modifyEqupmentList)) {
             ToastUtil.toast("修改成功");
             finish();
         }
-        if(data.getUrl().equals(ConstantUrl.createEqupmentList)){
+        if (data.getUrl().equals(ConstantUrl.createEqupmentList)) {
             ToastUtil.toast("创建成功");
             finish();
         }
@@ -137,10 +137,10 @@ public class CreateMechineActivity extends RequestActivity {
         Map<String, String> map = new HashMap<>();
         String ip = editextIPAddress.getText().toString().trim();
         String mechineCode = editextMechineCode.getText().toString().trim();
-        if(TextUtils.isEmpty(mechineCode)){
+        if (TextUtils.isEmpty(mechineCode)) {
             ToastUtil.toast("请输入设备码");
         }
-        if(TextUtils.isEmpty(ip)){
+        if (TextUtils.isEmpty(ip)) {
             ToastUtil.toast("请输入网络IP");
             return;
         }
@@ -151,24 +151,24 @@ public class CreateMechineActivity extends RequestActivity {
 
 
         map.put("schoolUnitGUID", resultBean.getSchoolUnitGUID());
-        map.put("deviceType",resultBean.getDeviceType()+"");
+        map.put("deviceType", resultBean.getDeviceType() + "");
 
         map.put("deviceAddress", amapClickResultBean.getAddress());
-        map.put("deviceMapX", amapClickResultBean.getLatLng().latitude + "");
-        map.put("deviceMapY", amapClickResultBean.getLatLng().longitude + "");
+        map.put("deviceMapX", amapClickResultBean.getLatLng().longitude + "");
+        map.put("deviceMapY", amapClickResultBean.getLatLng().latitude + "");
 
         map.put("deviceBuyDate", resultBean.getDeviceBuyDate());
-        map.put("deviceNotUseYears",resultBean.getDeviceNotUseYears()+"");
-        map.put("deviceRepairEndDate", resultBean.getDeviceRepairEndDate()+ "");
-        map.put("deviceRepairBeginDate",resultBean.getDeviceRepairBeginDate() + "");
-        map.put("deviceRepairBeginDate",resultBean.getDeviceRepairBeginDate() + "");
-        map.put("RepairBusinessGUID",resultBean.getRepairBusinessGUID() + "");
-        map.put("productGUID",resultBean.getProductGUID() + "");
-        if(resultBean.isModify()){
-            map.put("id",resultBean.getId() + "");
-            post(ConstantUrl.modifyEqupmentList,map,new BaseBean());
-        }else {
-            post(ConstantUrl.createEqupmentList,map,new BaseBean());
+        map.put("deviceNotUseYears", resultBean.getDeviceNotUseYears() + "");
+        map.put("deviceRepairEndDate", resultBean.getDeviceRepairEndDate() + "");
+        map.put("deviceRepairBeginDate", resultBean.getDeviceRepairBeginDate() + "");
+        map.put("deviceRepairBeginDate", resultBean.getDeviceRepairBeginDate() + "");
+        map.put("RepairBusinessGUID", resultBean.getRepairBusinessGUID() + "");
+        map.put("productGUID", resultBean.getProductGUID() + "");
+        if (resultBean.isModify()) {
+            map.put("id", resultBean.getId() + "");
+            post(ConstantUrl.modifyEqupmentList, map, new BaseBean());
+        } else {
+            post(ConstantUrl.createEqupmentList, map, new BaseBean());
         }
     }
 

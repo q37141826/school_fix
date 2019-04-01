@@ -124,11 +124,17 @@ public class ConstantUrl {
     //获取设备列表
     public final static String mechineListUrl = BuildConfig.BASE_URL + "api/services/app/SHCheckDeviceRecord/GetViewPage";
     //更新设备状态
-    public final static String updateMechineUrl = BuildConfig.BASE_URL +   "api/services/app/SHCheckDeviceRecord/UpdateByDto";
+    public final static String updateMechineUrl = BuildConfig.BASE_URL + "api/services/app/SHCheckDeviceRecord/UpdateByDto";
 
     //获取巡检报告
-    public final static String checkReportKeyUrl = BuildConfig.BASE_URL +    "api/services/app/SHCheckReport/GetCheckReport";
+    public final static String checkReportKeyUrl = BuildConfig.BASE_URL + "api/services/app/SHCheckReport/GetCheckReport";
 
     //保存巡检报告
-    public final static String saveReportKeyUrl = BuildConfig.BASE_URL +    "api/services/app/SHCheckReport/UpdateByDto";
+    public final static String saveReportKeyUrl = BuildConfig.BASE_URL + "api/services/app/SHCheckReport/UpdateByDto";
+
+    //设备的信息
+    public final static String mechineUrl = BuildConfig.BASE_URL + "api/services/app/SHDevice/GetViewDto?id=";
+    //位置是否在设备范围类
+
+    public final static String isInRangeUrl = BuildConfig.BASE_URL + "api/services/app/SHCheckDeviceRecord/GetLocationIsInRange";
 }

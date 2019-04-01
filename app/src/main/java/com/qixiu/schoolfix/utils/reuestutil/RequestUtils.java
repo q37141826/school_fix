@@ -99,10 +99,10 @@ public class RequestUtils {
                                 if (!resultBean.getC()) {
                                     ErrorBeanOne errorBeanOne = gson.fromJson(result, ErrorBeanOne.class);
                                     listener.onFailure(errorBeanOne);
-                                    Log.e("step","有结果失败"+errorBeanOne.getM());
+                                    Log.e("step", "有结果失败" + errorBeanOne.getM());
                                 } else {
                                     listener.onSuccess(resultBean, 0);
-                                    Log.e("step","有结果成功");
+                                    Log.e("step", "有结果成功");
                                 }
                             } catch (Exception e) {
                                 try {
@@ -119,11 +119,11 @@ public class RequestUtils {
                         }
                     } else {
                         listener.onError(null, exception, 0);
-                        Log.e("step",exception.toString());
+                        Log.e("step", exception.toString());
                     }
                 } catch (IOException e) {
                     exception = e;
-                    Log.e("step",exception.toString());
+                    Log.e("step", exception.toString());
                     e.printStackTrace();
                 }
             }

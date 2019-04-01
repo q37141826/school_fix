@@ -84,8 +84,8 @@ public class LineControllerView extends FrameLayout {
 
         final int textSecondaryLayout = a.getLayoutDimension(R.styleable.LineControllerView_sencondLayout,
                 SENCOND_LAYOUT_ALIGN_PARENT_RIGHT);
-        final float textSecondDaryMarginLeft = a.getDimension(R.styleable.LineControllerView_sencondMarginLeft,10);
-        final float textSecondDaryMarginRight = a.getDimension(R.styleable.LineControllerView_sencondMarginRight,10);
+        final float textSecondDaryMarginLeft = a.getDimension(R.styleable.LineControllerView_sencondMarginLeft, 10);
+        final float textSecondDaryMarginRight = a.getDimension(R.styleable.LineControllerView_sencondMarginRight, 10);
 
         //是否显示右边箭头图标
         boolean showRightArrowIcon = a.getBoolean(R.styleable.LineControllerView_showRightArrow, false);
@@ -143,7 +143,7 @@ public class LineControllerView extends FrameLayout {
             mSecondaryTextView.setText(textSecondary);
             if (mArrowView.getVisibility() != VISIBLE) {
                 setSecondLayout(textSecondaryLayout);
-                setSencondMargin(textSecondDaryMarginLeft,textSecondDaryMarginRight);
+                setSencondMargin(textSecondDaryMarginLeft, textSecondDaryMarginRight);
             }
         } else {
             mSecondaryTextView.setVisibility(GONE);
@@ -153,7 +153,7 @@ public class LineControllerView extends FrameLayout {
     public void setSencondMargin(float textSecondDaryMarginLeft, float textSecondDaryMarginRight) {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
                 mSecondaryTextView.getLayoutParams();
-        params.setMargins((int)textSecondDaryMarginLeft,0,(int)textSecondDaryMarginRight,0);
+        params.setMargins((int) textSecondDaryMarginLeft, 0, (int) textSecondDaryMarginRight, 0);
     }
 
     //更改右边文字属性
@@ -168,7 +168,7 @@ public class LineControllerView extends FrameLayout {
                 params.addRule(RelativeLayout.RIGHT_OF, mPrimaryTextView.getId());
                 break;
         }
-         getSecondaryTextView().setLayoutParams(params);
+        getSecondaryTextView().setLayoutParams(params);
     }
 
     private void initViews() {
@@ -232,8 +232,8 @@ public class LineControllerView extends FrameLayout {
         }
     }
 
-    public ImageView getRightImageView(){
-       return mArrowView;
+    public ImageView getRightImageView() {
+        return mArrowView;
     }
 
 }

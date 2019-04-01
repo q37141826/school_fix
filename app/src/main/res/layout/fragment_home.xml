@@ -9,13 +9,16 @@
         android:id="@+id/vg_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></RelativeLayout>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,20 +73,23 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/margin220dp">
+                android:layout_height="@dimen/margin220dp"
+                android:paddingLeft="@dimen/margin10dp"
+                android:paddingRight="@dimen/margin10dp">
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChart"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"></com.github.mikephil.charting.charts.LineChart>
+                    android:layout_height="match_parent"
+                  ></com.github.mikephil.charting.charts.LineChart>
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/back_grey"
-                android:paddingBottom="@dimen/margin10dp"
-                android:paddingTop="@dimen/margin10dp">
+                android:paddingTop="@dimen/margin10dp"
+                android:paddingBottom="@dimen/margin10dp">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerHome"
@@ -93,8 +99,6 @@
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
-
 
 
 </LinearLayout>

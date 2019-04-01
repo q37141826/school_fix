@@ -6,6 +6,7 @@
         <attr name="textYes" format="string"></attr>
         <attr name="textNo" format="string"></attr>
         <attr name="edittext_hint" format="string"></attr>
+        <attr name="text" format="string"></attr>
         <attr name="changeShow" format="boolean"></attr>
     </declare-styleable>
 

@@ -13,6 +13,7 @@ import com.qixiu.schoolfix.constant.ConstantString;
 import com.qixiu.schoolfix.ui.acitivty.LoginActivity;
 import com.qixiu.schoolfix.ui.acitivty.MainActivity;
 import com.qixiu.schoolfix.utils.LoginStatus;
+import com.qixiu.schoolfix.utils.reuestutil.TokenRequestUtils;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 
@@ -28,7 +29,7 @@ public class StartPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_page);
         onInitData();
-
+        TokenRequestUtils.requestToken();
     }
 
 
@@ -38,12 +39,11 @@ public class StartPageActivity extends AppCompatActivity {
         BaseApplication.NOTICE_NUM = 0;
         ShortcutBadger.applyCount(this, 0);
 
-        if(TextUtils.isEmpty(Preference.get(ConstantString.USERID,""))){
+        if (TextUtils.isEmpty(Preference.get(ConstantString.USERID, ""))) {
 
-        }else {
+        } else {
             MainActivity.start(StartPageActivity.this);
         }
-
 
 
         try {

@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:background="@color/back_grey"
     tools:context="com.qixiu.schoolfix.ui.acitivty.inspection.check_details.CheckDetailsActivity">
 
     <RelativeLayout
         android:id="@+id/vg_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></RelativeLayout>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/vg_title">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,83 +28,111 @@
                 android:text="单位信息" />
 
             <com.qixiu.widget.LineControllerView
-                style="@style/line_controller_style"
-                app:textPrimary="单位信息"></com.qixiu.widget.LineControllerView>
+                android:id="@+id/lineUnitName"
+                style="@style/line_under"
+                app:textPrimary="单位名称"></com.qixiu.widget.LineControllerView>
 
             <View style="@style/line_style_app"></View>
 
             <com.qixiu.widget.LineControllerView
-                style="@style/line_controller_style"
-                app:textPrimary="单位信息"></com.qixiu.widget.LineControllerView>
+                android:id="@+id/lineUnitAddress"
+                style="@style/line_under"
+                app:textPrimary="单位地址"></com.qixiu.widget.LineControllerView>
+
             <View style="@style/line_style_app"></View>
 
             <com.qixiu.widget.LineControllerView
-                style="@style/line_controller_style"
+                android:id="@+id/lineUnitPhone"
+                style="@style/line_under"
                 app:textPrimary="联系电话"></com.qixiu.widget.LineControllerView>
+
             <TextView
-                android:text="产品信息"
-                style="@style/mine_text_grey" />
+                style="@style/mine_text_grey"
+                android:text="产品信息" />
+
             <View style="@style/line_style_app"></View>
 
             <com.qixiu.widget.LineControllerView
-                style="@style/line_controller_style"
+                android:id="@+id/lineProductName"
+                style="@style/line_under"
                 app:textPrimary="产品名称"></com.qixiu.widget.LineControllerView>
+
             <View style="@style/line_style_app"></View>
 
             <com.qixiu.widget.LineControllerView
-                style="@style/line_controller_style"
+                android:id="@+id/lineProductBrand"
+                style="@style/line_under"
+
                 app:textPrimary="产品品牌"></com.qixiu.widget.LineControllerView>
+
             <View style="@style/line_style_app"></View>
 
             <com.qixiu.widget.LineControllerView
-                style="@style/line_controller_style"
+                android:id="@+id/lineProductModule"
+                style="@style/line_under"
                 app:textPrimary="产品型号"></com.qixiu.widget.LineControllerView>
+
             <TextView
-                android:text="设备信息"
-                style="@style/mine_text_grey" />
+                style="@style/mine_text_grey"
+                android:text="设备信息" />
+
             <View style="@style/line_style_app"></View>
 
             <com.qixiu.widget.LineControllerView
-                style="@style/line_controller_style"
+                android:id="@+id/lineDeviceCode"
+                style="@style/line_under"
+
                 app:textPrimary="机器码"></com.qixiu.widget.LineControllerView>
+
             <View style="@style/line_style_app"></View>
 
             <com.qixiu.widget.LineControllerView
-                style="@style/line_controller_style"
+                android:id="@+id/lineIpAddress"
+                style="@style/line_under"
                 app:textPrimary="网络IP地址"></com.qixiu.widget.LineControllerView>
+
             <View style="@style/line_style_app"></View>
 
             <com.qixiu.widget.LineControllerView
-                style="@style/line_controller_style"
+                android:id="@+id/lineAddress"
+                style="@style/line_under"
                 app:textPrimary="设备地址"></com.qixiu.widget.LineControllerView>
+
             <View style="@style/line_style_app"></View>
 
             <com.qixiu.widget.LineControllerView
-                style="@style/line_controller_style"
+                android:id="@+id/lineMechineCode"
+                style="@style/line_under"
                 app:textPrimary="设备码"></com.qixiu.widget.LineControllerView>
 
+            <View style="@style/line_style_app"></View>
+
             <com.qixiu.widget.LineControllerView
-                android:layout_marginTop="@dimen/margin18dp"
-                style="@style/line_controller_style"
+                android:id="@+id/lineApproveTime"
+                style="@style/line_under"
                 app:textPrimary="最近检测时间"></com.qixiu.widget.LineControllerView>
 
+            <View style="@style/line_style_app"></View>
+
             <com.qixiu.widget.LineControllerView
-                android:layout_marginTop="@dimen/margin18dp"
-                style="@style/line_controller_style"
+                android:id="@+id/lineState"
+                style="@style/line_under"
                 app:textPrimary="状态"></com.qixiu.widget.LineControllerView>
 
+            <View style="@style/line_style_app"></View>
 
             <Button
-                android:textSize="18sp"
-                android:textColor="@color/theme_color"
-                android:text="确定"
-                android:background="@color/white"
-                android:layout_marginBottom="@dimen/margin24dp"
-                android:layout_marginTop="@dimen/margin48dp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/margin48dp" />
+                android:layout_height="@dimen/margin48dp"
+                android:layout_marginTop="@dimen/margin48dp"
+                android:layout_marginBottom="@dimen/margin24dp"
+                android:background="@color/white"
+                android:text="确定"
+                android:textColor="@color/theme_color"
+                android:textSize="18sp"
+                android:visibility="gone" />
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
-</LinearLayout>
+</RelativeLayout>

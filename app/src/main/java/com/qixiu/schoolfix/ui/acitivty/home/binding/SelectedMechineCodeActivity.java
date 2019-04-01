@@ -148,14 +148,16 @@ public class SelectedMechineCodeActivity extends RequestActivity implements XRec
 //        map.put("repairBusinessGUID", detailsBean.getRepairBusinessGUID());
         map.put("schoolUnitGUID", detailsBean.getSchoolUnitGUID());
 //        RequestBean mechineRequest = RequestMaker.getRequest(map);
-        List<String[]> datas=new ArrayList<>();
-        String data01[]={"productGUID","uniqueidentifier","eq",detailsBean.getProductGUID()};
-        String data02[]={"schoolUnitGUID","uniqueidentifier","eq",detailsBean.getSchoolUnitGUID()};
-        String data03[]={"qrCodeGUID","uniqueidentifier","eq",ConstantString.NULL_ID};
+        List<String[]> datas = new ArrayList<>();
+        String data01[] = {"productGUID", "uniqueidentifier", "eq", detailsBean.getProductGUID()};
+        String data02[] = {"schoolUnitGUID", "uniqueidentifier", "eq", detailsBean.getSchoolUnitGUID()};
+        String data03[] = {"qrCodeGUID", "uniqueidentifier", "eq", ConstantString.NULL_ID};
+        String data04[] = {"approveState", "nvarchar", "eq", "已审批"};
         datas.add(data01);
         datas.add(data02);
         datas.add(data03);
-        RequestBean mechineRequest = RequestMaker.getRequests(datas,"CreateTime desc","and");
+        datas.add(data04);
+        RequestBean mechineRequest = RequestMaker.getRequests(datas, "CreateTime desc", "and");
         post(ConstantUrl.mechineCodeList, mechineRequest, new MechineCodeListBean());
     }
 }

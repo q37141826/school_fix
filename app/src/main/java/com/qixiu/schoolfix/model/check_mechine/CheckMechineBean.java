@@ -1,5 +1,8 @@
 package com.qixiu.schoolfix.model.check_mechine;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.qixiu.qixiu.request.bean.BaseBean;
 
 import java.util.List;
@@ -62,7 +65,7 @@ public class CheckMechineBean extends BaseBean<CheckMechineBean.ResultBean> {
             this.dataList = dataList;
         }
 
-        public static class DataListBean {
+        public static class DataListBean implements Parcelable {
             /**
              * id : 11109c69-8a39-e911-9738-a58da28d0b52
              * checkRecordGUID : 8a5ddc9b-783e-40f1-9be1-7aec453070c9
@@ -175,6 +178,55 @@ public class CheckMechineBean extends BaseBean<CheckMechineBean.ResultBean> {
             public void setIsChecked(int isChecked) {
                 this.isChecked = isChecked;
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(this.id);
+                dest.writeString(this.qrCodeGUID);
+                dest.writeString(this.checkRecordGUID);
+                dest.writeString(this.userGUID);
+                dest.writeString(this.createTime);
+                dest.writeString(this.checkDeviceRecordTime);
+                dest.writeString(this.deviceGUID);
+                dest.writeString(this.deviceAddress);
+                dest.writeString(this.deviceMachineCode);
+                dest.writeString(this.productName);
+                dest.writeInt(this.isChecked);
+            }
+
+            public DataListBean() {
+            }
+
+            protected DataListBean(Parcel in) {
+                this.id = in.readString();
+                this.qrCodeGUID = in.readString();
+                this.checkRecordGUID = in.readString();
+                this.userGUID = in.readString();
+                this.createTime = in.readString();
+                this.checkDeviceRecordTime = in.readString();
+                this.deviceGUID = in.readString();
+                this.deviceAddress = in.readString();
+                this.deviceMachineCode = in.readString();
+                this.productName = in.readString();
+                this.isChecked = in.readInt();
+            }
+
+            public static final Parcelable.Creator<DataListBean> CREATOR = new Parcelable.Creator<DataListBean>() {
+                @Override
+                public DataListBean createFromParcel(Parcel source) {
+                    return new DataListBean(source);
+                }
+
+                @Override
+                public DataListBean[] newArray(int size) {
+                    return new DataListBean[size];
+                }
+            };
         }
     }
 }

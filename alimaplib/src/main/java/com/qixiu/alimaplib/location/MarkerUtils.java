@@ -29,7 +29,8 @@ public class MarkerUtils {
         return view;
     }
 
-    public static void mark(List<? extends MarkInterf> beans, AMap aMap, Activity activity) {
+    public static List<MarkerOptions> mark(List<? extends MarkInterf> beans, AMap aMap, Activity activity) {
+        List<MarkerOptions> markerOptions=new ArrayList<>();
         for (int i = 0; i < beans.size(); i++) {
             MarkerOptions markerOption = new MarkerOptions();
             markerOption.position(new LatLng(beans.get(i).getLatitude(),
@@ -38,7 +39,9 @@ public class MarkerUtils {
             markerOption.title(String.valueOf(i));
             markerOption.icon(BitmapDescriptorFactory.fromView(getMyView(beans.get(i), activity)));
             aMap.addMarker(markerOption);
+            markerOptions.add(markerOption);
         }
+        return markerOptions;
     }
 
 

@@ -19,8 +19,6 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.qixiu.qixiu.google.zxing.client.android.CaptureActivity;
 import com.qixiu.qixiu.recyclerview_lib.OnRecyclerItemListener;
 import com.qixiu.qixiu.recyclerview_lib.RecyclerBaseAdapter;
@@ -28,6 +26,7 @@ import com.qixiu.qixiu.recyclerview_lib.RecyclerBaseHolder;
 import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
 import com.qixiu.qixiu.utils.Preference;
+import com.qixiu.qixiu.utils.TimeDataUtil;
 import com.qixiu.qixiu.utils.ToastUtil;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.action.IntentAction;
@@ -38,10 +37,15 @@ import com.qixiu.schoolfix.ui.acitivty.inspection.InspectionActivity;
 import com.qixiu.schoolfix.ui.acitivty.knowledge_share.KnowledgeShareListActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.create.CreateHardWorkActivity;
 import com.qixiu.schoolfix.ui.fragment.basefragment.base.RequstFragment;
+import com.qixiu.schoolfix.utils.ChartValueFormater;
+import com.qixiu.schoolfix.utils.LabelFormatter;
+import com.qixiu.schoolfix.utils.LoginStatus;
+import com.qixiu.schoolfix.utils.TestDataUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,21 +83,20 @@ public class HomeFragment extends RequstFragment implements OnRecyclerItemListen
     }
 
     private void setChartData(List<HomeDataBean.ResultBean.MonthFinshDetailsBean> monthFinshDetails) {
+        monthFinshDetails = TestDataUtils.getChartData(monthFinshDetails);//如果只给了一天，那么把前一天当做0
         //显示边界
         lineChart.setDrawBorders(true);
         //设置数据
         List<Entry> entries = new ArrayList<>();
-        if (monthFinshDetails.size() <= 1) {
+
+        if (monthFinshDetails.size() <= 1) {//如果数组数量是0
             entries.add(new Entry(0, 0));
         }
+        String[] str = addChartNum(entries, monthFinshDetails);
         for (int i = 0; i < monthFinshDetails.size(); i++) {
             try {
                 float nums = monthFinshDetails.get(i).getFinishCOunt();
-                if (entries.size() != 0) {
-                    entries.add(new Entry(i + 1, nums));
-                } else {
-                    entries.add(new Entry(i, nums));
-                }
+                entries.add(new Entry(i, nums));
             } catch (Exception e) {
             }
         }
@@ -101,12 +104,20 @@ public class HomeFragment extends RequstFragment implements OnRecyclerItemListen
         //一个LineDataSet就是一条线
         LineDataSet lineDataSet = new LineDataSet(entries, null);
         LineData data = new LineData(lineDataSet);
+        data.setDrawValues(true);
+
+
         lineChart.setData(data);
-        lineChart.setScaleEnabled(false);//测试是否禁止滑动
+        lineChart.setScaleEnabled(true);//测试是否禁止滑动
         XAxis xAxis = lineChart.getXAxis();//获取X轴对象
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextColor(Color.WHITE);
         xAxis.setAxisLineColor(Color.WHITE);
+        xAxis.setGranularity(1f);//设置x轴间距,1f表示一条数据对应一个x坐标
+        LabelFormatter labelFormatter = new LabelFormatter(str);
+        xAxis.setValueFormatter(labelFormatter);
+        xAxis.setLabelRotationAngle(60);//文字倾斜角度
+
         YAxis leftYAxis = lineChart.getAxisLeft();//获取两个Y轴对象
         leftYAxis.setTextColor(Color.WHITE);
         leftYAxis.setAxisLineColor(Color.WHITE);
@@ -114,17 +125,25 @@ public class HomeFragment extends RequstFragment implements OnRecyclerItemListen
         rightYAxis.setEnabled(false);//隐藏右侧Y轴
         rightYAxis.setAxisLineColor(Color.WHITE);//隐藏右侧Y轴
         leftYAxis.setDrawGridLines(false);//隐藏Y方向网格线
-        lineDataSet.setValueFormatter(new IValueFormatter() {//设置线上为整数
-            @Override
-            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-                int IValue = (int) value;
-                return String.valueOf(IValue);
-            }
-        });
+//        lineDataSet.setValueFormatter(new IValueFormatter() {//设置线上为整数
+//            @Override
+//            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+//                int IValue = NumUtils.getInterger(value + "");
+//                return (IValue+"");
+//            }
+//        });
+        //设置lineset折线显示数据为整数
+        String[] strings = addChartValue(monthFinshDetails);
+        ChartValueFormater labelFormatter02 = new ChartValueFormater(strings);
+        lineDataSet.setValueFormatter(labelFormatter02);
+
         lineDataSet.setValueTextColor(Color.WHITE);
         lineDataSet.setColor(Color.WHITE);
 //        去掉纵向网格线和顶部边线：
         xAxis.setDrawGridLines(false);//隐藏x轴方向的网格线
+        //保证Y轴从0开始，不然会上移一点
+        xAxis.setAxisMinimum(0f);
+        rightYAxis.setAxisMinimum(0f);
 
         //隐藏描述
         Description description = new Description();
@@ -142,8 +161,33 @@ public class HomeFragment extends RequstFragment implements OnRecyclerItemListen
         Legend legend = lineChart.getLegend();
         legend.setEnabled(false);
 
+//        lineDataSet.setValues(entries);//数据设置上去
+
         lineChart.notifyDataSetChanged();
         lineChart.invalidate();//有的时候刷新不出来要加上这2句话
+    }
+
+    private String[] addChartNum(List<Entry> entries, List<HomeDataBean.ResultBean.MonthFinshDetailsBean> monthFinshDetails) {
+        String[] str = new String[monthFinshDetails.size()];
+        if (str.length == 0) {
+            return new String[]{TimeDataUtil.getTimeStamp(new Date().getTime())};
+        }
+        for (int i = 0; i < str.length; i++) {
+            str[i] = monthFinshDetails.get(i).getFinishDate();
+        }
+        return str;
+    }
+
+
+    private String[] addChartValue(List<HomeDataBean.ResultBean.MonthFinshDetailsBean> monthFinshDetails) {
+        String[] str = new String[monthFinshDetails.size()];
+        if (str.length == 0) {
+            return new String[]{0 + ""};
+        }
+        for (int i = 0; i < str.length; i++) {
+            str[i] = monthFinshDetails.get(i).getFinishCOunt() + "";
+        }
+        return str;
     }
 
 
@@ -188,7 +232,13 @@ public class HomeFragment extends RequstFragment implements OnRecyclerItemListen
     @Override
     public void onSuccess(BaseBean data) {
         List<HomeGotoBean> datas = new ArrayList<>();
-        for (int i = 0; i < homeTitles.length; i++) {
+        int lenght = 6;
+        if (LoginStatus.getLoginBean().getO().getIsBindRights() == 1) {
+            lenght = 6;
+        } else {
+            lenght = 5;
+        }
+        for (int i = 0; i < lenght; i++) {
             HomeGotoBean bean = new HomeGotoBean();
             bean.setImage(images[i]);
             bean.setName(homeTitles[i]);

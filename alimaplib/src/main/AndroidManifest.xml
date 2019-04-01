@@ -2,6 +2,7 @@
     package="com.qixiu.alimaplib" >
 
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <application>
 
         <!--高德地图KEY-->

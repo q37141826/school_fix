@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"></RelativeLayout>
 
     <android.support.v4.widget.NestedScrollView
-        android:layout_below="@+id/vg_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/vg_title">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -159,7 +159,6 @@
 
             <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
                 android:id="@+id/switchDustClean"
-                app:changeShow="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -170,7 +169,6 @@
             <View style="@style/line_grey"></View>
 
             <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
-                app:changeShow="false"
                 android:id="@+id/switchHouseClean"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -182,7 +180,6 @@
             <View style="@style/line_grey"></View>
 
             <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
-                app:changeShow="false"
 
                 android:id="@+id/switchImpurityStacking"
                 android:layout_width="match_parent"
@@ -195,7 +192,6 @@
             <View style="@style/line_grey"></View>
 
             <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
-                app:changeShow="false"
 
                 android:id="@+id/switchCameraRecord"
                 android:layout_width="match_parent"

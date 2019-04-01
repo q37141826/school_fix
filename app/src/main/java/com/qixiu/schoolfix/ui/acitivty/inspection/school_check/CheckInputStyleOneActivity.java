@@ -130,9 +130,9 @@ public class CheckInputStyleOneActivity extends RequestActivity {
                 e.printStackTrace();
             }
         }
-        if(data.getUrl().equals(ConstantUrl.saveReportKeyUrl)){
+        if (data.getUrl().equals(ConstantUrl.saveReportKeyUrl)) {
             ToastUtil.toast("保存成功");
-            CheckInputHouseActivity.start(getContext(),CheckInputHouseActivity.class,dataListBean);
+            CheckInputHouseActivity.start(getContext(), CheckInputHouseActivity.class, dataListBean);
         }
     }
 
@@ -245,6 +245,7 @@ public class CheckInputStyleOneActivity extends RequestActivity {
         map.put("checkReportType", 1 + "");
         map.put("checkReportValue", json);
         map.put("checkSignUrl", signUrl);
+        map.put("checkReportDate", checkStepOneMoudleBean.getO().getCheckReportDate());
         post(ConstantUrl.saveReportKeyUrl, map, new BaseBean());
     }
 

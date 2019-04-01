@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -28,15 +30,12 @@ public class GoToActivity extends TitleActivity {
     private ZProgressHUD zProgressHUD;
     private boolean is_show_share;
     private Object bean;
-
+    WebBean webBean;
     @Override
     protected void onInitViewNew() {
         zProgressHUD = new ZProgressHUD(this);
         try {
-            url = getIntent().getStringExtra(ConstantString.URL);
-            title = getIntent().getStringExtra(ConstantString.TITLE_NAME);
-            filePath = getIntent().getStringExtra(ConstantString.FILEPATH);
-            bean = getIntent().getParcelableExtra(IntentDataKeyConstant.DATA);
+            webBean = getIntent().getParcelableExtra(IntentDataKeyConstant.DATA);
         } catch (Exception e) {
         }
         if(is_show_share){
@@ -194,5 +193,86 @@ public class GoToActivity extends TitleActivity {
 //            intent.setClass(context, Go.class);//BigImageActivity查看大图的类，自己定义就好
             context.startActivity(intent);
         }
+    }
+
+
+    public static class WebBean implements Parcelable {
+        private String title;
+        private String url;
+        private String filepath;
+        private boolean isShowShare;
+
+        public boolean isShowShare() {
+            return isShowShare;
+        }
+
+        public void setShowShare(boolean showShare) {
+            isShowShare = showShare;
+        }
+
+        public WebBean() {
+        }
+
+        public WebBean(String title, String url, String filepath) {
+            this.title = title;
+            this.url = url;
+            this.filepath = filepath;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public String getFilepath() {
+            return filepath;
+        }
+
+        public void setFilepath(String filepath) {
+            this.filepath = filepath;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.title);
+            dest.writeString(this.url);
+            dest.writeString(this.filepath);
+            dest.writeByte(this.isShowShare ? (byte) 1 : (byte) 0);
+        }
+
+        protected WebBean(Parcel in) {
+            this.title = in.readString();
+            this.url = in.readString();
+            this.filepath = in.readString();
+            this.isShowShare = in.readByte() != 0;
+        }
+
+        public static final Creator<WebBean> CREATOR = new Creator<WebBean>() {
+            @Override
+            public WebBean createFromParcel(Parcel source) {
+                return new WebBean(source);
+            }
+
+            @Override
+            public WebBean[] newArray(int size) {
+                return new WebBean[size];
+            }
+        };
     }
 }

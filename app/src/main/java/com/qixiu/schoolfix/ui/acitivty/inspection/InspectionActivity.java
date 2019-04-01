@@ -17,6 +17,7 @@ import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
 import com.qixiu.qixiu.utils.Preference;
 import com.qixiu.qixiu.utils.TimeDataUtil;
+import com.qixiu.qixiu.utils.ToastUtil;
 import com.qixiu.qixiu.utils.XrecyclerViewUtil;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantString;
@@ -65,6 +66,7 @@ public class InspectionActivity extends RequestActivity implements XRecyclerView
     XRecyclerView xrecyclerView;
     InspectionAdapter adapter;
     String addressId;
+    private CheckMainSchoolBean listBean;
 
     @Override
     protected void onInitViewNew() {
@@ -88,6 +90,7 @@ public class InspectionActivity extends RequestActivity implements XRecyclerView
     private void loadData() {
         if (AddressStatus.getDefultAddress() != null) {
             addressId = AddressStatus.getDefultAddress().getCheckLineGUID();
+            setRout(AddressStatus.getDefultAddress());
         }
         if (!TextUtils.isEmpty(addressId)) {
             getData();
@@ -112,7 +115,7 @@ public class InspectionActivity extends RequestActivity implements XRecyclerView
     @Override
     public void onSuccess(BaseBean data) {
         if (data instanceof CheckMainSchoolBean) {
-            CheckMainSchoolBean listBean = (CheckMainSchoolBean) data;
+            listBean = (CheckMainSchoolBean) data;
             adapter.refreshData(listBean.getO().getDataList());
         }
     }
@@ -187,7 +190,14 @@ public class InspectionActivity extends RequestActivity implements XRecyclerView
     //选择了巡检路线之后
     @Subscribe
     public void getAddressEvent(CheckRouteBean.ResultBean.DataListBean dataListBean) {
+        setRout(dataListBean);
         AppManager.getAppManager().finishActivity(CheckRouteActivity.class);
+    }
+
+    private void setRout(CheckRouteBean.ResultBean.DataListBean dataListBean) {
+        textViewRoute.setText(dataListBean.getCheckLineName());
+        textViewName.setText(dataListBean.getUserName());
+        textViewDate.setText(dataListBean.getCreateTime());
     }
 
     //巡检地图
@@ -196,14 +206,20 @@ public class InspectionActivity extends RequestActivity implements XRecyclerView
             hasRequse(1, LoactionUtils.loactionPermissions);
             return;
         }
-        RouteMapActivity.start(getContext(), RouteMapActivity.class);
+        if(listBean==null){
+            ToastUtil.toast("请选择一条巡检路线");
+            return;
+        }
+        ArrayList datas = (ArrayList) listBean.getO().getDataList();
+        RouteMapActivity.start(getContext(), RouteMapActivity.class, datas);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (hasPermission(LoactionUtils.loactionPermissions)) {
-            RouteMapActivity.start(getContext(), RouteMapActivity.class);
+            ArrayList datas = (ArrayList) listBean.getO().getDataList();
+            RouteMapActivity.start(getContext(), RouteMapActivity.class, datas);
         }
     }
 

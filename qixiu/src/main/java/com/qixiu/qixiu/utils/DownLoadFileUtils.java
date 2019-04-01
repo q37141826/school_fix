@@ -101,7 +101,7 @@ public class DownLoadFileUtils {
                     file.mkdir();
                 }
                 //下载后的文件名
-                fileName= fileName.replace("/","");
+                fileName = fileName.replace("/", "");
                 File file1 = new File(fileName);
                 if (file1.exists()) {
                     file1.delete();
@@ -109,7 +109,7 @@ public class DownLoadFileUtils {
                 //创建字节流
                 byte[] bs = new byte[1024];
                 int len;
-                OutputStream os = new FileOutputStream((filePath + "/" + fileName).replace("//","/"));
+                OutputStream os = new FileOutputStream((filePath + "/" + fileName).replace("//", "/"));
                 //写数据
                 while ((len = is.read(bs)) != -1) {
                     os.write(bs, 0, len);
@@ -137,14 +137,14 @@ public class DownLoadFileUtils {
     }
 
     //打开pdf的Intent
-    public static Intent getPdfFileIntent(String path,Context context) {
+    public static Intent getPdfFileIntent(String path, Context context) {
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.addCategory(Intent.CATEGORY_DEFAULT);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         Uri uri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            uri = MyFileProvider.getUriForFile(context,context.getString(R.string.provider) , new File(path));
+            uri = MyFileProvider.getUriForFile(context, context.getString(R.string.provider), new File(path));
         } else {
             uri = Uri.fromFile(new File(path));
         }
@@ -159,9 +159,9 @@ public class DownLoadFileUtils {
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 //             uri = Uri.parse("content://" + filesPath);
 //        }else {
-             uri = Uri.parse("file://" + filesPath);
+        uri = Uri.parse("file://" + filesPath);
 //        }
-        if(TextUtils.isEmpty(filesPath)){
+        if (TextUtils.isEmpty(filesPath)) {
             ToastUtil.toast("服务端没有这个文件");
             return;
         }

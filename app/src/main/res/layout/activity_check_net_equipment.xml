@@ -30,6 +30,7 @@
             <View style="@style/line_grey"></View>
 
             <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchNoteCheck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -40,18 +41,19 @@
             <LinearLayout style="@style/linearlayout_check">
 
                 <LinearLayout
-                    android:paddingLeft="@dimen/margin5dp"
                     style="@style/linearlayout_check"
                     android:layout_width="0px"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/margin5dp">
 
                     <TextView
                         style="@style/text_check_resolve"
                         android:text="无线AP登记数量：" />
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/edittextRegisterNum"
                         style="@style/text_check_edittext"
-                        android:text="0" />
+                        android:hint="0" />
                 </LinearLayout>
 
                 <View
@@ -60,18 +62,19 @@
                     android:background="@color/back_grey"></View>
 
                 <LinearLayout
-                    android:paddingLeft="@dimen/margin5dp"
                     style="@style/linearlayout_check"
                     android:layout_width="0px"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/margin5dp">
 
                     <TextView
                         style="@style/text_check_resolve"
                         android:text="无线AP在线数量" />
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/edittextOnlineNum"
                         style="@style/text_check_edittext"
-                        android:text="0" />
+                        android:hint="0" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -88,6 +91,7 @@
                     android:text="无线AP不在线原因：" />
 
                 <EditText
+                    android:id="@+id/edittextOfflineResion"
                     style="@style/text_check_edittext"
                     android:layout_marginTop="@dimen/margin15dp"
                     android:hint="描述200字以内"
@@ -107,6 +111,7 @@
                     android:text="核心到各分机房光缆可用芯数情况" />
 
                 <EditText
+                    android:id="@+id/edittextCoreToHouseChips"
                     style="@style/text_check_edittext"
                     android:layout_marginTop="@dimen/margin15dp"
                     android:hint="描述200字以内"
@@ -114,6 +119,7 @@
             </LinearLayout>
 
             <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchHaveOpiticalTransceiver"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin10dp"
@@ -135,6 +141,7 @@
                     android:text="光纤收发器替换整改情况" />
 
                 <EditText
+                    android:id="@+id/edittextRepCorrection"
                     style="@style/text_check_edittext"
                     android:layout_marginTop="@dimen/margin15dp"
                     android:hint="描述200字以内"
@@ -142,6 +149,7 @@
             </LinearLayout>
 
             <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchCanAccess"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin10dp"
@@ -151,6 +159,7 @@
                 app:textTitle="各机房网络设备网管地址是否可访问"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
 
             <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchNetLogCheck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -159,6 +168,7 @@
                 app:textTitle="各机房网络设备日志检查是否正常"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
 
             <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchOpticalFiberLossCheck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -167,6 +177,7 @@
                 app:textTitle="各机房网络设备光纤损耗检测是否正常"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
 
             <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchNVR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -175,6 +186,7 @@
                 app:textTitle="NVR监控主机是否正常"></com.qixiu.schoolfix.ui.wight.SwitchAndOpenView>
 
             <com.qixiu.schoolfix.ui.wight.SwitchAndOpenView
+                android:id="@+id/switchService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"

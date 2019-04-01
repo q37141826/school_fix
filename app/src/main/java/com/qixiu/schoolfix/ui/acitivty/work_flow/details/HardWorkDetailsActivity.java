@@ -169,10 +169,10 @@ public class HardWorkDetailsActivity extends RequestActivity {
             textViewTicketNumber.setSecondaryText(workDetailsBean.getO().getWorkOrderServiceNo());
             textViewCommitTime.setSecondaryText(workDetailsBean.getO().getWorkOrderCreatime());
             HardWorkDetailsDataSetting.setProblemPic(recyclerViewPic,
-                    TextUtils.isEmpty(workDetailsBean.getO().getWorkOrderErrorImgUrls())?workDetailsBean.getO().getWorkOrderCstProblemImgUrl():
+                    TextUtils.isEmpty(workDetailsBean.getO().getWorkOrderErrorImgUrls()) ? workDetailsBean.getO().getWorkOrderCstProblemImgUrl() :
                             workDetailsBean.getO().getWorkOrderErrorImgUrls(), getActivity());
-            textViewPrblems.setText(TextUtils.isEmpty(workDetailsBean.getO().getWorkOrderRepairProblemRemark())?
-                    workDetailsBean.getO().getWorkOrderCstProblemRemark():workDetailsBean.getO().getWorkOrderRepairProblemRemark());
+            textViewPrblems.setText(TextUtils.isEmpty(workDetailsBean.getO().getWorkOrderRepairProblemRemark()) ?
+                    workDetailsBean.getO().getWorkOrderCstProblemRemark() : workDetailsBean.getO().getWorkOrderRepairProblemRemark());
             imageViewSound.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -248,7 +248,6 @@ public class HardWorkDetailsActivity extends RequestActivity {
         map.put("workOrderExpectTime", time);
         post(transferOrderUrl, map, new BaseBean());
     }
-
 
 
     @Override

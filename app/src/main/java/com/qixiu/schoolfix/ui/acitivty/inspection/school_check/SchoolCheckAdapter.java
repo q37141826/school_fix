@@ -20,6 +20,12 @@ import com.qixiu.schoolfix.model.check_mechine.CheckMechineBean;
 
 public class SchoolCheckAdapter extends RecyclerBaseAdapter {
 
+    boolean isCheckBle = true;
+
+    public void setCheckBle(boolean checkBle) {
+        isCheckBle = checkBle;
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.item_school_check;
@@ -34,7 +40,7 @@ public class SchoolCheckAdapter extends RecyclerBaseAdapter {
         TextView textViewNum, textViewCheckState
 //                textViewAddress, textViewMechineCode,
 //                textViewMechineName, textViewCheckItems;
-        ;
+                ;
         ImageView imageViewGotoDetails;
         private final ViewDataBinding bind;
 
@@ -61,15 +67,16 @@ public class SchoolCheckAdapter extends RecyclerBaseAdapter {
             imageViewGotoDetails.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getClickListenner2().itemChildclick(imageViewGotoDetails,mData,1,itemView);
+                    getClickListenner2().itemChildclick(imageViewGotoDetails, mData, 1, itemView);
                 }
             });
-            bind.setVariable(BR.data,mData);
-            if(mData instanceof CheckMechineBean.ResultBean.DataListBean){
-                CheckMechineBean.ResultBean.DataListBean listBean= (CheckMechineBean.ResultBean.DataListBean) mData;
-                textViewCheckState.setText(listBean.getIsChecked()==0?"未检测":"已检测");
-                textViewCheckState.setTextColor(listBean.getIsChecked()==0?
-                        mContext.getResources().getColor(R.color.theme_color):mContext.getResources().getColor(R.color.txt_fe9e46));
+            bind.setVariable(BR.data, mData);
+            if (mData instanceof CheckMechineBean.ResultBean.DataListBean) {
+                CheckMechineBean.ResultBean.DataListBean listBean = (CheckMechineBean.ResultBean.DataListBean) mData;
+                textViewCheckState.setText(listBean.getIsChecked() == 0 ? "未检测" : "已检测");
+                textViewCheckState.setVisibility(isCheckBle ? View.VISIBLE : View.GONE);
+                textViewCheckState.setTextColor(listBean.getIsChecked() == 0 ?
+                        mContext.getResources().getColor(R.color.theme_color) : mContext.getResources().getColor(R.color.txt_fe9e46));
             }
 
         }

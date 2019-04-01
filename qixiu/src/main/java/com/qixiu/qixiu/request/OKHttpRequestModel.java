@@ -2,7 +2,6 @@ package com.qixiu.qixiu.request;
 
 import android.text.TextUtils;
 
-import com.google.gson.Gson;
 import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.parameter.OKHttpRequestParameter;
 import com.qixiu.qixiu.request.parameter.SplitStringUtils;
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.MediaType;
-import okhttp3.RequestBody;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by Administrator on 2017/4/11 0011.
@@ -164,4 +163,8 @@ public class OKHttpRequestModel<T> {
 
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
+    public static void cancle(){
+        OkHttpClient okHttpClient = OkHttpUtils.getInstance().getOkHttpClient();
+
+    }
 }

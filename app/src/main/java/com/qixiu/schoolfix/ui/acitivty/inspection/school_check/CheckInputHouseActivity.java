@@ -79,7 +79,7 @@ public class CheckInputHouseActivity extends RequestActivity {
         mTitleView.setRightListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CheckNetEquipmentActivity.start(getContext(), CheckNetEquipmentActivity.class);
+                CheckNetEquipmentActivity.start(getContext(), CheckNetEquipmentActivity.class, dataListBean);
             }
         });
         //获取字段
@@ -114,6 +114,10 @@ public class CheckInputHouseActivity extends RequestActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        if (data.getUrl().equals(ConstantUrl.saveReportKeyUrl)) {
+            ToastUtil.toast("保存成功");
+            CheckNetEquipmentActivity.start(getContext(), CheckNetEquipmentActivity.class, dataListBean);
         }
     }
 
@@ -235,7 +239,8 @@ public class CheckInputHouseActivity extends RequestActivity {
         map.put("checkReportType", 2 + "");
         map.put("checkReportValue", json);
         map.put("checkSignUrl", signUrl);
-//        post(ConstantUrl.saveReportKeyUrl, map, new BaseBean());
+        map.put("checkReportDate",checkStepOneMoudleBean.getO().getCheckReportDate());
+        post(ConstantUrl.saveReportKeyUrl, map, new BaseBean());
     }
 
     //签名

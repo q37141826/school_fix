@@ -28,6 +28,7 @@ import com.qixiu.schoolfix.utils.reuestutil.RequestMaker;
 import com.qixiu.widget.LineControllerView;
 import com.qixiu.wigit.picker.MyPopOneListPicker;
 import com.qixiu.wigit.picker.SelectedDataBean;
+import com.qixiu.wigit.show_dialog.ArshowContextUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -127,6 +128,7 @@ public class HardWorkReceiveActivity extends RequestActivity {
             textViewContactPerson.setSecondaryText(workDetailsBean.getO().getWorkOrderSubmitName());
             textViewContactPhone.setSecondaryText(workDetailsBean.getO().getWorkOrderSubmitTel());
             textViewAddress.setSecondaryText(workDetailsBean.getO().getSchoolUnitAddress());
+            textViewAddress.getSecondaryTextView().setPadding(ArshowContextUtil.dp2px(40), 0, 0, 0);
             textViewCity.setSecondaryText(workDetailsBean.getO().getSchoolUnitArea());
             try {
                 textViewExpectTime.setSecondaryText(workDetailsBean.getO().getWorkOrderExpectTime());

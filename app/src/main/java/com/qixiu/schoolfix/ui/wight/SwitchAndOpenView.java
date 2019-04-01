@@ -60,9 +60,15 @@ public class SwitchAndOpenView extends RelativeLayout implements View.OnClickLis
         setResolveText(textResolve);
         String textHint = array.getString(R.styleable.SwitchAndOpen_edittext_hint);
         setResolveHint(textHint);
-        changeShow=array.getBoolean(R.styleable.SwitchAndOpen_changeShow,true);
+        changeShow = array.getBoolean(R.styleable.SwitchAndOpen_changeShow, true);
+        String text = array.getString(R.styleable.SwitchAndOpen_text);
+        setText(text);
         isShow(changeShow ? !isOpened : isOpened);
         array.recycle();
+    }
+
+    public void setText(String text) {
+        editTextResolve.setText(text);
     }
 
     private void setResolveHint(String textHint) {
@@ -114,23 +120,27 @@ public class SwitchAndOpenView extends RelativeLayout implements View.OnClickLis
         void isOpen(boolean isOpen);
     }
 
-    public CharSequence getTitile(){
+    public CharSequence getTitile() {
         return textViewTilte.getText();
     }
-    public CharSequence getTitileResolve(){
+
+    public CharSequence getTitileResolve() {
         return textViewResovleTitle.getText();
     }
-    public CharSequence getInput(){
+
+    public CharSequence getInput() {
         return editTextResolve.getText();
     }
 
-    public TextView getTitleView(){
-        return  textViewTilte;
+    public TextView getTitleView() {
+        return textViewTilte;
     }
-    public TextView getTitleResovleView(){
-        return  textViewResovleTitle;
+
+    public TextView getTitleResovleView() {
+        return textViewResovleTitle;
     }
-    public EditText getInputEdittext(){
-        return  editTextResolve;
+
+    public EditText getInputEdittext() {
+        return editTextResolve;
     }
 }

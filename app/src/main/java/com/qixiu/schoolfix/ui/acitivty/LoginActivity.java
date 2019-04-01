@@ -19,6 +19,7 @@ import com.qixiu.schoolfix.constant.ConstantString;
 import com.qixiu.schoolfix.constant.ConstantUrl;
 import com.qixiu.schoolfix.ui.acitivty.baseactivity.RequestActivity;
 import com.qixiu.schoolfix.utils.LoginStatus;
+import com.qixiu.schoolfix.utils.reuestutil.TokenRequestUtils;
 import com.qixiu.wigit.myedittext.MyEditTextView;
 
 import java.util.HashMap;
@@ -119,6 +120,7 @@ public class LoginActivity extends RequestActivity {
     }
 
     public void login(View view) {
+        TokenRequestUtils.requestToken();
         String id = edittextId.getText().toString().trim();
         String psw = ediitextPsw.getText().toString().trim();
         if (TextUtils.isEmpty(id)) {
@@ -153,6 +155,15 @@ public class LoginActivity extends RequestActivity {
             private String repairBusinessTel;
             private String repairBusinessAddress;
             private int userType;
+            private int isBindRights;
+
+            public int getIsBindRights() {
+                return isBindRights;
+            }
+
+            public void setIsBindRights(int isBindRights) {
+                this.isBindRights = isBindRights;
+            }
 
             public String getId() {
                 return id;
