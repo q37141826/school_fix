@@ -465,7 +465,7 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
                     schoolBean = (SchoolListBean.ResultBean.DataListBean) data.getData();
                     schoolUnitGUID = schoolBean.getSchoolUnitGUID();
                     lineSchoolName.setSecondaryText(schoolBean.getSchoolUnitName());
-                    lineSchoolAddress.setSecondaryText(schoolBean.getRepairBusinessAddress());
+                    lineSchoolAddress.setSecondaryText(schoolBean.getSchoolUnitAddress());
                     lineCreatePhone.setSecondaryText(schoolBean.getSchoolUnitTel());
                     lineCreatePerson.setSecondaryText(schoolBean.getSchoolUnitMaster());
                     //选择学校之后要清除产品 问题描述信息
@@ -638,8 +638,8 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 
 

@@ -84,6 +84,15 @@ public class SchoolListBean extends BaseBean<SchoolListBean.ResultBean> {
             private String schoolUnitName;
             private String schoolUnitTel;
             private String schoolUnitMaster;
+            private String schoolUnitAddress;
+
+            public String getSchoolUnitAddress() {
+                return schoolUnitAddress;
+            }
+
+            public void setSchoolUnitAddress(String schoolUnitAddress) {
+                this.schoolUnitAddress = schoolUnitAddress;
+            }
 
             public String getId() {
                 return id;
@@ -157,6 +166,9 @@ public class SchoolListBean extends BaseBean<SchoolListBean.ResultBean> {
                 this.schoolUnitMaster = schoolUnitMaster;
             }
 
+            public DataListBean() {
+            }
+
             @Override
             public int describeContents() {
                 return 0;
@@ -173,9 +185,7 @@ public class SchoolListBean extends BaseBean<SchoolListBean.ResultBean> {
                 dest.writeString(this.schoolUnitName);
                 dest.writeString(this.schoolUnitTel);
                 dest.writeString(this.schoolUnitMaster);
-            }
-
-            public DataListBean() {
+                dest.writeString(this.schoolUnitAddress);
             }
 
             protected DataListBean(Parcel in) {
@@ -188,9 +198,10 @@ public class SchoolListBean extends BaseBean<SchoolListBean.ResultBean> {
                 this.schoolUnitName = in.readString();
                 this.schoolUnitTel = in.readString();
                 this.schoolUnitMaster = in.readString();
+                this.schoolUnitAddress = in.readString();
             }
 
-            public static final Parcelable.Creator<DataListBean> CREATOR = new Parcelable.Creator<DataListBean>() {
+            public static final Creator<DataListBean> CREATOR = new Creator<DataListBean>() {
                 @Override
                 public DataListBean createFromParcel(Parcel source) {
                     return new DataListBean(source);
