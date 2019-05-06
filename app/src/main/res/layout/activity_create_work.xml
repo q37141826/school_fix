@@ -87,6 +87,15 @@
                     app:textSecondary="硬件设备"></com.qixiu.widget.LineControllerView>
 
                 <com.qixiu.widget.LineControllerView
+                    android:id="@+id/lineProductType02"
+                    style="@style/line_work"
+                    android:background="@drawable/under_line"
+                    android:onClick="selectProductType"
+                    app:showRightArrow="true"
+                    app:textPrimary="产品类型"
+                    app:textSecondary=""></com.qixiu.widget.LineControllerView>
+
+                <com.qixiu.widget.LineControllerView
                     android:id="@+id/lineProductName"
                     style="@style/line_work"
                     android:background="@drawable/under_line"

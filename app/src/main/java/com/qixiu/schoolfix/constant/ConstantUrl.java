@@ -78,6 +78,8 @@ public class ConstantUrl {
     //产品列表
     public final static String productListUrl = BuildConfig.BASE_URL + "api/services/app/SHProduct/GetViewPage";
 
+    //产品类型
+    public final static String productTypesUrl = BuildConfig.BASE_URL +   "api/services/app/SHProductType/GetProductType";
     //创建工单的产品列表
     public final static String productListUrl02 = BuildConfig.BASE_URL + "api/services/app/SHProduct/GetViewPageBySchool";
 

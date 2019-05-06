@@ -27,6 +27,7 @@ import com.qixiu.qixiu.utils.audio.SoundUtils;
 import com.qixiu.schoolfix.R;
 import com.qixiu.schoolfix.constant.ConstantString;
 import com.qixiu.schoolfix.constant.ConstantUrl;
+import com.qixiu.schoolfix.model.ProductTypesBean;
 import com.qixiu.schoolfix.model.UploadFileBean;
 import com.qixiu.schoolfix.ui.acitivty.baseactivity.upload.UploadPictureActivityNew;
 import com.qixiu.schoolfix.ui.acitivty.home.binding.MechineCodeListBean;
@@ -85,6 +86,8 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
     LineControllerView lineSchoolAddress;
     @BindView(R.id.lineProductType)
     LineControllerView lineProductType;
+    @BindView(R.id.lineProductType02)
+    LineControllerView lineProductType02;
     @BindView(R.id.lineProductName)
     LineControllerView lineProductName;
     @BindView(R.id.lineProductModel)
@@ -133,6 +136,8 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
     private ProductListBean.ResultBean.DataListBean productBean;
     private MechineCodeListBean.ResultBean.DataListBean selectMechineCode;
     private boolean is_soft = false;//目前是创建软件还是创建硬件维修
+    private ProductTypesBean productTypesBean;
+    private SelectedDataBean selectedProductBean;//选择的产品类型
 
 
     @Override
@@ -477,6 +482,10 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
         if (data instanceof ProductListBean) {
             ProductListBean bean = (ProductListBean) data;
             List<SelectedDataBean> selectedDataBeans = new ArrayList<>();
+            if (bean.getO().getDataList().size() == 0) {
+                ToastUtil.toast("暂时没有数据");
+                return;
+            }
             for (int i = 0; i < bean.getO().getDataList().size(); i++) {
                 SelectedDataBean selectedDataBean = new SelectedDataBean(bean.getO().getDataList().get(i).getId(), bean.getO().getDataList().get(i).getProductName());
                 selectedDataBean.setData(bean.getO().getDataList().get(i));
@@ -501,6 +510,10 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
         if (data instanceof SoftListBean) {
             SoftListBean bean = (SoftListBean) data;
             List<SelectedDataBean> selectedDataBeans = new ArrayList<>();
+            if (bean.getO().getDataList().size() == 0) {
+                ToastUtil.toast("暂时没有数据");
+                return;
+            }
             for (int i = 0; i < bean.getO().getDataList().size(); i++) {
                 SelectedDataBean selectedDataBean = new SelectedDataBean(bean.getO().getDataList().get(i).getId(),
                         bean.getO().getDataList().get(i).getDeviceSoftName());
@@ -520,7 +533,26 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
             });
             popOneListPicker.show();
         }
+        if (data instanceof ProductTypesBean) {
+            productTypesBean = (ProductTypesBean) data;
+            if (productTypesBean.getO().getDtos().size() == 0) {
+                ToastUtil.toast("暂时没有数据");
+                return;
+            }
+            List<SelectedDataBean> selectedDataBeans = new ArrayList<>();
+            for (int i = 0; i < productTypesBean.getO().getDtos().size(); i++) {
+                SelectedDataBean selectedDataBean = new SelectedDataBean(productTypesBean.getO().getDtos().get(i).getProductTypeGUID(), productTypesBean.getO().getDtos().get(i).getProductTypeName());
+                selectedDataBeans.add(selectedDataBean);
+            }
+            MyPopOneListPicker picker = new MyPopOneListPicker(getContext(), selectedDataBeans, new MyPopOneListPicker.Pop_selectedListenner() {
+                @Override
+                public void getData(SelectedDataBean data) {
+                    selectedProductBean = data;
+                    lineProductType02.setSecondaryText(data.getText());
+                }
+            });
 
+        }
 
         super.onSuccess(data);
         mZProgressHUD.dismiss();
@@ -611,17 +643,28 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
     }
 
 
-    //选择设备
+    //选择产品
     public void selectDevice(View view) {
         if (schoolBean == null) {
             ToastUtil.toast("请先选择单位");
             return;
         }
-        Map<String, String> map = new HashMap<>();
-        map.put("schoolUnitGUID", schoolBean.getSchoolUnitGUID());
-        RequestBean request = RequestMaker.getRequest(map);
-        request.setOrder("productName desc");
-        post(ConstantUrl.productListUrl02, request, new ProductListBean());
+        //新增设备类型
+        if (selectedProductBean == null) {
+            ToastUtil.toast("请先选择产品类型");
+            return;
+        }
+        List<String[]> datas = new ArrayList<>();
+        String data01[] = {"schoolUnitGUID", "uniqueidentifier", "eq", schoolBean.getSchoolUnitGUID()};
+        String data02[] = {"productTypeGUID", "uniqueidentifier", "eq", selectedProductBean.getId()};
+        datas.add(data01);
+        datas.add(data02);
+        RequestBean requests = RequestMaker.getRequests(datas, "productName desc", "and");
+//        Map<String, String> map = new HashMap<>();
+//        map.put("schoolUnitGUID", schoolBean.getSchoolUnitGUID());
+//        RequestBean request = RequestMaker.getRequest(map);
+//        request.setOrder("productName desc");
+        post(ConstantUrl.productListUrl02, requests, new ProductListBean());
     }
 
     //选择学校
@@ -673,5 +716,11 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
 //        datas.add(data02);
 //        datas.add(data03);
         post(ConstantUrl.mechineCodeList, request, new SoftListBean());
+    }
+
+
+    //选择产品类型
+    public void selectProductType(View view) {
+        post(ConstantUrl.productTypesUrl, new HashMap(), new ProductTypesBean());
     }
 }
