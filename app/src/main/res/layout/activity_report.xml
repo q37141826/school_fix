@@ -113,7 +113,7 @@
 
             <TextView
                 style="@style/mine_text_grey"
-                android:text="故障图片上传" />
+                android:text="故障图片上传（必填）" />
 
             <LinearLayout
                 android:layout_width="match_parent"
