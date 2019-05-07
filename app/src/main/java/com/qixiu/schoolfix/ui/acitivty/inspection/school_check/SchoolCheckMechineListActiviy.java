@@ -173,8 +173,8 @@ public class SchoolCheckMechineListActiviy extends RequestActivity implements XR
             getData();
         }
         if (data instanceof IsInRangeBean) {
-            IsInRangeBean bean= (IsInRangeBean) data;
-            if (bean.getO().getIsInRange()==1) {
+            IsInRangeBean bean = (IsInRangeBean) data;
+            if (bean.getO().getIsInRange() == 1) {
                 markeMechineData(code);
             } else {
                 ToastUtil.toast("未到达指定地点");
@@ -245,12 +245,12 @@ public class SchoolCheckMechineListActiviy extends RequestActivity implements XR
                 public void getResult(Location location) {
                     Map<String, String> map = new HashMap<>();
                     CheckMechineBean.ResultBean.DataListBean listBean = searchMechine(code);
-                    if (listBean==null) {
+                    if (listBean == null) {
                         return;
                     }
                     map.put("deviceGUID", listBean.getDeviceGUID());
-                    map.put("xLocation", NumUtils.formatDouble3(location.getLongitude(), 7) );
-                    map.put("yLocation", NumUtils.formatDouble3(location.getLatitude(), 7) );
+                    map.put("xLocation", NumUtils.formatDouble3(location.getLongitude(), 7));
+                    map.put("yLocation", NumUtils.formatDouble3(location.getLatitude(), 7));
                     post(ConstantUrl.isInRangeUrl, map, new IsInRangeBean());
                 }
             });
@@ -276,7 +276,7 @@ public class SchoolCheckMechineListActiviy extends RequestActivity implements XR
 
     private void markeMechineData(String code) {
         CheckMechineBean.ResultBean.DataListBean listBean = searchMechine(code);
-        if (listBean==null) {
+        if (listBean == null) {
             return;
         }
         Map<String, String> map = new HashMap<>();

@@ -142,6 +142,7 @@
                     android:id="@+id/lineMechinAddress"
                     style="@style/line_work"
                     android:background="@drawable/under_line"
+                    app:sencondMarginLeft="@dimen/margin100dp"
                     app:sencondMarginRight="@dimen/margin80dp"
                     app:showRightArrow="true"
                     app:textPrimary="详细地址"

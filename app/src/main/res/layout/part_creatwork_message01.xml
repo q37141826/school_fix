@@ -14,7 +14,7 @@
         style="@style/line_work"
         app:showRightArrow="true"
         app:textPrimary="报修单位"
-        app:textSecondary="-"></com.qixiu.widget.LineControllerView>
+        app:textSecondary=""></com.qixiu.widget.LineControllerView>
     <View
         android:layout_marginRight="@dimen/margin18dp"
         android:layout_marginLeft="@dimen/margin18dp"
@@ -57,6 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin0.5dp"></View>
     <com.qixiu.widget.LineControllerView
+        app:sencondMarginLeft="@dimen/margin100dp"
         android:id="@+id/lineRepairAddress"
         style="@style/line_work"
         app:textPrimary="详细地址"

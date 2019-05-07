@@ -51,6 +51,7 @@
             <com.qixiu.widget.LineControllerView
                 android:id="@+id/lineAddress"
                 style="@style/line_controller_style"
+                app:sencondMarginLeft="@dimen/margin100dp"
                 android:background="@drawable/under_line"
                 app:textPrimary="详细地址"
                 app:textSecondary="-"></com.qixiu.widget.LineControllerView>
@@ -139,6 +140,7 @@
                 android:id="@+id/lineMaintainAddress"
                 style="@style/line_controller_style"
                 android:background="@drawable/under_line"
+                app:sencondMarginLeft="@dimen/margin100dp"
                 app:textPrimary="详细地址"
                 app:textSecondary="----"></com.qixiu.widget.LineControllerView>
 
