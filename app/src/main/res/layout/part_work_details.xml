@@ -56,8 +56,10 @@
         android:text="服务信息" />
 
     <com.qixiu.widget.LineControllerView
+        app:textSecondarySize="12sp"
         android:id="@+id/textViewExpectTime"
         style="@style/line_under"
+        app:sencondMarginLeft="@dimen/margin150dp"
         android:layout_height="wrap_content"
         android:background="@drawable/under_line"
         app:textPrimary="期望上门时间"

@@ -99,6 +99,7 @@
                     android:id="@+id/lineProductName"
                     style="@style/line_work"
                     android:background="@drawable/under_line"
+                    app:sencondMarginRight="@dimen/margin100dp"
                     android:onClick="selectDevice"
                     app:showRightArrow="true"
                     app:textPrimary="名称"

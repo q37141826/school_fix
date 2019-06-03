@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
 import com.qixiu.qixiu.utils.DownLoadFileUtils;
+import com.qixiu.qixiu.utils.NumUtils;
 import com.qixiu.qixiu.utils.Preference;
 import com.qixiu.qixiu.utils.TimeDataUtil;
 import com.qixiu.qixiu.utils.ToastUtil;
@@ -28,6 +29,7 @@ import com.qixiu.schoolfix.ui.acitivty.work_flow.problem.RequestBean;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.report.ReportActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.sign.ServiceProgressActivity;
 import com.qixiu.schoolfix.ui.acitivty.work_flow.sign.SignWorkActivity;
+import com.qixiu.schoolfix.ui.wight.MyPopTimePicker;
 import com.qixiu.schoolfix.utils.LoginStatus;
 import com.qixiu.schoolfix.utils.reuestutil.RequestMaker;
 import com.qixiu.widget.LineControllerView;
@@ -107,6 +109,7 @@ public class HardWorkDetailsActivity extends RequestActivity {
     private String id;
     private WorkDetailsBean workDetailsBean;
     SelectedDataBean selectedPerson;
+    private MyPopTimePicker defultTimePicker;
 
     @Override
     protected void onInitViewNew() {
@@ -161,7 +164,7 @@ public class HardWorkDetailsActivity extends RequestActivity {
             textViewAddress.setSecondaryText(workDetailsBean.getO().getSchoolUnitAddress());
             textViewCity.setSecondaryText(workDetailsBean.getO().getSchoolUnitArea());
             try {
-                textViewExpectTime.setSecondaryText(workDetailsBean.getO().getWorkOrderExpectTime());
+                textViewExpectTime.setSecondaryText(workDetailsBean.getO().getWorkOrderExpectTime()+"\n"+workDetailsBean.getO().getWorkOrderExpectEndTime());
             } catch (Exception e) {
 
             }
@@ -211,23 +214,24 @@ public class HardWorkDetailsActivity extends RequestActivity {
                 @Override
                 public void getData(SelectedDataBean data) {
                     selectedPerson = data;
-                    TimePickerView pvTime = new TimePickerView.Builder(getActivity(), new TimePickerView.OnTimeSelectListener() {
-                        @Override
-                        public void onTimeSelect(Date date, View v) {//选中事件回调
-                            if (new Date().getTime() > date.getTime()) {
-                                ToastUtil.toast("时间不正确");
-                                return;
-                            }
-                            textViewExpectTime.setSecondaryText(TimeDataUtil.getTimeStamp(date.getTime(), TimeDataUtil.DEFULT_TIME_FORMAT));
-                            transToOther(TimeDataUtil.getTimeStamp(date.getTime(), TimeDataUtil.DEFULT_TIME_FORMAT));
-                        }
-                    })
-                            .setType(new boolean[]{true, true, true, true, true, false})
-                            .build();
-                    Calendar instance = Calendar.getInstance();
-                    instance.set(TimeDataUtil.getYear(), TimeDataUtil.getMonth(), TimeDataUtil.getDay());
-                    pvTime.setDate(instance);//注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
-                    pvTime.show();
+                    showTimePicker(selectedPerson);
+//                    TimePickerView pvTime = new TimePickerView.Builder(getActivity(), new TimePickerView.OnTimeSelectListener() {
+//                        @Override
+//                        public void onTimeSelect(Date date, View v) {//选中事件回调
+//                            if (new Date().getTime() > date.getTime()) {
+//                                ToastUtil.toast("时间不正确");
+//                                return;
+//                            }
+//                            textViewExpectTime.setSecondaryText(TimeDataUtil.getTimeStamp(date.getTime(), TimeDataUtil.DEFULT_TIME_FORMAT));
+//                            transToOther(TimeDataUtil.getTimeStamp(date.getTime(), TimeDataUtil.DEFULT_TIME_FORMAT));
+//                        }
+//                    })
+//                            .setType(new boolean[]{true, true, true, true, true, false})
+//                            .build();
+//                    Calendar instance = Calendar.getInstance();
+//                    instance.set(TimeDataUtil.getYear(), TimeDataUtil.getMonth(), TimeDataUtil.getDay());
+//                    pvTime.setDate(instance);//注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
+//                    pvTime.show();
 
                 }
             });
@@ -240,12 +244,26 @@ public class HardWorkDetailsActivity extends RequestActivity {
         }
     }
 
+    private void showTimePicker(SelectedDataBean selectedPerson) {
+        //                transToOther(TimeDataUtil.getTimeStamp(new Date().getTime(), TimeDataUtil.DEFULT_TIME_FORMAT));
+        defultTimePicker = MyPopTimePicker.getDefultTimePicker(getContext(), 7, new MyPopTimePicker.Pop_itemSelectListener() {
+            @Override
+            public void getRightSelectData(SelectedDataBean selectedDataBean) {
+                textViewExpectTime.setSecondaryText(selectedDataBean.getText());
+//                transToOther(TimeDataUtil.getTimeStamp(new Date().getTime(), TimeDataUtil.DEFULT_TIME_FORMAT));
+                transToOther(selectedDataBean.getText());
+            }
+        });
+
+    }
+
     public void transToOther(String time) {
         Map<String, String> map = new HashMap();
         map.put("workOrderGUID", workDetailsBean.getO().getId());
         map.put("oldReceiveUserGUID", LoginStatus.getLoginBean().getO().getId());
         map.put("newReceiveUserGUID", selectedPerson.getId());
-        map.put("workOrderExpectTime", time);
+        map.put("workOrderExpectTime",MyPopTimePicker.getCurrentLeftSelect(defultTimePicker).getText()+" "+time.substring(0,5)+":00");
+        map.put("workOrderExpectEndTime",MyPopTimePicker.getCurrentLeftSelect(defultTimePicker).getText()+" "+time.substring(6,time.length())+":00");
         post(transferOrderUrl, map, new BaseBean());
     }
 

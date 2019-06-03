@@ -71,9 +71,8 @@ dependencies {
     api "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
     api 'com.jcodecraeer:xrecyclerview:1.3.2'
     implementation files('libs/zxingcore.jar')
-
+    implementation files('libs/pinyin4j.jar')
     //轮播图
     implementation 'com.jude:rollviewpager:1.4.6'
-
     compile 'com.contrarywind:Android-PickerView:3.2.7'
 }

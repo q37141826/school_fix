@@ -18,6 +18,7 @@ import com.qixiu.qixiu.request.OKHttpRequestModel;
 import com.qixiu.qixiu.request.OKHttpUIUpdataListener;
 import com.qixiu.qixiu.request.bean.BaseBean;
 import com.qixiu.qixiu.request.bean.C_CodeBean;
+import com.qixiu.qixiu.utils.ChineseCharacterUtil;
 import com.qixiu.qixiu.utils.CommonUtils;
 import com.qixiu.qixiu.utils.Preference;
 import com.qixiu.qixiu.utils.TimeDataUtil;
@@ -458,7 +459,7 @@ public class CreateHardWorkActivity extends UploadPictureActivityNew {
                 SelectedDataBean selectedDataBean = new SelectedDataBean(bean.getO().getDataList().get(i).getId(), bean.getO().getDataList().get(i).getSchoolUnitName());
                 selectedDataBean.setData(bean.getO().getDataList().get(i));
                 selectedDataBeans.add(selectedDataBean);
-            }
+            }           // TODO: 2019/5/18 是否更换表现模式  
             MyPopOneListPicker schoolPicker = new MyPopOneListPicker(getContext(), selectedDataBeans, new MyPopOneListPicker.Pop_selectedListenner() {
                 @Override
                 public void getData(SelectedDataBean data) {
